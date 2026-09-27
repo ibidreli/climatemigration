@@ -5,149 +5,95 @@
 
 ## Projektthema
 
-### Klimabedingte Migration in der Sahel-Zone
+**Thema:** Klimabedingte Migration in der Sahel-Zone
 
 **Leitfrage:**
 
-> Wie beeinflussen Dürre, Wasserknappheit und Ernteausfälle die Migration in der Sahel-Zone, und welche Rückwirkungen hat Migration auf die betroffenen Regionen?
+> Wie beeinflussen Dürre, Wasserknappheit und Ernteausfälle die Abwanderungsrate, und welche Rückwirkungen hat die Abwanderung auf die lokale Bevölkerung und Landwirtschaft?
 
-**Region:** Sahel-Zone
+**Region:** Sahel-Zone, spätere Eingrenzung auf eine ausgewählte Teilregion
 
 ---
 
 ## Modellierungsansatz
 
-Das Projekt wird über mehrere Lerneinheiten schrittweise konkretisiert.
+Für unser Zweierteam bearbeiten wir:
 
-Grundprinzip ist, das System in LE1 zunächst möglichst vollständig zu erfassen und erst für die nachfolgenden Modelle gezielt zu vereinfachen.
+- **LE1 – Systemkartierung** *(vollständig)* – System erfassen
+- **LE2 – Systemdynamik** *(vollständig)* – System vereinfachen und simulieren
+- **LE4 – Szenario- und integrierte Analyse** *(Lösungsskizze)* – Szenarien ableiten
+
+---
 
 ### LE1 – Systemkartierung
 
-**Systemkartierung** hilft dabei, ein komplexes System übersichtlich darzustellen. Dabei werden wichtige Faktoren, beteiligte Akteure und ihre Zusammenhänge sichtbar gemacht, bevor daraus später ein Simulationsmodell erstellt wird.
-
-Ziel ist ein breites Verständnis des Systems und seiner wichtigsten Zusammenhänge.
+**Systemkartierung** stellt wichtige Faktoren, Akteure und Zusammenhänge des Systems übersichtlich dar.
 
 Geplante Artefakte:
 
-- **Causal Loop Map / Kausalkreisdiagramm:** Zeigt wichtige Grössen und wie diese sich gegenseitig beeinflussen. Daraus können verstärkende oder abschwächende Rückkopplungen entstehen.
+- **Causal Loop Map:** Zeigt wichtige Grössen, Einflüsse und Rückkopplungen.
+- **Stakeholder Map:** Zeigt relevante Akteure und ihre Rollen.
+- **Systemgrenzen:** Legen fest, was zum betrachteten System gehört.
+- **Cluster System Map oder Connected Circle Map:** Strukturiert wichtige Systemelemente und ihre Zusammenhänge.
 
-- **Stakeholder Map:** Zeigt die wichtigsten beteiligten oder betroffenen Akteure des Systems, z.B. Haushalte, Regierungen oder Hilfsorganisationen, und hilft dabei, deren Rollen und Beziehungen einzuordnen.
-
-- **Systemgrenzen:** Legen fest, welche Teile des realen Systems im Modell berücksichtigt werden und welche ausserhalb liegen.
-
-- **Cluster System Map:** Sammelt und gruppiert wichtige Elemente eines Systems. Sie dient dazu, ein komplexes Problem zunächst breit zu erfassen und erste Zusammenhänge sichtbar zu machen.
-
-- **Connected Circle Map:** Stellt wichtige Elemente eines Systems in einem Kreis dar und verbindet diese anhand ihrer Beziehungen miteinander.
-
-Mögliche Themenbereiche der Systemkarte:
+Mögliche Themenbereiche:
 
 - Klima und Umwelt
 - Wasserverfügbarkeit
 - Landwirtschaft und Ernährung
 - wirtschaftliche Situation
-- Bevölkerung und Migration
+- Bevölkerung und Abwanderung
 - soziale Netzwerke
 - politische und institutionelle Faktoren
 
-Die Komplexität wird zunächst bewusst beibehalten. Die Vereinfachung erfolgt insbesondere beim Kausalkreisdiagramm, das als Grundlage für LE2 dient.
+Das System wird zunächst breit betrachtet und für LE2 gezielt vereinfacht.
 
 ---
 
 ### LE2 – Systemdynamik
 
-**System Dynamics** untersucht, wie sich wichtige Grössen eines Systems über die Zeit verändern und gegenseitig beeinflussen.
+**System Dynamics** untersucht, wie sich wichtige Grössen über die Zeit verändern und gegenseitig beeinflussen.
 
 Wichtige Begriffe:
 
-- **Stock:** Ein Bestand, der sich über die Zeit verändern kann, z.B. Bevölkerung oder Wasservorrat.
-
-- **Flow:** Eine Zu- oder Abnahme eines Stocks, z.B. Migration oder Wasserverbrauch.
-
-- **Rückkopplung:** Eine Veränderung wirkt auf andere Grössen und kann später wieder auf die ursprüngliche Grösse zurückwirken.
+- **Stock:** Bestand, z.B. Bevölkerung oder Wasservorrat.
+- **Flow:** Zu- oder Abnahme eines Stocks, z.B. Abwanderung.
+- **Rückkopplung:** Veränderungen wirken über andere Grössen wieder auf das System zurück.
 
 Aus dem Kausalkreisdiagramm aus LE1 wird ein vereinfachtes Simulationsmodell erstellt.
 
 **Tool: BPTK-Py**
 
-BPTK-Py ist ein Python-Framework für die Erstellung von Simulationsmodellen. Damit können Stocks, Flows und ihre Zusammenhänge in Python definiert und über einen bestimmten Zeitraum simuliert werden. Die Ergebnisse können anschliessend beispielsweise als Tabellen oder Diagramme ausgewertet werden.
+Python-Framework zur Erstellung und Simulation von System-Dynamics-Modellen.
 
 Mögliche zentrale Grössen:
 
+- Niederschlag / Dürre
 - Wasserverfügbarkeit
 - landwirtschaftlicher Ertrag
 - Bevölkerung
-- Migration
-- lokale Resilienz
+- Abwanderungsrate
 
-**Anfangszustand:** Gibt an, wie das System zu Beginn der Simulation aussieht, z.B. wie gross die Bevölkerung am Anfang ist.
+**Anfangszustand:** Ausgangslage der Simulation.  
+**Modellparameter:** Bestimmen die Stärke der Zusammenhänge.
 
-**Modellparameter:** Legen fest, wie stark bestimmte Zusammenhänge wirken, z.B. wie stark sinkende Ernteerträge die Migration beeinflussen.
-
-Die Anfangswerte und Parameter sollen soweit möglich aus realen Daten abgeleitet werden. Falls Annahmen notwendig sind, werden diese dokumentiert.
-
-Ziel ist es zu untersuchen, wie sich die wichtigsten Grössen des Systems über die Zeit entwickeln.
+Werte werden soweit möglich aus realen Daten abgeleitet und Annahmen dokumentiert.
 
 ---
 
-### LE3 – Agentenbasierte Modellierung
+### LE4 – Szenario- und integrierte Analyse (Skizze)
 
-**Agentenbasierte Modellierung (ABM)** untersucht, wie sich das Verhalten einzelner Akteure auf das gesamte System auswirkt.
-
-Dabei werden einzelne **Agenten** mit eigenen Eigenschaften und Regeln erstellt. Diese Agenten können Entscheidungen treffen und miteinander oder mit ihrer Umgebung interagieren.
-
-Für unser Modell könnten **Haushalte die Agenten** darstellen.
-
-Eine Migrationsentscheidung könnte zum Beispiel von folgenden Faktoren abhängen:
-
-- Klimastress
-- wirtschaftliche Situation
-- verfügbare Ressourcen
-- soziale Netzwerke
-
-**Tool: Mesa**
-
-Mesa ist ein Python-Framework für agentenbasierte Simulationen. Damit können Agenten, ihre Eigenschaften, ihre Regeln und ihre Interaktionen programmiert und simuliert werden.
-
-Ziel ist es zu untersuchen, wie aus den Entscheidungen einzelner Haushalte grössere Muster entstehen, z.B. steigende oder sinkende Migration.
-
-Die genaue Modelllogik wird erst auf Basis der Ergebnisse aus LE1 und LE2 festgelegt.
-
----
-
-### LE4 – Szenario- und integrierte Analyse
-
-Bei einer **Szenarioanalyse** wird untersucht, wie sich das System unter verschiedenen zukünftigen Bedingungen entwickeln könnte.
+Die **Szenarioanalyse** untersucht, wie sich das System unter unterschiedlichen zukünftigen Bedingungen entwickeln könnte.
 
 Mögliche Szenarien:
 
 - stärkere oder häufigere Dürren
 - verbesserte Wasserversorgung
-- Veränderungen landwirtschaftlicher Erträge
-- Massnahmen zur Erhöhung der lokalen Resilienz
+- veränderte landwirtschaftliche Erträge
+- Massnahmen zur Verringerung klimabedingter Auswirkungen
 
-Bei der **integrierten Analyse** wird betrachtet, wie Veränderungen in einem Bereich Auswirkungen auf andere Bereiche haben.
+**Beispiel für einen Übertragungskanal:**
 
-Ein Beispiel wäre:
+Dürre → weniger Wasser → geringerer Ernteertrag → höhere Abwanderungsrate → Veränderungen bei Bevölkerung und Landwirtschaft
 
-Dürre → weniger Wasser → geringere Ernte → höherer Migrationsdruck
-
-Solche Wirkungsketten werden als **Übertragungskanäle** bezeichnet.
-
-Die konkreten Szenarien werden erst festgelegt, wenn die Modelle aus den vorherigen Lerneinheiten entwickelt wurden.
-
----
-
-## Datenquellen
-
-Mögliche Datenquellen werden während der Modellierung geprüft und konkretisiert.
-
-| Quelle | Mögliche Verwendung |
-|---|---|
-| **CHIRPS** | Niederschlags- und Dürredaten |
-| **FEWS NET** | Landwirtschaft und Ernährungssicherheit |
-| **UNHCR / IDMC** | Migration und Vertreibung |
-| **World Bank** | Sozioökonomische und migrationsbezogene Daten |
-| **ACLED** | Konfliktdaten als möglicher Kontextfaktor |
-
-Die Daten können zur Bestimmung von Anfangswerten und Modellparametern sowie zur Überprüfung der Simulationsergebnisse verwendet werden.
-
+Für LE4 wird keine vollständige Simulation umgesetzt, sondern eine mögliche Szenarioanalyse skizziert.
