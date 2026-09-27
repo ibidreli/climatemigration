@@ -1,0 +1,13 @@
+# Nur für das optionale Climada-Notebook in LE4.
+# Getrennt von mss-sd, da Climada viele Geo-Abhängigkeiten (GDAL, cartopy, ...) mitbringt.
+# Unterstützte Python-Version vor der Installation in der aktuellen Climada-Doku prüfen.
+name: mss-climada
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - climada
+  - climada-petals
+  - jupyterlab
+  - ipykernel
+  - jupytext

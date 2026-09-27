@@ -1,0 +1,86 @@
+---
+title: '**LE4 – 01 Übertragungskanäle und Szenarien**'
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.19.5
+  kernelspec:
+    display_name: Python (mss-sd)
+    language: python
+    name: mss-sd
+---
+
+
+
+```{python}
+import sys
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+ROOT = Path.cwd().parent
+sys.path.append(str(ROOT / "LE2_system_dynamics"))
+
+import BPTK_Py
+from parameters import PARAMS
+from model import build_model, with_overrides
+```
+
+## **1 Problemstellung und Kenngrössen**
+
+- Problemstellung:
+- Kenngrössen:
+
+## **2 Systemgrenzen**
+
+Verweis auf LE1; Umgang mit der Umgebung.
+
+## **3 Übertragungskanäle**
+
+Kanal aus dem Kausalschleifen-Diagramm, Zyklen an begründeter Stelle aufgebrochen:
+
+Klima (Niederschlag) → Wasserverfügbarkeit → Ernteertrag → Einkommen → Abwanderung → Bevölkerung
+
+Wo wird welcher Zyklus aufgebrochen, und warum?
+
+```{python}
+# Graph der Übertragungskanäle (z.B. networkx oder Grafik aus draw.io einbinden)
+```
+
+## **4 Raum- und Zeitskalen**
+
+## **5 Module**
+
+| Modul | Rolle | Nachparametrisierung nötig? |
+|---|---|---|
+| SD-Modell LE2 | Klima → Abwanderung → Bevölkerung | |
+| Climada (optional) | Gefährdung Dürre / Ernte | |
+
+## **6 Kennzahlen und Funktionsparameter**
+
+Zuerst schätzen, dann mit Daten vergleichen.
+
+| Grösse | Schätzung | Daten | Abweichung / Kommentar |
+|---|---|---|---|
+
+## **7 Ausgangszustand und Szenarien**
+
+| Szenario | Annahmen | Quelle / Begründung |
+|---|---|---|
+
+
+## **8 Ergebnisse**
+
+
+## **9 Backtest (Beschreibung)**
+
+Wie würde der Backtest durchgeführt, mit welchen Daten?
+
+## **10 Erkenntnisse und Limitationen**
+
+- 
