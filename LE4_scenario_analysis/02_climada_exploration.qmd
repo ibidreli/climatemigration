@@ -1,0 +1,42 @@
+---
+title: '**LE4 – 02 Climada-Exploration (optional)**'
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.19.5
+  kernelspec:
+    display_name: Python (mss-climada)
+    language: python
+    name: mss-climada
+---
+
+
+Ziel: prüfen, ob Climada bzw. climada_petals für Dürre oder Ernteertrag in Senegal nutzbar ist.
+Ergebnis dieser Prüfung (nutzbar / nicht nutzbar, Gründe) in `LE4_Overview.md` festhalten.
+
+
+```{python}
+import climada
+from climada.util.api_client import Client
+
+print(climada.__version__)
+```
+
+## **1 Verfügbare Datensätze für Senegal**
+
+```{python}
+client = Client()
+# client.list_dataset_infos(...) — verfügbare Datentypen und Eigenschaften prüfen
+```
+
+## **2 Hazard – Exposure – Vulnerability**
+
+Konzept und mögliche Abbildung auf die Fragestellung.
+
+
+## **3 Fazit**
+
+- 

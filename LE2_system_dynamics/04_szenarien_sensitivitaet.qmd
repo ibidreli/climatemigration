@@ -1,0 +1,49 @@
+---
+title: '**LE2 – 04 Szenarien und Sensitivität**'
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.19.5
+  kernelspec:
+    display_name: Python (mss-sd)
+    language: python
+    name: mss-sd
+---
+
+
+
+```{python}
+import sys
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+ROOT = Path.cwd().parent
+DATA_RAW = ROOT / "data" / "raw"
+DATA_PROC = ROOT / "data" / "processed"
+
+import BPTK_Py
+from parameters import PARAMS
+from model import build_model, with_overrides
+```
+
+## **1 Szenarien**
+
+| Szenario | Beschreibung | Geänderte Parameter / Zeitreihen | Begründung |
+|---|---|---|---|
+| basis | | | |
+
+
+## **2 Sensitivitätsanalyse**
+
+One-at-a-time: jeder unsichere Parameter wird innerhalb einer begründeten Spannweite variiert.
+
+
+## **3 Erkenntnisse**
+
+- 

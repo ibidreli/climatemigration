@@ -1,0 +1,8 @@
+# Zeilenenden im Repo einheitlich normalisieren (LF), lokal je nach System
+* text=auto
+
+# Binärdateien nie verändern
+*.png binary
+*.jpg binary
+*.pdf binary
+*.xlsx binary

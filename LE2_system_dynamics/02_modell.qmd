@@ -1,0 +1,95 @@
+---
+title: '**LE2 – 02 Modell und Basislauf**'
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.19.5
+  kernelspec:
+    display_name: Python (mss-sd)
+    language: python
+    name: mss-sd
+---
+
+
+
+```{python}
+import sys
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+ROOT = Path.cwd().parent
+DATA_RAW = ROOT / "data" / "raw"
+DATA_PROC = ROOT / "data" / "processed"
+
+import BPTK_Py
+from parameters import PARAMS, as_dataframe, missing
+from model import build_model
+```
+
+## **1 Problemstellung und Kenngrössen**
+
+- Problemstellung:
+- Kenngrössen:
+- Braucht es Szenarien?
+
+## **2 Systemgrenzen**
+
+Verweis auf die Systemkarte aus LE1. Welche Elemente sind endogen, welche exogen, welche ausserhalb?
+
+![Cluster System Map](../LE1_system_mapping/cluster_system_map.png)
+
+## **3 Modellstruktur**
+
+| Element | Typ | Einheit | Definition | Gleichung |
+|---|---|---|---|---|
+| bevoelkerung | Stock | Personen | | |
+| natuerliches_wachstum | Flow | Personen/Jahr | | |
+| abwanderung | Flow | Personen/Jahr | | |
+| abwanderungsrate | Converter | 1/Jahr | | |
+| niederschlag | exogen | mm/Jahr | | |
+
+## **4 Zeithorizont und Zeitschritt**
+
+Begründung von starttime, stoptime und dt.
+
+## **5 Anfangszustand und Parameter**
+
+```{python}
+as_dataframe()
+```
+
+```{python}
+print("Noch offen:", missing())
+```
+
+## **6 Basislauf**
+
+```{python}
+model = build_model()
+bptk = BPTK_Py.bptk()
+bptk.register_model(model)
+
+scenario_manager = {"sm_kaffrine": {"model": model, "base_constants": {}}}
+bptk.register_scenario_manager(scenario_manager)
+bptk.register_scenarios(scenario_manager="sm_kaffrine", scenarios={"basis": {}})
+
+bptk.plot_scenarios(
+    scenario_managers=["sm_kaffrine"],
+    scenarios=["basis"],
+    equations=["bevoelkerung", "abwanderung"],
+)
+```
+
+## **7 Kausalschleifen des simulierten Systems**
+
+Welche Schleifen aus LE1 sind abgebildet, welche nicht (und warum)?
+
+## **8 Erkenntnisse**
+
+- 
