@@ -75,8 +75,13 @@ docs/_build/
 .pybuilder/
 target/
 
-# Jupyter Notebook
+# Jupyter Notebook: Quelle ist die .qmd-Datei, das .ipynb ist nur die lokale Arbeitskopie (Jupytext-Paar)
+*.ipynb
 .ipynb_checkpoints
+
+# Quarto
+.quarto/
+**/*.quarto_ipynb
 
 # IPython
 profile_default/
