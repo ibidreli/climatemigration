@@ -1,0 +1,49 @@
+---
+title: '**LE2 – 03 Backtest**'
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.19.5
+  kernelspec:
+    display_name: Python (mss-sd)
+    language: python
+    name: mss-sd
+---
+
+
+
+```{python}
+import sys
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+ROOT = Path.cwd().parent
+DATA_RAW = ROOT / "data" / "raw"
+DATA_PROC = ROOT / "data" / "processed"
+
+import BPTK_Py
+from parameters import PARAMS
+from model import build_model
+```
+
+## **1 Referenzdaten und Zeitraum**
+
+Womit wird verglichen (historische Daten oder postulierte Werte)? Begründung bei postulierten Werten.
+
+
+## **2 Fehlermass**
+
+Wahl und Begründung des Fehlermasses.
+
+## **3 Simulation vs. Referenz**
+
+
+## **4 Interpretation und Grenzen des Backtests**
+
+- 
