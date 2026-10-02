@@ -1,7 +1,14 @@
 # LE1 – Systemkartierung
 
+## Dateien
 
+| Artefakt | Bild | Quelle (draw.io) |
+|---|---|---|
+| Cluster System Map | [PNG](cluster_system_map.png) | [drawio](drawio/cluster_system_map.drawio) |
+| Stakeholder Map | [PNG](stakeholder_map.png) | [drawio](drawio/stakeholder_map.drawio) |
+| Causal Loop Map | [PNG](causal_loop_map.png) | [drawio](drawio/causal_loop_map.drawio) |
 
+`drawio/generate_maps.py` erzeugt die Stakeholder Map und die Causal Loop Map aus Code (überschreibt die bestehenden Dateien). Aufgabenstellung: [`docs/mss-Mini-Challenge-LE1.pdf`](../docs/mss-Mini-Challenge-LE1.pdf).
 
 ## 1. Systemgrenzen
 
@@ -49,6 +56,8 @@ Der genaue Betrachtungs- und Simulationszeitraum wird in LE2 anhand der verfügb
 
 
 ## 2. Cluster System Map
+
+![Cluster System Map](cluster_system_map.png)
 
 Die Cluster System Map sammelt und gruppiert Faktoren, die den Zusammenhang zwischen Klima, Landwirtschaft und Abwanderung in Kaffrine beeinflussen können.
 
@@ -104,6 +113,8 @@ Die Cluster System Map sammelt und gruppiert Faktoren, die den Zusammenhang zwis
 
 ## 3. Stakeholder Map
 
+![Stakeholder Map](stakeholder_map.png)
+
 Die Stakeholder Map zeigt die wichtigsten Akteure, die von klimabedingter Abwanderung in Kaffrine betroffen sind oder Einfluss auf das System haben.
 
 ### Zentrale Stakeholder
@@ -123,6 +134,8 @@ Die Stakeholder Map zeigt die wichtigsten Akteure, die von klimabedingter Abwand
 - Forschung und internationale Organisationen
 
 ## 4. Causal Loop Map
+
+![Causal Loop Map](causal_loop_map.png)
 
 Die Causal Loop Map konzentriert sich auf die wichtigsten Zusammenhänge zwischen Klima, Landwirtschaft, Bevölkerung und Abwanderung.
 
