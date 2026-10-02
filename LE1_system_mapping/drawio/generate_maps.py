@@ -1,5 +1,5 @@
 """
-Erzeugt causal_loop_map und stakeholder_map nach drawio/ und png/.
+Erzeugt causal_loop_map und stakeholder_map (.drawio hier, .png im LE1-Ordner).
 
 Achtung: Überschreibt die bestehenden Dateien. Manuelle Änderungen
 in draw.io gehen dabei verloren. Benötigt Pillow und die Windows-Schrift Arial.
@@ -34,7 +34,7 @@ class Map:
    for x,y in points: E.SubElement(ar,'mxPoint',x=str(x),y=str(y))
   self.edges.append((a,b,label,color,dashed,points or [],ports,arrow))
  def save(self,stem):
-  E.indent(self.doc); E.ElementTree(self.doc).write(P/'drawio'/(stem+'.drawio'),encoding='utf-8',xml_declaration=True)
+  E.indent(self.doc); E.ElementTree(self.doc).write(P/(stem+'.drawio'),encoding='utf-8',xml_declaration=True)
   im=Image.new('RGB',(self.w,self.h),'white'); d=ImageDraw.Draw(im)
   for text,x,y,w,h,col,size,bold,align,plain in self.nodes.values():
    if not plain: d.rounded_rectangle((x,y,x+w,y+h),radius=16,fill=C[col][0],outline=C[col][1],width=2)
@@ -69,7 +69,7 @@ class Map:
     p,q=ps[len(ps)//2-1:len(ps)//2+1]; lx=(p[0]+q[0])/2; ly=(p[1]+q[1])/2
     f=ImageFont.truetype('C:/Windows/Fonts/arialbd.ttf',23); bw=d.textlength(label,font=f)
     d.rectangle((lx-bw/2-5,ly-17,lx+bw/2+5,ly+17),fill='white'); d.text((lx-bw/2,ly-14),label,fill=color,font=f)
-  im.save(P/'png'/(stem+'.png'))
+  im.save(P.parent/(stem+'.png'))
   ids=[c.get('id') for c in self.r]; assert len(ids)==len(set(ids))
   for a,b,*_ in self.edges: assert a in ids and b in ids
   print(stem,len(self.nodes),'elements',len(self.edges),'relationships; XML, references and text fit verified')
