@@ -1,20 +1,10 @@
 # LE1 – Systemkartierung
 
-## Dateien
-
-| Artefakt | Bild | Quelle (draw.io) |
-|---|---|---|
-| Cluster System Map | [PNG](cluster_system_map.png) | [drawio](drawio/cluster_system_map.drawio) |
-| Stakeholder Map | [PNG](stakeholder_map.png) | [drawio](drawio/stakeholder_map.drawio) |
-| Causal Loop Map | [PNG](causal_loop_map.png) | [drawio](drawio/causal_loop_map.drawio) |
-
-`drawio/generate_maps.py` erzeugt die Stakeholder Map und die Causal Loop Map aus Code (überschreibt die bestehenden Dateien). Aufgabenstellung: [`docs/mss-Mini-Challenge-LE1.pdf`](../docs/mss-Mini-Challenge-LE1.pdf).
-
 ## 1. Systemgrenzen
 
 ### Untersuchungsgegenstand
 
-Untersucht wird, wie Dürre, Wasserknappheit und Ernteausfälle die Abwanderung aus der Region Kaffrine im Senegal beeinflussen und welche Rückwirkungen die Abwanderung auf Bevölkerung und Landwirtschaft hat.
+Untersucht wird, wie sich Dürren über Wasserverfügbarkeit, Ernte und Einkommen auf die Abwanderung aus der Region Kaffrine (Senegal) auswirken und wie die Abwanderung auf Bevölkerung, Landwirtschaft und Versorgung in der Region zurückwirkt.
 
 ### Räumliche Grenze
 
@@ -26,18 +16,19 @@ Untersucht wird, wie Dürre, Wasserknappheit und Ernteausfälle die Abwanderung 
 
 ### Zentraler Zusammenhang
 
-Dürre → Wasserverfügbarkeit → landwirtschaftlicher Ertrag → Abwanderung
+Niederschlag → Wasserverfügbarkeit → landwirtschaftlicher Ertrag → Einkommen → Abwanderung
 
-Zusätzlich werden Rückwirkungen der Abwanderung auf die lokale Bevölkerung und Landwirtschaft betrachtet.
+Eine Dürre ist ein Jahr mit deutlich weniger Niederschlag als üblich. Zusätzlich werden Rückwirkungen der Abwanderung auf die lokale Bevölkerung und Landwirtschaft betrachtet.
 
 ### Im System berücksichtigt
 
-- Niederschlag und Dürre
+- Niederschlag (wirkt von aussen auf das System)
 - Wasserverfügbarkeit
-- landwirtschaftlicher Ertrag
-- wirtschaftliche Situation
-- Bevölkerung
-- Abwanderungsrate
+- landwirtschaftlicher Ertrag und Produktion
+- landwirtschaftliches Einkommen und Haushaltseinkommen
+- Bevölkerung und Arbeitskräfte
+- Nahrungsmittelverfügbarkeit pro Person
+- Abwanderung, abgewanderte Personen und Rücküberweisungen
 
 ### Ausserhalb des direkten Modellfokus
 
@@ -51,13 +42,12 @@ Diese Faktoren können das System beeinflussen, werden aber nicht selbst detaill
 
 ### Zeitliche Grenze
 
-Der genaue Betrachtungs- und Simulationszeitraum wird in LE2 anhand der verfügbaren Klima-, Landwirtschafts- und Migrationsdaten festgelegt.
+- **2002–2023:** Vergleich mit echten Daten (Backtest)
+- **2024–2050:** Szenarien für die Zukunft
 
-
+Ab 2002 gibt es drei Volkszählungen (2002, 2013, 2023) und lückenlose Niederschlagsdaten.
 
 ## 2. Cluster System Map
-
-![Cluster System Map](cluster_system_map.png)
 
 Die Cluster System Map sammelt und gruppiert Faktoren, die den Zusammenhang zwischen Klima, Landwirtschaft und Abwanderung in Kaffrine beeinflussen können.
 
@@ -110,10 +100,7 @@ Die Cluster System Map sammelt und gruppiert Faktoren, die den Zusammenhang zwis
 - politische Veränderungen
 - wirtschaftliche Krisen
 
-
 ## 3. Stakeholder Map
-
-![Stakeholder Map](stakeholder_map.png)
 
 Die Stakeholder Map zeigt die wichtigsten Akteure, die von klimabedingter Abwanderung in Kaffrine betroffen sind oder Einfluss auf das System haben.
 
@@ -135,45 +122,13 @@ Die Stakeholder Map zeigt die wichtigsten Akteure, die von klimabedingter Abwand
 
 ## 4. Causal Loop Map
 
-![Causal Loop Map](causal_loop_map.png)
+Die Causal Loop Map verbindet Klima, Landwirtschaft, Einkommen, Bevölkerung und Abwanderung. Sie besteht aus einem Kernmodell, das in LE2 simuliert wird, und aus Detailmodulen mit allen Faktoren der Cluster System Map.
 
-Die Causal Loop Map konzentriert sich auf die wichtigsten Zusammenhänge zwischen Klima, Landwirtschaft, Bevölkerung und Abwanderung.
+### Zentrale Rückkopplungen
 
-Dabei gilt:
+- **R1 Arbeitskräfte–Einkommen (verstärkend, Vermutung):** Wer wegzieht, fehlt als Arbeitskraft. Ernte und Einkommen sinken, und noch mehr Menschen ziehen weg.
+- **R2 Netzwerk (verstärkend):** Wer schon weg ist, erleichtert anderen das Wegziehen.
+- **B1 Versorgung (ausgleichend):** Weniger Menschen heisst mehr Nahrung pro Person. Der Druck wegzuziehen sinkt.
+- **B2 Rücküberweisungen (ausgleichend):** Geld von Abgewanderten hilft den Familien. Weniger Menschen müssen wegziehen.
 
-- **(+)** Grössen verändern sich in die gleiche Richtung.
-- **(-)** Grössen verändern sich in entgegengesetzte Richtungen.
-
-### Zentrale Wirkungskette
-
-- Niederschlag → Wasserverfügbarkeit **(+)**
-- Dürre → Wasserverfügbarkeit **(-)**
-- Wasserverfügbarkeit → landwirtschaftlicher Ertrag **(+)**
-- landwirtschaftlicher Ertrag → landwirtschaftliches Einkommen **(+)**
-- landwirtschaftliches Einkommen → Abwanderung **(-)**
-- Abwanderung → Bevölkerung **(-)**
-
-### Verstärkende Rückkopplung
-
-Eine höhere Abwanderung kann die Zahl verfügbarer Arbeitskräfte reduzieren:
-
-Abwanderung ↑  
-→ verfügbare Arbeitskräfte ↓  
-→ landwirtschaftliche Produktion ↓  
-→ landwirtschaftliches Einkommen ↓  
-→ Abwanderung ↑
-
-Dies bildet eine **verstärkende Rückkopplung (R)**.
-
-### Ausgleichende Rückkopplung
-
-Abgewanderte Personen können ihre zurückbleibenden Haushalte durch Rücküberweisungen unterstützen:
-
-Abwanderung ↑  
-→ Rücküberweisungen ↑  
-→ Haushaltseinkommen ↑  
-→ Abwanderung ↓
-
-Dies bildet eine mögliche **ausgleichende Rückkopplung (B)**.
-
-Ob diese Rückkopplung später im Simulationsmodell berücksichtigt wird, hängt von der verfügbaren Datenlage und der notwendigen Vereinfachung ab.
+Welche Schleifen stärker sind, wird in LE2 untersucht.

@@ -1,4 +1,3 @@
-<?xml version='1.0' encoding='utf-8'?>
 <mxfile host="app.diagrams.net">
   <diagram name="Causal Loop Map – ausführlich" id="Causal-Loop-Map-–-ausführlich">
     <mxGraphModel dx="2537" dy="2223" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3100" pageHeight="2900" background="light-dark(#FFFFFF,#FFFFFF)" math="0" shadow="0">
@@ -11,16 +10,19 @@
         <mxCell id="coretitle" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=27;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="01  KERNMODELL: KLIMA → LANDWIRTSCHAFT → EINKOMMEN → ABWANDERUNG" vertex="1">
           <mxGeometry height="55" width="1640" x="65" y="200" as="geometry" />
         </mxCell>
-        <mxCell id="rain" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f5f5f5;strokeColor=#888888;strokeWidth=2;" value="Niederschlag" vertex="1">
+        <mxCell id="rain" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="Niederschlag" vertex="1">
           <mxGeometry height="105" width="300" x="90" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="drought" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="Dürre" vertex="1">
+          <mxGeometry height="105" width="300" x="90" y="570" as="geometry" />
         </mxCell>
         <mxCell id="water" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="Wasserverfügbarkeit" vertex="1">
           <mxGeometry height="105" width="300" x="510" y="445" as="geometry" />
         </mxCell>
-        <mxCell id="yield" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftlicher&#10;Ertrag" vertex="1">
+        <mxCell id="yield" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftlicher&#xa;Ertrag" vertex="1">
           <mxGeometry height="105" width="300" x="930" y="445" as="geometry" />
         </mxCell>
-        <mxCell id="income" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Landwirtschaftliches&#10;Einkommen" vertex="1">
+        <mxCell id="income" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Landwirtschaftliches&#xa;Einkommen" vertex="1">
           <mxGeometry height="105" width="300" x="1350" y="445" as="geometry" />
         </mxCell>
         <mxCell id="migration" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Abwanderung" vertex="1">
@@ -29,10 +31,10 @@
         <mxCell id="pop" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Bevölkerung" vertex="1">
           <mxGeometry height="105" width="300" x="2420" y="445" as="geometry" />
         </mxCell>
-        <mxCell id="labor" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Verfügbare&#10;Arbeitskräfte" vertex="1">
+        <mxCell id="labor" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Verfügbare&#xa;Arbeitskräfte" vertex="1">
           <mxGeometry height="105" width="300" x="1800" y="810" as="geometry" />
         </mxCell>
-        <mxCell id="production" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftliche&#10;Produktion" vertex="1">
+        <mxCell id="production" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftliche&#xa;Produktion" vertex="1">
           <mxGeometry height="105" width="300" x="1350" y="810" as="geometry" />
         </mxCell>
         <mxCell id="remit" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Rücküberweisungen" vertex="1">
@@ -41,13 +43,25 @@
         <mxCell id="houseincome" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Haushaltseinkommen" vertex="1">
           <mxGeometry height="105" width="300" x="1800" y="235" as="geometry" />
         </mxCell>
-        <mxCell id="e1" edge="1" parent="1" source="rain" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.25;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="water" value="+">
+        <mxCell id="e1" edge="1" parent="1" source="rain" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#82b366;fontColor=#82b366;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.25;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="water" value="+">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="drought" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#82b366;fontColor=#82b366;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.75;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="water" value="−">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e3" edge="1" parent="1" source="water" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="yield" value="+">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e6" edge="1" parent="1" source="migration" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#b85450;fontColor=#b85450;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="pop" value="−">
+        <mxCell id="e4" edge="1" parent="1" source="yield" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="income" value="+">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="income" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#b85450;fontColor=#b85450;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="migration" value="−">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="migration" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="pop" value="−">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="migration" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#b85450;fontColor=#b85450;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="labor" value="−">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e8" edge="1" parent="1" source="labor" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#b85450;fontColor=#b85450;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="production" value="+">
@@ -56,22 +70,25 @@
         <mxCell id="e9" edge="1" parent="1" source="production" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#b85450;fontColor=#b85450;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;entryX=0.5;entryY=1;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="income" value="+">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="migration" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#9673a6;fontColor=#9673a6;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0;entryX=0.5;entryY=1;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="remit" value="+">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="e11" edge="1" parent="1" source="remit" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#9673a6;fontColor=#9673a6;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="houseincome" value="+">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e12" edge="1" parent="1" source="houseincome" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#b85450;fontColor=#b85450;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="migration" value="−">
+        <mxCell id="e12" edge="1" parent="1" source="houseincome" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#9673a6;fontColor=#9673a6;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="migration" value="−">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="R1 · VERSTÄRKEND&#10;Arbeitskräfte–Einkommen&#10;(Hypothese)" vertex="1">
-          <mxGeometry height="110" width="400" x="1515" y="630" as="geometry" />
+        <mxCell id="r" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="R · VERSTÄRKEND&#xa;Arbeitskräfte–Einkommen" vertex="1">
+          <mxGeometry height="95" width="400" x="1515" y="640" as="geometry" />
         </mxCell>
-        <mxCell id="b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="B2 · AUSGLEICHEND&#10;Rücküberweisungen&#10;(möglich)" vertex="1">
+        <mxCell id="b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="B · AUSGLEICHEND&#xa;Rücküberweisungen&#xa;(möglich)" vertex="1">
           <mxGeometry height="78" width="245" x="2130" y="305" as="geometry" />
         </mxCell>
-        <mxCell id="key" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=24;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#f5f5f5;strokeColor=#888888;strokeWidth=2;" value="+  Gleiche Wirkungsrichtung&#10;−  Entgegengesetzte Wirkungsrichtung&#10;||  Verzögerung&#10;Grau: wirkt von aussen auf das System&#10;&#10;Vorzeichen gelten bei sonst gleichen Bedingungen.&#10;Sie bedeuten nicht «gut» oder «schlecht»." vertex="1">
-          <mxGeometry height="260" width="1030" x="90" y="760" as="geometry" />
+        <mxCell id="key" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=24;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#f5f5f5;strokeColor=#888888;strokeWidth=2;" value="+  Gleiche Wirkungsrichtung&#xa;−  Entgegengesetzte Wirkungsrichtung&#xa;&#xa;Vorzeichen gelten bei sonst gleichen Bedingungen.&#xa;Sie bedeuten nicht «gut» oder «schlecht»." vertex="1">
+          <mxGeometry height="210" width="1030" x="90" y="770" as="geometry" />
         </mxCell>
-        <mxCell id="corefoot" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="R: gerade Anzahl negativer Verbindungen → verstärkend.    B: ungerade Anzahl → ausgleichend.&#10;Die mögliche B2-Schleife wird nur bei geeigneter Datenlage und angemessener Modellkomplexität übernommen." vertex="1">
+        <mxCell id="corefoot" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="R: Zwei negative Verbindungen → verstärkend.    B: Eine negative Verbindung → ausgleichend.&#xa;Die mögliche B-Schleife wird nur bei geeigneter Datenlage und angemessener Modellkomplexität übernommen." vertex="1">
           <mxGeometry height="70" width="1770" x="1190" y="950" as="geometry" />
         </mxCell>
         <mxCell id="modules" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=29;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;fontColor=light-dark(#000000,#000000);" value="02  DETAILMODULE: ALLE FAKTOREN DER CLUSTER MAP" vertex="1">
@@ -98,7 +115,7 @@
         <mxCell id="water2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="Wasserverfügbarkeit" vertex="1">
           <mxGeometry height="85" width="270" x="415" y="1565" as="geometry" />
         </mxCell>
-        <mxCell id="yield2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftlicher&#10;Ertrag" vertex="1">
+        <mxCell id="yield2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftlicher&#xa;Ertrag" vertex="1">
           <mxGeometry height="85" width="270" x="735" y="1565" as="geometry" />
         </mxCell>
         <mxCell id="rain2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="Niederschlag" vertex="1">
@@ -134,19 +151,19 @@
         <mxCell id="area" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Verfügbare Anbaufläche" vertex="1">
           <mxGeometry height="85" width="270" x="1090" y="1355" as="geometry" />
         </mxCell>
-        <mxCell id="demand" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Wasserbedarf der&#10;Landwirtschaft" vertex="1">
+        <mxCell id="demand" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Wasserbedarf der&#xa;Landwirtschaft" vertex="1">
           <mxGeometry height="85" width="270" x="1425" y="1355" as="geometry" />
         </mxCell>
         <mxCell id="water3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="Wasserverfügbarkeit" vertex="1">
           <mxGeometry height="85" width="270" x="1745" y="1355" as="geometry" />
         </mxCell>
-        <mxCell id="yield3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftlicher&#10;Ertrag" vertex="1">
+        <mxCell id="yield3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftlicher&#xa;Ertrag" vertex="1">
           <mxGeometry height="85" width="270" x="1090" y="1565" as="geometry" />
         </mxCell>
-        <mxCell id="prod3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftliche&#10;Produktion" vertex="1">
+        <mxCell id="prod3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftliche&#xa;Produktion" vertex="1">
           <mxGeometry height="85" width="270" x="1425" y="1565" as="geometry" />
         </mxCell>
-        <mxCell id="food" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Nahrungsmittel-&#10;verfügbarkeit" vertex="1">
+        <mxCell id="food" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Nahrungsmittel-&#xa;verfügbarkeit" vertex="1">
           <mxGeometry height="85" width="270" x="1745" y="1565" as="geometry" />
         </mxCell>
         <mxCell id="e19" edge="1" parent="1" source="area" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="demand" value="+">
@@ -173,19 +190,19 @@
         <mxCell id="econnote" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Mehr landwirtschaftliches Einkommen und lokale Erwerbsalternativen können Haushalte stärken. Preise beeinflussen die Kaufkraft, nicht direkt das nominale Einkommen. Preiswirkungen hängen auch von externen Märkten ab." vertex="1">
           <mxGeometry height="105" width="930" x="2095" y="1695" as="geometry" />
         </mxCell>
-        <mxCell id="inc3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Landwirtschaftliches&#10;Einkommen" vertex="1">
+        <mxCell id="inc3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Landwirtschaftliches&#xa;Einkommen" vertex="1">
           <mxGeometry height="85" width="270" x="2100" y="1355" as="geometry" />
         </mxCell>
         <mxCell id="hh3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Haushaltseinkommen" vertex="1">
           <mxGeometry height="85" width="270" x="2435" y="1355" as="geometry" />
         </mxCell>
-        <mxCell id="alternatives" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Wirtschaftliche&#10;Alternativen vor Ort" vertex="1">
+        <mxCell id="alternatives" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Wirtschaftliche&#xa;Alternativen vor Ort" vertex="1">
           <mxGeometry height="85" width="270" x="2755" y="1355" as="geometry" />
         </mxCell>
         <mxCell id="prices" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Lebensmittelpreise" vertex="1">
           <mxGeometry height="85" width="270" x="2100" y="1565" as="geometry" />
         </mxCell>
-        <mxCell id="purchase" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Kaufkraft für&#10;Lebensmittel" vertex="1">
+        <mxCell id="purchase" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Kaufkraft für&#xa;Lebensmittel" vertex="1">
           <mxGeometry height="85" width="270" x="2435" y="1565" as="geometry" />
         </mxCell>
         <mxCell id="mig3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Abwanderung" vertex="1">
@@ -224,16 +241,16 @@
         <mxCell id="pop4" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Bevölkerung" vertex="1">
           <mxGeometry height="85" width="270" x="415" y="1995" as="geometry" />
         </mxCell>
-        <mxCell id="labor4" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Verfügbare&#10;Arbeitskräfte" vertex="1">
+        <mxCell id="labor4" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Verfügbare&#xa;Arbeitskräfte" vertex="1">
           <mxGeometry height="85" width="270" x="735" y="1995" as="geometry" />
         </mxCell>
-        <mxCell id="change" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Bevölkerungsentwicklung&#10;(Veränderung des Bestands)" vertex="1">
+        <mxCell id="change" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Bevölkerungsentwicklung&#xa;(Veränderung des Bestands)" vertex="1">
           <mxGeometry height="85" width="270" x="80" y="2205" as="geometry" />
         </mxCell>
         <mxCell id="pressure" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Lokaler Versorgungsdruck" vertex="1">
           <mxGeometry height="85" width="270" x="415" y="2205" as="geometry" />
         </mxCell>
-        <mxCell id="food4" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Nahrungsmittel-&#10;verfügbarkeit pro Person" vertex="1">
+        <mxCell id="food4" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Nahrungsmittel-&#xa;verfügbarkeit pro Person" vertex="1">
           <mxGeometry height="85" width="270" x="735" y="2205" as="geometry" />
         </mxCell>
         <mxCell id="e30" edge="1" parent="1" source="mig4" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="pop4" value="−">
@@ -266,7 +283,7 @@
         <mxCell id="mig5" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Abwanderung" vertex="1">
           <mxGeometry height="85" width="270" x="1425" y="1995" as="geometry" />
         </mxCell>
-        <mxCell id="family" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Familiäre&#10;Abhängigkeiten" vertex="1">
+        <mxCell id="family" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Familiäre&#xa;Abhängigkeiten" vertex="1">
           <mxGeometry height="85" width="270" x="1745" y="1995" as="geometry" />
         </mxCell>
         <mxCell id="remit5" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Rücküberweisungen" vertex="1">
@@ -305,7 +322,7 @@
         <mxCell id="supply" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Wasserversorgung" vertex="1">
           <mxGeometry height="85" width="270" x="2755" y="1995" as="geometry" />
         </mxCell>
-        <mxCell id="program" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Landwirtschaftliche&#10;Hilfsprogramme" vertex="1">
+        <mxCell id="program" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Landwirtschaftliche&#xa;Hilfsprogramme" vertex="1">
           <mxGeometry height="85" width="270" x="2100" y="2205" as="geometry" />
         </mxCell>
         <mxCell id="irrigation" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Bewässerung" vertex="1">
@@ -331,50 +348,6 @@
         </mxCell>
         <mxCell id="e44" edge="1" parent="1" source="supply" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="water6" value="+">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_e1" edge="1" parent="1" source="yield" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0.8;exitY=1;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="production" value="+">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1170" y="862" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="v2_e2" edge="1" parent="1" source="pop" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#b85450;fontColor=#b85450;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=1;entryX=1;entryY=0;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="labor" value="+">
-          <mxGeometry relative="1" as="geometry" x="0.6" />
-        </mxCell>
-        <mxCell id="v2_e8" edge="1" parent="1" source="income" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#b85450;fontColor=#b85450;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="houseincome" value="+">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1500" y="287" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="v2_emigrants" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Abgewanderte&#10;Personen" vertex="1">
-          <mxGeometry height="90" width="270" x="2760" y="300" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_e3" edge="1" parent="1" source="migration" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#9673a6;fontColor=#9673a6;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.1;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="v2_emigrants" value="+">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_e4" edge="1" parent="1" source="v2_emigrants" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#9673a6;fontColor=#9673a6;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0.2;exitY=0;entryX=1;entryY=0.8;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="remit" value="+ ||">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_e5" edge="1" parent="1" source="v2_emigrants" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#9673a6;fontColor=#9673a6;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.9;entryX=1;entryY=0.3;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="migration" value="+ ||">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_food" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Nahrungsmittel-&#10;verfügbarkeit pro Person" vertex="1">
-          <mxGeometry height="105" width="300" x="2420" y="690" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_e6" edge="1" parent="1" source="pop" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="v2_food" value="−">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_e7" edge="1" parent="1" source="v2_food" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=1;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="migration" value="−">
-          <mxGeometry relative="1" as="geometry" x="-0.6" />
-        </mxCell>
-        <mxCell id="v2_r2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="R2 · VERSTÄRKEND&#10;Netzwerk" vertex="1">
-          <mxGeometry height="60" width="270" x="2760" y="420" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_b1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="B1 · AUSGLEICHEND&#10;Versorgung" vertex="1">
-          <mxGeometry height="60" width="270" x="2760" y="800" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
