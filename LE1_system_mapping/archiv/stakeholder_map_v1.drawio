@@ -1,0 +1,319 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Stakeholder Map – ausführlich" id="Stakeholder-Map-–-ausführlich">
+    <mxGraphModel dx="2537" dy="2163" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3100" pageHeight="2900" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=38;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="STAKEHOLDER MAP | Klimabedingte Abwanderung in Kaffrine" vertex="1">
+          <mxGeometry height="70" width="3000" x="50" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="lh" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=28;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="DIREKT BETROFFENE AKTEURE" vertex="1">
+          <mxGeometry height="50" width="760" x="50" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="rh" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=28;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="UNTERSTÜTZUNG, STEUERUNG UND WISSEN" vertex="1">
+          <mxGeometry height="50" width="860" x="2190" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="house" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Lokale Haushalte&#xa;&#xa;Betroffenheit: Dürre, Wasserknappheit, Ernteausfälle und Abwanderung.&#xa;Interessen: verlässliche Versorgung, tragfähiges Einkommen und gesicherte Lebensgrundlagen.&#xa;Rolle: treffen bzw. tragen Entscheidungen über Erwerb und Abwanderung." vertex="1">
+          <mxGeometry height="290" width="760" x="40" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="farm" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftliche Betriebe und Bauern&#xa;&#xa;Betroffenheit: abhängig von Wasserverfügbarkeit und landwirtschaftlichen Erträgen.&#xa;Interessen: stabile Produktion, verfügbare Arbeitskräfte und ausreichendes Einkommen.&#xa;Ansatzpunkte: Anbau, Bewässerung und landwirtschaftliche Anpassung." vertex="1">
+          <mxGeometry height="290" width="760" x="50" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="mig" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Abwandernde Personen&#xa;&#xa;Betroffenheit: verlassen die Region im Kontext unsicherer Lebensgrundlagen.&#xa;Systemwirkung: verändern lokale Bevölkerung und verfügbare Arbeitskräfte.&#xa;Beziehungen: bleiben potenziell über Familie, Netzwerke und Rücküberweisungen verbunden." vertex="1">
+          <mxGeometry height="290" width="760" x="50" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="fam" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Zurückbleibende Familien&#xa;&#xa;Betroffenheit: mögliche Lücken bei Arbeit, Versorgung und familiären Aufgaben.&#xa;Mögliche Entlastung: Rücküberweisungen abgewanderter Angehöriger.&#xa;Interessen: gesichertes Haushaltseinkommen und tragfähige familiäre Unterstützung." vertex="1">
+          <mxGeometry height="290" width="760" x="50" y="1260" as="geometry" />
+        </mxCell>
+        <mxCell id="auth" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Lokale und regionale Behörden&#xa;&#xa;Infrastruktur, Wasserversorgung und Unterstützungsprogramme.&#xa;Ansatzpunkt: lokale Umsetzung und Koordination." vertex="1">
+          <mxGeometry height="190" width="820" x="2230" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="aid" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Hilfs- und Entwicklungsorganisationen&#xa;&#xa;Ernährungssicherheit, Landwirtschaft und Klimaanpassung.&#xa;Ansatzpunkt: Projekte, Unterstützung und Zusammenarbeit." vertex="1">
+          <mxGeometry height="190" width="820" x="2230" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="gov" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Nationale Regierung&#xa;&#xa;Möglicher Beitrag: Rahmenbedingungen, Mittel und staatliche Unterstützung.&#xa;Schnittstelle: lokale und regionale Behörden." vertex="1">
+          <mxGeometry height="190" width="820" x="2230" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="advice" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftliche Beratungsstellen&#xa;&#xa;Möglicher Beitrag: Wissen zu Anbau, Wasserbewirtschaftung und Anpassung.&#xa;Schnittstelle: Betriebe und Bauern." vertex="1">
+          <mxGeometry height="190" width="820" x="2230" y="915" as="geometry" />
+        </mxCell>
+        <mxCell id="community" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Lokale Gemeinschaften&#xa;&#xa;Möglicher Beitrag: soziale Netzwerke, Austausch und gegenseitige Hilfe.&#xa;Schnittstelle: Haushalte und Familien." vertex="1">
+          <mxGeometry height="190" width="820" x="2230" y="1130" as="geometry" />
+        </mxCell>
+        <mxCell id="research" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#f5f5f5;strokeColor=#888888;strokeWidth=2;" value="Forschung und internationale Organisationen&#xa;&#xa;Möglicher Beitrag: Daten, Analysen und Wissen zu Klima, Landwirtschaft und Migration.&#xa;Schnittstelle: Planung und Unterstützungsprogramme." vertex="1">
+          <mxGeometry height="190" width="820" x="2230" y="1345" as="geometry" />
+        </mxCell>
+        <mxCell id="system" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=32;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="SYSTEMKERN&#xa;Klimabedingte Abwanderung&#xa;in Kaffrine" vertex="1">
+          <mxGeometry height="180" width="870" x="1050" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="topic0" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="Klima und Umwelt&#xa;Niederschlag · Dürre · Temperatur&#xa;Wasserverfügbarkeit · Bodenqualität" vertex="1">
+          <mxGeometry height="120" width="930" x="1030" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="topic1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaft und Ernährung&#xa;Ertrag · Anbaufläche · Wasserbedarf&#xa;Produktion · Nahrungsmittelverfügbarkeit" vertex="1">
+          <mxGeometry height="120" width="930" x="1030" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="topic2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Wirtschaft&#xa;Landwirtschaftliches Einkommen&#xa;Haushaltseinkommen · Preise · Alternativen" vertex="1">
+          <mxGeometry height="120" width="930" x="1030" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="topic3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Bevölkerung und Abwanderung&#xa;Bevölkerung · Entwicklung&#xa;Abwanderung · verfügbare Arbeitskräfte" vertex="1">
+          <mxGeometry height="120" width="930" x="1030" y="1140" as="geometry" />
+        </mxCell>
+        <mxCell id="topic4" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Soziale Faktoren&#xa;Familiäre Abhängigkeiten&#xa;Rücküberweisungen · soziale Netzwerke" vertex="1">
+          <mxGeometry height="120" width="930" x="1030" y="1270" as="geometry" />
+        </mxCell>
+        <mxCell id="topic5" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Institutionelle Faktoren&#xa;Wasserversorgung · Bewässerung&#xa;Hilfsprogramme · Unterstützung · Infrastruktur" vertex="1">
+          <mxGeometry height="120" width="930" x="1030" y="1400" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="house" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d6b656;fontColor=#d6b656;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.15;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="farm" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d6b656;fontColor=#d6b656;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.38;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="mig" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d6b656;fontColor=#d6b656;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.61;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="fam" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d6b656;fontColor=#d6b656;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.8400000000000001;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="auth" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.08;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="aid" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.25;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="gov" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.42000000000000004;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="advice" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.59;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="community" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.76;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="research" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=1;entryY=0.93;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=30;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="BEZIEHUNGEN IM DETAIL" vertex="1">
+          <mxGeometry height="60" width="3000" x="50" y="1585" as="geometry" />
+        </mxCell>
+        <mxCell id="rel0" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="50" y="1730" as="geometry" />
+        </mxCell>
+        <mxCell id="rel0a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Abwandernde Personen" vertex="1">
+          <mxGeometry height="70" width="365" x="70" y="1750" as="geometry" />
+        </mxCell>
+        <mxCell id="rel0b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Zurückbleibende Familien" vertex="1">
+          <mxGeometry height="70" width="365" x="645" y="1750" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="rel0a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#9673a6;fontColor=#9673a6;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="rel0b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel0label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Rücküberweisungen" vertex="1">
+          <mxGeometry height="60" width="220" x="430" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="rel0note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Mögliche finanzielle Unterstützung; keine Garantie für regelmässige Zahlungen." vertex="1">
+          <mxGeometry height="60" width="930" x="75" y="1875" as="geometry" />
+        </mxCell>
+        <mxCell id="rel1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="1060" y="1730" as="geometry" />
+        </mxCell>
+        <mxCell id="rel1a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Abwandernde Personen" vertex="1">
+          <mxGeometry height="70" width="365" x="1080" y="1750" as="geometry" />
+        </mxCell>
+        <mxCell id="rel1b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Landwirtschaftliche Betriebe" vertex="1">
+          <mxGeometry height="70" width="365" x="1655" y="1750" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="rel1a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#d6b656;fontColor=#d6b656;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="rel1b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel1label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Weniger Arbeitskräfte" vertex="1">
+          <mxGeometry height="60" width="220" x="1440" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="rel1note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Abwanderung kann die lokal verfügbare Arbeit und damit die Produktion verringern." vertex="1">
+          <mxGeometry height="60" width="930" x="1085" y="1875" as="geometry" />
+        </mxCell>
+        <mxCell id="rel2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="2070" y="1730" as="geometry" />
+        </mxCell>
+        <mxCell id="rel2a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Betriebe und Bauern" vertex="1">
+          <mxGeometry height="70" width="365" x="2090" y="1750" as="geometry" />
+        </mxCell>
+        <mxCell id="rel2b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Lokale Haushalte" vertex="1">
+          <mxGeometry height="70" width="365" x="2665" y="1750" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="rel2a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#6c8ebf;fontColor=#6c8ebf;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="rel2b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel2label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Ertrag und Einkommen" vertex="1">
+          <mxGeometry height="60" width="220" x="2450" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="rel2note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Die landwirtschaftliche Situation prägt die Lebensgrundlagen betroffener Haushalte." vertex="1">
+          <mxGeometry height="60" width="930" x="2095" y="1875" as="geometry" />
+        </mxCell>
+        <mxCell id="rel3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="50" y="1970" as="geometry" />
+        </mxCell>
+        <mxCell id="rel3a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Lokale / regionale Behörden" vertex="1">
+          <mxGeometry height="70" width="365" x="70" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="rel3b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Lokale Haushalte" vertex="1">
+          <mxGeometry height="70" width="365" x="645" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="rel3a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="rel3b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel3label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Versorgung / Infrastruktur" vertex="1">
+          <mxGeometry height="60" width="220" x="430" y="2060" as="geometry" />
+        </mxCell>
+        <mxCell id="rel3note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Wasserversorgung und Unterstützungsprogramme als mögliche Einflusswege." vertex="1">
+          <mxGeometry height="60" width="930" x="75" y="2115" as="geometry" />
+        </mxCell>
+        <mxCell id="rel4" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="1060" y="1970" as="geometry" />
+        </mxCell>
+        <mxCell id="rel4a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Hilfsorganisationen" vertex="1">
+          <mxGeometry height="70" width="365" x="1080" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="rel4b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Betriebe und Bauern" vertex="1">
+          <mxGeometry height="70" width="365" x="1655" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="rel4a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="rel4b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel4label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Anpassung / Unterstützung" vertex="1">
+          <mxGeometry height="60" width="220" x="1440" y="2060" as="geometry" />
+        </mxCell>
+        <mxCell id="rel4note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Unterstützung bei Landwirtschaft und Anpassung an klimatische Veränderungen." vertex="1">
+          <mxGeometry height="60" width="930" x="1085" y="2115" as="geometry" />
+        </mxCell>
+        <mxCell id="rel5" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="2070" y="1970" as="geometry" />
+        </mxCell>
+        <mxCell id="rel5a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Hilfsorganisationen" vertex="1">
+          <mxGeometry height="70" width="365" x="2090" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="rel5b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Lokale Haushalte" vertex="1">
+          <mxGeometry height="70" width="365" x="2665" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="rel5a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="rel5b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel5label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Ernährungssicherheit" vertex="1">
+          <mxGeometry height="60" width="220" x="2450" y="2060" as="geometry" />
+        </mxCell>
+        <mxCell id="rel5note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Unterstützung zur Stabilisierung der Versorgung und Lebensgrundlagen." vertex="1">
+          <mxGeometry height="60" width="930" x="2095" y="2115" as="geometry" />
+        </mxCell>
+        <mxCell id="rel6" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="50" y="2210" as="geometry" />
+        </mxCell>
+        <mxCell id="rel6a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Nationale Regierung" vertex="1">
+          <mxGeometry height="70" width="365" x="70" y="2230" as="geometry" />
+        </mxCell>
+        <mxCell id="rel6b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Lokale / regionale Behörden" vertex="1">
+          <mxGeometry height="70" width="365" x="645" y="2230" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="rel6a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="rel6b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel6label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Rahmen / Ressourcen" vertex="1">
+          <mxGeometry height="60" width="220" x="430" y="2300" as="geometry" />
+        </mxCell>
+        <mxCell id="rel6note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Mögliche Verbindung zwischen nationaler Unterstützung und lokaler Umsetzung." vertex="1">
+          <mxGeometry height="60" width="930" x="75" y="2355" as="geometry" />
+        </mxCell>
+        <mxCell id="rel7" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="1060" y="2210" as="geometry" />
+        </mxCell>
+        <mxCell id="rel7a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Beratungsstellen" vertex="1">
+          <mxGeometry height="70" width="365" x="1080" y="2230" as="geometry" />
+        </mxCell>
+        <mxCell id="rel7b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Betriebe und Bauern" vertex="1">
+          <mxGeometry height="70" width="365" x="1655" y="2230" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="rel7a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#6c8ebf;fontColor=#6c8ebf;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="rel7b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel7label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Beratung / Wissen" vertex="1">
+          <mxGeometry height="60" width="220" x="1440" y="2300" as="geometry" />
+        </mxCell>
+        <mxCell id="rel7note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Mögliche Verbesserung von Anbau und Wasserbewirtschaftung." vertex="1">
+          <mxGeometry height="60" width="930" x="1085" y="2355" as="geometry" />
+        </mxCell>
+        <mxCell id="rel8" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="2070" y="2210" as="geometry" />
+        </mxCell>
+        <mxCell id="rel8a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Lokale Gemeinschaften" vertex="1">
+          <mxGeometry height="70" width="365" x="2090" y="2230" as="geometry" />
+        </mxCell>
+        <mxCell id="rel8b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Haushalte / Familien" vertex="1">
+          <mxGeometry height="70" width="365" x="2665" y="2230" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="rel8a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#9673a6;fontColor=#9673a6;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="rel8b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel8label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Netzwerke / Hilfe" vertex="1">
+          <mxGeometry height="60" width="220" x="2450" y="2300" as="geometry" />
+        </mxCell>
+        <mxCell id="rel8note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Möglicher Austausch von Informationen und gegenseitige Unterstützung." vertex="1">
+          <mxGeometry height="60" width="930" x="2095" y="2355" as="geometry" />
+        </mxCell>
+        <mxCell id="rel9" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="50" y="2450" as="geometry" />
+        </mxCell>
+        <mxCell id="rel9a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f5f5f5;strokeColor=#888888;strokeWidth=2;" value="Forschung / int. Organisationen" vertex="1">
+          <mxGeometry height="70" width="365" x="70" y="2470" as="geometry" />
+        </mxCell>
+        <mxCell id="rel9b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f5f5f5;strokeColor=#888888;strokeWidth=2;" value="Behörden / Hilfsorganisationen" vertex="1">
+          <mxGeometry height="70" width="365" x="645" y="2470" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="rel9a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#888888;fontColor=#888888;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="rel9b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel9label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Daten / Analysen" vertex="1">
+          <mxGeometry height="60" width="220" x="430" y="2540" as="geometry" />
+        </mxCell>
+        <mxCell id="rel9note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Möglicher Beitrag zur Planung, Priorisierung und Bewertung von Massnahmen." vertex="1">
+          <mxGeometry height="60" width="930" x="75" y="2595" as="geometry" />
+        </mxCell>
+        <mxCell id="rel10" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="1060" y="2450" as="geometry" />
+        </mxCell>
+        <mxCell id="rel10a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Zurückbleibende Familien" vertex="1">
+          <mxGeometry height="70" width="365" x="1080" y="2470" as="geometry" />
+        </mxCell>
+        <mxCell id="rel10b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Abwandernde Personen" vertex="1">
+          <mxGeometry height="70" width="365" x="1655" y="2470" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="rel10a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#9673a6;fontColor=#9673a6;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="rel10b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel10label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Familiäre Bindungen" vertex="1">
+          <mxGeometry height="60" width="220" x="1440" y="2540" as="geometry" />
+        </mxCell>
+        <mxCell id="rel10note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Abhängigkeiten und Verpflichtungen können Entscheidungen prägen; Richtung offen." vertex="1">
+          <mxGeometry height="60" width="930" x="1085" y="2595" as="geometry" />
+        </mxCell>
+        <mxCell id="rel11" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="220" width="980" x="2070" y="2450" as="geometry" />
+        </mxCell>
+        <mxCell id="rel11a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Lokale Haushalte" vertex="1">
+          <mxGeometry height="70" width="365" x="2090" y="2470" as="geometry" />
+        </mxCell>
+        <mxCell id="rel11b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Behörden / Hilfsorganisationen" vertex="1">
+          <mxGeometry height="70" width="365" x="2665" y="2470" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="rel11a" style="edgeStyle=none;rounded=0;html=0;endArrow=block;endFill=1;strokeWidth=3;strokeColor=#d79b00;fontColor=#d79b00;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitPerimeter=0;entryPerimeter=0;dashed=1;" target="rel11b" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel11label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Bedarf / Erfahrungen" vertex="1">
+          <mxGeometry height="60" width="220" x="2450" y="2540" as="geometry" />
+        </mxCell>
+        <mxCell id="rel11note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Möglicher Rückfluss lokaler Bedürfnisse und Erfahrungen an unterstützende Akteure." vertex="1">
+          <mxGeometry height="60" width="930" x="2095" y="2595" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
