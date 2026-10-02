@@ -1,9 +1,15 @@
+"""
+Erzeugt causal_loop_map und stakeholder_map nach drawio/ und png/.
+
+Achtung: Überschreibt die bestehenden Dateien. Manuelle Änderungen
+in draw.io gehen dabei verloren. Benötigt Pillow und die Windows-Schrift Arial.
+"""
 from pathlib import Path
 import xml.etree.ElementTree as E
 from PIL import Image, ImageDraw, ImageFont
 import math
 
-P=Path(__file__).parent
+P=Path(__file__).resolve().parent
 C={'green':('#d5e8d4','#82b366'),'blue':('#dae8fc','#6c8ebf'),'red':('#f8cecc','#b85450'),'yellow':('#fff2cc','#d6b656'),'purple':('#e1d5e7','#9673a6'),'orange':('#ffe6cc','#d79b00'),'grey':('#f5f5f5','#888888'),'white':('#ffffff','#d5d9df')}
 class Map:
  def __init__(self,name,w,h):
@@ -28,7 +34,7 @@ class Map:
    for x,y in points: E.SubElement(ar,'mxPoint',x=str(x),y=str(y))
   self.edges.append((a,b,label,color,dashed,points or [],ports,arrow))
  def save(self,stem):
-  E.indent(self.doc); E.ElementTree(self.doc).write(P/(stem+'.drawio'),encoding='utf-8',xml_declaration=True)
+  E.indent(self.doc); E.ElementTree(self.doc).write(P/'drawio'/(stem+'.drawio'),encoding='utf-8',xml_declaration=True)
   im=Image.new('RGB',(self.w,self.h),'white'); d=ImageDraw.Draw(im)
   for text,x,y,w,h,col,size,bold,align,plain in self.nodes.values():
    if not plain: d.rounded_rectangle((x,y,x+w,y+h),radius=16,fill=C[col][0],outline=C[col][1],width=2)
@@ -63,7 +69,7 @@ class Map:
     p,q=ps[len(ps)//2-1:len(ps)//2+1]; lx=(p[0]+q[0])/2; ly=(p[1]+q[1])/2
     f=ImageFont.truetype('C:/Windows/Fonts/arialbd.ttf',23); bw=d.textlength(label,font=f)
     d.rectangle((lx-bw/2-5,ly-17,lx+bw/2+5,ly+17),fill='white'); d.text((lx-bw/2,ly-14),label,fill=color,font=f)
-  im.save(P/(stem+'.png'))
+  im.save(P/'png'/(stem+'.png'))
   ids=[c.get('id') for c in self.r]; assert len(ids)==len(set(ids))
   for a,b,*_ in self.edges: assert a in ids and b in ids
   print(stem,len(self.nodes),'elements',len(self.edges),'relationships; XML, references and text fit verified')
@@ -99,7 +105,7 @@ for i,(a,b,label,note,col,hyp) in enumerate(rels):
  s.text(k+'label',label,x+380,y+90,220,60,19,True)
  s.text(k+'note',note,x+25,y+145,930,60,21)
 s.box('scope','SYSTEMGRENZEN UND LESART\nRegion Kaffrine; konkrete Zielorte, Zuwanderung und Rückkehrmigration ausserhalb des direkten Modellfokus. Konflikte, detaillierte politische Entwicklungen und wirtschaftliche Krisen bleiben Kontext.\nAkteursgruppen können sich überschneiden. Rollenbeschreibungen und gestrichelte Beziehungen sind konzeptionelle Ergänzungen, keine empirisch geprüfte Einflussbewertung.',50,2720,3000,145,'grey',22,align='left')
-s.save('stakeholder_map_ausfuehrlich')
+s.save('stakeholder_map')
 
 c=Map('Causal Loop Map – ausführlich',3100,2900)
 c.text('title','CAUSAL LOOP MAP | Klimabedingte Abwanderung in Kaffrine',50,25,3000,70,38,True)
@@ -148,4 +154,4 @@ for k,t,dx,dy,col in [('support','Staatliche Unterstützung',30,125,'orange'),('
 e('support','infra','+');e('infra','supply','+');e('support','program','+',(.5,1,.5,0));e('program','irrigation','+');e('irrigation','water6','+');e('supply','water6','+',(.5,1,.5,0))
 c.box('scope','03  SYSTEMGRENZEN / KONTEXT\nRäumlich: Kaffrine in Senegal, im Kontext der Sahel-Zone. Die Ziele der Abwanderung liegen ausserhalb des Systems.\nAusserhalb des direkten Modellfokus: konkrete Zielorte, Zuwanderung, Rückkehrmigration, Konflikte als eigenständige Dynamik, detaillierte politische Entwicklungen und wirtschaftliche Krisen. Diese Einflüsse werden hier nicht kausal ausmodelliert.\nZeitlich: Betrachtungs- und Simulationszeitraum werden in LE2 anhand verfügbarer Klima-, Landwirtschafts- und Migrationsdaten festgelegt.',50,2510,1480,335,'grey',23,align='left')
 c.box('assumptions','04  MODELLLOGIK / OFFENE PRÜFPUNKTE\nDie 12 Verbindungen des Kernmodells entsprechen der vorgegebenen Wirkungskette sowie R- und B-Schleife. Erweiterungen in den Detailmodulen sind konzeptionelle Annahmen, keine geprüften Befunde für Kaffrine.\nAbwanderung bezeichnet im Kernmodell die Intensität bzw. Rate. Rücküberweisungen hängen zudem vom Bestand abgewanderter Personen, deren Einkommen und zeitlichen Verzögerungen ab.\n± = kontextabhängige Richtung; keine feste Polarität. Kaufkraft und Versorgungsdruck sind ergänzte Vermittlungsgrössen. Ertrag, Produktion und Einkommen sind im Simulationsmodell getrennt zu definieren, um Doppelzählungen zu vermeiden.',1570,2510,1480,335,'grey',23,align='left')
-c.save('causal_loop_map_ausfuehrlich')
+c.save('causal_loop_map')
