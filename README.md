@@ -2,6 +2,8 @@
 
 MSS Mini-Challenge (FHNW): Klimabedingte Migration in der Sahel-Zone. Übersicht in `mss_project_overview.md`, Setup der Umgebungen in `environment/README.md`.
 
+Die Aufgabenstellungen der bearbeiteten Mini-Challenges (LE1, LE2, LE4) liegen in `docs/`.
+
 ## Notebook-Workflow (Quarto + Jupytext)
 
 Im Repo liegen die Notebooks ausschliesslich als `.qmd`. Das `.ipynb` ist nur eine lokale Arbeitskopie und über `.gitignore` von Git ausgeschlossen. Jupytext koppelt beide Dateien gemäss `jupytext.toml`: Beim Speichern in JupyterLab wird das `.qmd` automatisch aktualisiert, beim Öffnen gilt die jeweils neuere Datei.
