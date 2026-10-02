@@ -55,7 +55,7 @@ Alle Faktoren der Cluster Map stehen in Teil 02 der Causal Loop Map (Detailmodul
 
 ![Stakeholder Map](stakeholder_map.png)
 
-Unten in der Karte sind die Akteure nach Einfluss und Betroffenheit eingeordnet (neu gegenüber der [ersten Version](vorlaeufersystemkarten/stakeholder_map_v1.png)). Regierung, Behörden und Hilfsorganisationen können viel bewirken, tragen die Folgen aber kaum selbst. Sie sind die Ansprechpartner für die Massnahmen in LE4.
+Unten in der Karte sind die Akteure nach Einfluss und Betroffenheit eingeordnet (neu gegenüber der ersten Version `vorlaeufersystemkarten/stakeholder_map_v1.png`). Regierung, Behörden und Hilfsorganisationen können viel bewirken, tragen die Folgen aber kaum selbst. Sie sind die Ansprechpartner für die Massnahmen in LE4.
 
 ## **5. Causal Loop Map**
 
@@ -65,7 +65,7 @@ Teil 01 ist das Kernmodell, das wir in LE2 simulieren. Teil 02 zeigt alle Faktor
 
 ### **Änderungen gegenüber der ersten Version**
 
-Teil 02 ist unverändert. Im Kernmodell haben wir gegenüber der [ersten Version](vorlaeufersystemkarten/causal_loop_map_v1.png) geändert:
+Teil 02 ist unverändert. Im Kernmodell haben wir gegenüber der ersten Version `vorlaeufersystemkarten/causal_loop_map_v1.png` geändert:
 
 | Änderung | Warum |
 |---|---|
@@ -91,19 +91,26 @@ R1 und B1 beginnen beide bei der sinkenden Bevölkerung, wirken aber gegeneinand
 
 ### **Exploration in Loopy**
 
-Das Kernmodell haben wir in Loopy nachgebaut ([Modell öffnen](https://ncase.me/loopy/v1.1/?data=%5B%5B%5B0,180,130,0.5,%22Niederschlag%22,4%5D,%5B1,340,130,0.5,%22Wasserverf%25C3%25BCgbarkeit%22,4%5D,%5B2,500,130,0.5,%22Ertrag%22,3%5D,%5B3,660,130,0.5,%22Produktion%22,3%5D,%5B4,820,130,0.5,%22Landw.%2520Einkommen%22,0%5D,%5B5,980,130,0.5,%22Haushaltseinkommen%22,0%5D,%5B6,1160,130,0.5,%22R%25C3%25BCck%25C3%25BCberweisungen%22,5%5D,%5B7,660,380,0.5,%22Arbeitskr%25C3%25A4fte%22,2%5D,%5B8,980,400,0.5,%22Abwanderung%22,1%5D,%5B9,1160,420,0.5,%22Abgewanderte%2520Personen%22,5%5D,%5B10,820,620,0.5,%22Bev%25C3%25B6lkerung%22,2%5D,%5B11,1120,660,0.5,%22Nahrung%2520pro%2520Person%22,3%5D%5D,%5B%5B0,1,0,1%5D,%5B1,2,0,1%5D,%5B2,3,0,1%5D,%5B7,3,0,1%5D,%5B3,4,0,1%5D,%5B4,5,0,1%5D,%5B6,5,0,1%5D,%5B5,8,0,-1%5D,%5B8,10,0,-1%5D,%5B10,7,0,1%5D,%5B10,11,0,-1%5D,%5B11,8,0,-1%5D,%5B8,9,40,1%5D,%5B9,6,0,1%5D,%5B9,8,40,1%5D%5D,%5B%5B840,300,%22R1%22%5D,%5B1070,270,%22B2%22%5D,%5B1070,485,%22R2%22%5D,%5B960,570,%22B1%22%5D%5D,12%5D)). Loopy zeigt, wie sich eine Veränderung durch die Pfeile und Schleifen ausbreitet, ohne Zahlen und ohne Verzögerungen.
+Das Kernmodell ist in Loopy nachgebaut. Darin sieht man, wie sich eine Veränderung durch die Schleifen ausbreitet.
 
-![Loopy-Modell](loopy/loopy_modell.png)
+**Modell**
 
-**Experiment Dürre:** Wir haben den Niederschlag einmal gesenkt.
+<img src="loopy/loopy_modell.png" width="70%">
 
-![Loopy nach einer Dürre](loopy/loopy_duerre.png)
+**Experiment Dürre** (Niederschlag einmal gesenkt)
 
-- Über Wasser, Ernte und Einkommen steigt die Abwanderung. Gleichzeitig wächst die Zahl der Abgewanderten Personen.
-- Mit der Netzwerk-Schleife R2 steigt die Abwanderung deutlich stärker als ohne sie. R2 verstärkt die Wirkung der Dürre also spürbar.
-- Danach schwanken die Werte stark und kommen nicht zur Ruhe. Loopy kennt keine Bestände und keine Verzögerungen. Welche Schleife langfristig überwiegt, kann Loopy deshalb nicht zeigen. Das untersuchen wir mit Zahlen in LE2.
+<img src="loopy/loopy_duerre.png" width="70%">
+
+- Über Wasser, Ernte und Einkommen steigt die Abwanderung, und die Zahl der abgewanderten Personen wächst.
+- Mit R2 steigt die Abwanderung deutlich stärker als ohne (Vergleich: Pfeil «Abgewanderte Personen → Abwanderung» entfernt).
+- Danach schwanken die Werte, ohne zur Ruhe zu kommen. Welche Schleife langfristig überwiegt, kann Loopy nicht zeigen. Das untersuchen wir in LE2.
 
 ### **Grenzen der Karte**
 
-- **Einkommen und Abwanderung:** Sehr arme Haushalte können sich das Wegziehen oft nicht leisten. Mehr Einkommen kann deshalb zuerst sogar zu mehr Abwanderung führen. Das «−» zeigt den Normalfall.
-- **R1 ist eine Vermutung:** Im ländlichen Sahel gibt es oft mehr Arbeitskräfte als Arbeit. Ob die Ernte sinkt, wenn Menschen wegziehen, ist unsicher.
+**Einkommen und Abwanderung:** 
+- Sehr arme Haushalte können sich das Wegziehen oft nicht leisten
+- Mehr Einkommen kann deshalb zuerst sogar zu mehr Abwanderung führen. Das «−» zeigt den Normalfall
+
+**R1 ist eine Vermutung:** 
+- Im ländlichen Sahel gibt es oft mehr Arbeitskräfte als Arbeit
+- Ob die Ernte sinkt, wenn Menschen wegziehen, ist unsicher
