@@ -1,7 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
 <mxfile host="app.diagrams.net">
   <diagram name="Stakeholder Map – ausführlich" id="Stakeholder-Map-–-ausführlich">
-    <mxGraphModel dx="2537" dy="2163" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3100" pageHeight="3500" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="2537" dy="2163" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3100" pageHeight="2900" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -14,55 +13,55 @@
         <mxCell id="rh" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=28;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="UNTERSTÜTZUNG, STEUERUNG UND WISSEN" vertex="1">
           <mxGeometry height="50" width="860" x="2190" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="house" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Lokale Haushalte&#10;&#10;Betroffenheit: Dürre, Wasserknappheit, Ernteausfälle und Abwanderung.&#10;Interessen: verlässliche Versorgung, tragfähiges Einkommen und gesicherte Lebensgrundlagen.&#10;Rolle: treffen bzw. tragen Entscheidungen über Erwerb und Abwanderung." vertex="1">
+        <mxCell id="house" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Lokale Haushalte&#xa;&#xa;Betroffenheit: Dürre, Wasserknappheit, Ernteausfälle und Abwanderung.&#xa;Interessen: verlässliche Versorgung, tragfähiges Einkommen und gesicherte Lebensgrundlagen.&#xa;Rolle: treffen bzw. tragen Entscheidungen über Erwerb und Abwanderung." vertex="1">
           <mxGeometry height="290" width="760" x="40" y="275" as="geometry" />
         </mxCell>
-        <mxCell id="farm" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftliche Betriebe und Bauern&#10;&#10;Betroffenheit: abhängig von Wasserverfügbarkeit und landwirtschaftlichen Erträgen.&#10;Interessen: stabile Produktion, verfügbare Arbeitskräfte und ausreichendes Einkommen.&#10;Ansatzpunkte: Anbau, Bewässerung und landwirtschaftliche Anpassung." vertex="1">
+        <mxCell id="farm" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftliche Betriebe und Bauern&#xa;&#xa;Betroffenheit: abhängig von Wasserverfügbarkeit und landwirtschaftlichen Erträgen.&#xa;Interessen: stabile Produktion, verfügbare Arbeitskräfte und ausreichendes Einkommen.&#xa;Ansatzpunkte: Anbau, Bewässerung und landwirtschaftliche Anpassung." vertex="1">
           <mxGeometry height="290" width="760" x="50" y="600" as="geometry" />
         </mxCell>
-        <mxCell id="mig" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Abwandernde Personen&#10;&#10;Betroffenheit: verlassen die Region im Kontext unsicherer Lebensgrundlagen.&#10;Systemwirkung: verändern lokale Bevölkerung und verfügbare Arbeitskräfte.&#10;Beziehungen: bleiben potenziell über Familie, Netzwerke und Rücküberweisungen verbunden." vertex="1">
+        <mxCell id="mig" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Abwandernde Personen&#xa;&#xa;Betroffenheit: verlassen die Region im Kontext unsicherer Lebensgrundlagen.&#xa;Systemwirkung: verändern lokale Bevölkerung und verfügbare Arbeitskräfte.&#xa;Beziehungen: bleiben potenziell über Familie, Netzwerke und Rücküberweisungen verbunden." vertex="1">
           <mxGeometry height="290" width="760" x="50" y="930" as="geometry" />
         </mxCell>
-        <mxCell id="fam" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Zurückbleibende Familien&#10;&#10;Betroffenheit: mögliche Lücken bei Arbeit, Versorgung und familiären Aufgaben.&#10;Mögliche Entlastung: Rücküberweisungen abgewanderter Angehöriger.&#10;Interessen: gesichertes Haushaltseinkommen und tragfähige familiäre Unterstützung." vertex="1">
+        <mxCell id="fam" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Zurückbleibende Familien&#xa;&#xa;Betroffenheit: mögliche Lücken bei Arbeit, Versorgung und familiären Aufgaben.&#xa;Mögliche Entlastung: Rücküberweisungen abgewanderter Angehöriger.&#xa;Interessen: gesichertes Haushaltseinkommen und tragfähige familiäre Unterstützung." vertex="1">
           <mxGeometry height="290" width="760" x="50" y="1260" as="geometry" />
         </mxCell>
-        <mxCell id="auth" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Lokale und regionale Behörden&#10;&#10;Infrastruktur, Wasserversorgung und Unterstützungsprogramme.&#10;Ansatzpunkt: lokale Umsetzung und Koordination." vertex="1">
+        <mxCell id="auth" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Lokale und regionale Behörden&#xa;&#xa;Infrastruktur, Wasserversorgung und Unterstützungsprogramme.&#xa;Ansatzpunkt: lokale Umsetzung und Koordination." vertex="1">
           <mxGeometry height="190" width="820" x="2230" y="270" as="geometry" />
         </mxCell>
-        <mxCell id="aid" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Hilfs- und Entwicklungsorganisationen&#10;&#10;Ernährungssicherheit, Landwirtschaft und Klimaanpassung.&#10;Ansatzpunkt: Projekte, Unterstützung und Zusammenarbeit." vertex="1">
+        <mxCell id="aid" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Hilfs- und Entwicklungsorganisationen&#xa;&#xa;Ernährungssicherheit, Landwirtschaft und Klimaanpassung.&#xa;Ansatzpunkt: Projekte, Unterstützung und Zusammenarbeit." vertex="1">
           <mxGeometry height="190" width="820" x="2230" y="485" as="geometry" />
         </mxCell>
-        <mxCell id="gov" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Nationale Regierung&#10;&#10;Möglicher Beitrag: Rahmenbedingungen, Mittel und staatliche Unterstützung.&#10;Schnittstelle: lokale und regionale Behörden." vertex="1">
+        <mxCell id="gov" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Nationale Regierung&#xa;&#xa;Möglicher Beitrag: Rahmenbedingungen, Mittel und staatliche Unterstützung.&#xa;Schnittstelle: lokale und regionale Behörden." vertex="1">
           <mxGeometry height="190" width="820" x="2230" y="700" as="geometry" />
         </mxCell>
-        <mxCell id="advice" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftliche Beratungsstellen&#10;&#10;Möglicher Beitrag: Wissen zu Anbau, Wasserbewirtschaftung und Anpassung.&#10;Schnittstelle: Betriebe und Bauern." vertex="1">
+        <mxCell id="advice" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaftliche Beratungsstellen&#xa;&#xa;Möglicher Beitrag: Wissen zu Anbau, Wasserbewirtschaftung und Anpassung.&#xa;Schnittstelle: Betriebe und Bauern." vertex="1">
           <mxGeometry height="190" width="820" x="2230" y="915" as="geometry" />
         </mxCell>
-        <mxCell id="community" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Lokale Gemeinschaften&#10;&#10;Möglicher Beitrag: soziale Netzwerke, Austausch und gegenseitige Hilfe.&#10;Schnittstelle: Haushalte und Familien." vertex="1">
+        <mxCell id="community" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Lokale Gemeinschaften&#xa;&#xa;Möglicher Beitrag: soziale Netzwerke, Austausch und gegenseitige Hilfe.&#xa;Schnittstelle: Haushalte und Familien." vertex="1">
           <mxGeometry height="190" width="820" x="2230" y="1130" as="geometry" />
         </mxCell>
-        <mxCell id="research" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#f5f5f5;strokeColor=#888888;strokeWidth=2;" value="Forschung und internationale Organisationen&#10;&#10;Möglicher Beitrag: Daten, Analysen und Wissen zu Klima, Landwirtschaft und Migration.&#10;Schnittstelle: Planung und Unterstützungsprogramme." vertex="1">
+        <mxCell id="research" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=left;verticalAlign=middle;spacing=18;fillColor=#f5f5f5;strokeColor=#888888;strokeWidth=2;" value="Forschung und internationale Organisationen&#xa;&#xa;Möglicher Beitrag: Daten, Analysen und Wissen zu Klima, Landwirtschaft und Migration.&#xa;Schnittstelle: Planung und Unterstützungsprogramme." vertex="1">
           <mxGeometry height="190" width="820" x="2230" y="1345" as="geometry" />
         </mxCell>
-        <mxCell id="system" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=32;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="SYSTEMKERN&#10;Klimabedingte Abwanderung&#10;in Kaffrine" vertex="1">
+        <mxCell id="system" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=32;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="SYSTEMKERN&#xa;Klimabedingte Abwanderung&#xa;in Kaffrine" vertex="1">
           <mxGeometry height="180" width="870" x="1050" y="400" as="geometry" />
         </mxCell>
-        <mxCell id="topic0" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="Klima und Umwelt&#10;Niederschlag · Dürre · Temperatur&#10;Wasserverfügbarkeit · Bodenqualität" vertex="1">
+        <mxCell id="topic0" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" value="Klima und Umwelt&#xa;Niederschlag · Dürre · Temperatur&#xa;Wasserverfügbarkeit · Bodenqualität" vertex="1">
           <mxGeometry height="120" width="930" x="1030" y="750" as="geometry" />
         </mxCell>
-        <mxCell id="topic1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaft und Ernährung&#10;Ertrag · Anbaufläche · Wasserbedarf&#10;Produktion · Nahrungsmittelverfügbarkeit" vertex="1">
+        <mxCell id="topic1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" value="Landwirtschaft und Ernährung&#xa;Ertrag · Anbaufläche · Wasserbedarf&#xa;Produktion · Nahrungsmittelverfügbarkeit" vertex="1">
           <mxGeometry height="120" width="930" x="1030" y="880" as="geometry" />
         </mxCell>
-        <mxCell id="topic2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Wirtschaft&#10;Landwirtschaftliches Einkommen&#10;Haushaltseinkommen · Preise · Alternativen" vertex="1">
+        <mxCell id="topic2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Wirtschaft&#xa;Landwirtschaftliches Einkommen&#xa;Haushaltseinkommen · Preise · Alternativen" vertex="1">
           <mxGeometry height="120" width="930" x="1030" y="1010" as="geometry" />
         </mxCell>
-        <mxCell id="topic3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Bevölkerung und Abwanderung&#10;Bevölkerung · Entwicklung&#10;Abwanderung · verfügbare Arbeitskräfte" vertex="1">
+        <mxCell id="topic3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Bevölkerung und Abwanderung&#xa;Bevölkerung · Entwicklung&#xa;Abwanderung · verfügbare Arbeitskräfte" vertex="1">
           <mxGeometry height="120" width="930" x="1030" y="1140" as="geometry" />
         </mxCell>
-        <mxCell id="topic4" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Soziale Faktoren&#10;Familiäre Abhängigkeiten&#10;Rücküberweisungen · soziale Netzwerke" vertex="1">
+        <mxCell id="topic4" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Soziale Faktoren&#xa;Familiäre Abhängigkeiten&#xa;Rücküberweisungen · soziale Netzwerke" vertex="1">
           <mxGeometry height="120" width="930" x="1030" y="1270" as="geometry" />
         </mxCell>
-        <mxCell id="topic5" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Institutionelle Faktoren&#10;Wasserversorgung · Bewässerung&#10;Hilfsprogramme · Unterstützung · Infrastruktur" vertex="1">
+        <mxCell id="topic5" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Institutionelle Faktoren&#xa;Wasserversorgung · Bewässerung&#xa;Hilfsprogramme · Unterstützung · Infrastruktur" vertex="1">
           <mxGeometry height="120" width="930" x="1030" y="1400" as="geometry" />
         </mxCell>
         <mxCell id="e1" edge="1" parent="1" source="house" style="edgeStyle=none;rounded=0;html=0;endArrow=none;endFill=1;strokeWidth=3;strokeColor=#d6b656;fontColor=#d6b656;fontSize=23;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.15;exitPerimeter=0;entryPerimeter=0;dashed=0;" target="system" value="">
@@ -313,36 +312,6 @@
         </mxCell>
         <mxCell id="rel11note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffffff;strokeColor=#d5d9df;strokeWidth=2;fillColor=none;strokeColor=none;" value="Möglicher Rückfluss lokaler Bedürfnisse und Erfahrungen an unterstützende Akteure." vertex="1">
           <mxGeometry height="60" width="930" x="2095" y="2595" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_power_title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=30;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=none;strokeColor=none;strokeWidth=2;" value="EINFLUSS UND BETROFFENHEIT" vertex="1">
-          <mxGeometry height="60" width="3000" x="50" y="2740" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_power_sub" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=none;strokeColor=none;strokeWidth=2;" value="Eigene Einschätzung: Wer kann das System beeinflussen, und wer trägt die Folgen? Grundlage für die Massnahmen-Szenarien in LE4." vertex="1">
-          <mxGeometry height="45" width="3000" x="50" y="2800" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_col_hoch" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=24;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=none;strokeColor=none;strokeWidth=2;" value="Betroffenheit hoch" vertex="1">
-          <mxGeometry height="45" width="1350" x="300" y="2860" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_col_tief" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=24;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=none;strokeColor=none;strokeWidth=2;" value="Betroffenheit tief bis mittel" vertex="1">
-          <mxGeometry height="45" width="1350" x="1700" y="2860" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_row_hoch" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=24;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=none;strokeColor=none;strokeWidth=2;" value="Einfluss hoch bis mittel" vertex="1">
-          <mxGeometry height="260" width="230" x="50" y="2920" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_row_tief" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=24;fontStyle=1;align=center;verticalAlign=middle;spacing=18;fillColor=none;strokeColor=none;strokeWidth=2;" value="Einfluss tief" vertex="1">
-          <mxGeometry height="260" width="230" x="50" y="3200" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_q1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=24;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" value="Eng einbinden&#10;&#10;Abwandernde Personen · Lokale Gemeinschaften" vertex="1">
-          <mxGeometry height="260" width="1350" x="300" y="2920" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_q2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=24;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" value="Für Massnahmen gewinnen (LE4)&#10;&#10;Nationale Regierung · Lokale und regionale Behörden&#10;Hilfs- und Entwicklungsorganisationen · Landwirtschaftliche Beratungsstellen" vertex="1">
-          <mxGeometry height="260" width="1350" x="1700" y="2920" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_q3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=24;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" value="Schützen und informieren&#10;&#10;Lokale Haushalte · Landwirtschaftliche Betriebe und Bauern&#10;Zurückbleibende Familien" vertex="1">
-          <mxGeometry height="260" width="1350" x="300" y="3200" as="geometry" />
-        </mxCell>
-        <mxCell id="v2_q4" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=24;fontStyle=0;align=center;verticalAlign=middle;spacing=18;fillColor=#f5f5f5;strokeColor=#888888;strokeWidth=2;" value="Informieren&#10;&#10;Forschung und internationale Organisationen" vertex="1">
-          <mxGeometry height="260" width="1350" x="1700" y="3200" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

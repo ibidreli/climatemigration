@@ -9,9 +9,9 @@
 
 **Leitfrage:**
 
-> Wie beeinflussen Dürre, Wasserknappheit und Ernteausfälle die Abwanderungsrate, und welche Rückwirkungen hat die Abwanderung auf die lokale Bevölkerung und Landwirtschaft?
+> Wie beeinflussen Dürre, Wasserknappheit und Ernteausfälle die Abwanderung aus der Region Kaffrine (Senegal), und welche Rückwirkungen hat die Abwanderung auf die lokale Bevölkerung und Landwirtschaft?
 
-**Region:** Sahel-Zone, spätere Eingrenzung auf eine ausgewählte Teilregion
+**Region:** Kaffrine (Senegal), im Kontext der Sahel-Zone
 
 ---
 
