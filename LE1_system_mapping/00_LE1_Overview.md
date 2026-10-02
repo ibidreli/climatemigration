@@ -42,10 +42,10 @@ Diese Faktoren können das System beeinflussen, werden aber nicht selbst detaill
 
 ### Zeitliche Grenze
 
-- **2002–2023:** Vergleich mit echten Daten (Backtest)
+- **2013–2023:** Vergleich mit echten Daten (Backtest)
 - **2024–2050:** Szenarien für die Zukunft
 
-Ab 2002 gibt es drei Volkszählungen (2002, 2013, 2023) und lückenlose Niederschlagsdaten.
+Für die Region Kaffrine (seit 2008) gibt es Volkszählungswerte für 2013 und 2023 sowie lückenlose Niederschlagsdaten.
 
 ## 2. Cluster System Map
 

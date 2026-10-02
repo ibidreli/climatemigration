@@ -1,0 +1,266 @@
+---
+title: '**LE2 – Systemdynamik: Abwanderung aus Kaffrine**'
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.19.5
+  kernelspec:
+    display_name: Python (mss-sd)
+    language: python
+    name: mss-sd
+---
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from model import (PARAMS, lade_niederschlag, lade_bevoelkerung, lade_migration,
+                   niederschlag_szenario, simuliere, with_overrides, parameter_tabelle)
+
+pd.set_option("display.float_format", "{:,.3f}".format)
+```
+
+## **1 Problemstellung und Kenngrössen**
+
+- **Problemstellung:** Wie stark treiben Dürren die Abwanderung aus Kaffrine, und wie wirkt die Abwanderung über Bevölkerung, Versorgung, Netzwerke und Rücküberweisungen auf die Region zurück?
+- **Kenngrössen:** Bevölkerung (Personen), Abwanderung (Personen/Jahr), Abwanderungsrate (1/Jahr), Abgewanderte Personen (Personen)
+- **Szenarien:** ja, für den Niederschlag nach 2023 (Abschnitt 9)
+
+## **2 Systemgrenzen**
+
+Grundlage ist das Kernmodell der Causal Loop Map aus LE1 (Teil 01).
+
+![Causal Loop Map](../LE1_system_mapping/causal_loop_map.png)
+
+| Bereich | Umgang im Modell |
+|---|---|
+| Niederschlag | von aussen vorgegeben: Daten bis 2023, danach Szenario |
+| Bevölkerung, Abwanderung, Abgewanderte Personen | im Modell berechnet (Stocks und Flows) |
+| Ertrag, Produktion, Einkommen, Nahrung, Rücküberweisungen | im Modell berechnet (Index, 1 = Normaljahr) |
+| Zielorte, Zuwanderung, Rückkehr | nicht modelliert; Rückkehr nur indirekt über die Verweildauer im Netzwerk |
+| Preise, Bewässerung, Politik | nicht modelliert; Bewässerung ist Thema von LE4 |
+
+## **3 Daten**
+
+Alle Daten liegen in `data/raw/`, Quellen in `data/SOURCES.md`.
+
+### **Niederschlag (CHIRPS)**
+
+Jahresniederschlag 1991–2023, Mittel über alle Rasterzellen (0.05°) im Rechteck um Kaffrine (13.6–14.7° N, 16.0–14.4° W).
+
+```{python}
+niederschlag, ref = lade_niederschlag()
+print(f"Normalperiode 1991-2020: {ref:.0f} mm/Jahr")
+
+fig, ax = plt.subplots(figsize=(10, 3.5))
+ax.bar(niederschlag.index, niederschlag, color="#6c8ebf")
+ax.axhline(ref, color="black", lw=1, ls="--", label="Mittel 1991-2020")
+ax.set(xlabel="Jahr", ylabel="mm/Jahr", title="Jahresniederschlag Kaffrine (CHIRPS)")
+ax.legend()
+plt.show()
+```
+
+### **Bevölkerung und Abwanderung (ANSD)**
+
+```{python}
+bevoelkerung = lade_bevoelkerung()
+migration = lade_migration()
+
+wachstum = np.log(bevoelkerung[2023] / bevoelkerung[2013]) / 10
+# Abwanderungsrate: Wegzüge der 5 Jahre vor 2023 pro Jahr / Bevölkerung in der Mitte des Fensters
+bev_mitte = bevoelkerung[2013] * np.exp(wachstum * 7.5)
+rate_basis = migration["wegzuege_5_jahre"] / 5 / bev_mitte
+
+print(f"Bevölkerung 2013: {bevoelkerung[2013]:,}   2023: {bevoelkerung[2023]:,}")
+print(f"Wachstum laut Volkszählung: {wachstum:.2%} pro Jahr")
+print(f"Abwanderungsrate Normaljahr: {rate_basis:.4f} pro Jahr")
+```
+
+- Die Bevölkerung wuchs laut Volkszählung um rund 3.7 % pro Jahr, obwohl mehr Menschen weg- als zuziehen. Das ist mehr als ein typisches natürliches Wachstum im Senegal (Diskussion im Backtest).
+- Die Abwanderungsrate enthält nur Wegzüge innerhalb Senegals. Die Auswanderung ins Ausland ist für Kaffrine nicht ausgewiesen; die Rate ist eher zu tief.
+- Für Ertrag, Einkommen und Rücküberweisungen gibt es keine regionalen Daten. Diese Grössen sind deshalb Indizes, ihre Wirkungsstärken Annahmen (Sensitivität in Abschnitt 10).
+
+## **4 Modellstruktur**
+
+| Element | Typ | Einheit | Gleichung | Schleife |
+|---|---|---|---|---|
+| bevoelkerung | Stock | Personen | Zufluss natuerliches_wachstum, Abfluss abwanderung | R3, R1, B1 |
+| abgewanderte | Stock | Personen | Zufluss abwanderung, Abfluss abgang_netzwerk | R2, B2 |
+| natuerliches_wachstum | Flow | Personen/Jahr | bevoelkerung × rate_natuerliches_wachstum | R3 |
+| abwanderung | Flow | Personen/Jahr | bevoelkerung × abwanderungsrate | alle |
+| abgang_netzwerk | Flow | Personen/Jahr | abgewanderte / verweildauer | |
+| niederschlag_index | Converter | – | niederschlag / Mittel 1991–2020 | |
+| ertrag_index | Converter | – | 1 + elast_ertrag × (niederschlag_index − 1) | |
+| produktion_index | Converter | – | ertrag_index × (1 + elast_arbeit × (bevoelkerung / bevoelkerung_2013 − 1)) | R1 |
+| nahrung_pk_index | Converter | – | produktion_index / (bevoelkerung / bevoelkerung_2013) | B1 |
+| haushaltseinkommen_index | Converter | – | (1 − anteil_rueck) × Produktion pro Kopf + anteil_rueck × Rücküberweisungen pro Kopf | R1, B2 |
+| abwanderungsrate | Converter | 1/Jahr | abwanderungsrate_basis × (1 + druck) × netzwerk_faktor | |
+| druck | Converter | – | wirkung_einkommen × (1 − haushaltseinkommen_index) + wirkung_nahrung × (1 − nahrung_pk_index) | R1, B1, B2 |
+| netzwerk_faktor | Converter | – | 1 + wirkung_netzwerk × (abgewanderte / abgewanderte_2013 − 1) | R2 |
+
+- Einkommen und Nahrung werden **pro Kopf** gerechnet. Nur so zeigt sich, dass weniger Menschen auch weniger Esser bedeuten (B1).
+- Startwert der Abgewanderten: Gleichgewicht von Zu- und Abgang im Normaljahr, abwanderungsrate_basis × bevoelkerung_2013 × verweildauer ≈ 84 000. Zum Vergleich: Die Volkszählung 2023 zählt 80 171 Wegzüge über die ganze Lebenszeit (innerhalb Senegals).
+
+## **5 Zeithorizont und Zeitschritt**
+
+- **Start 2013:** erste Volkszählung mit einem Wert für die Region Kaffrine (Region seit 2008)
+- **Backtest 2013–2023:** Vergleich mit der Volkszählung 2023
+- **Ende 2050:** Szenariohorizont aus LE1
+- **Zeitschritt 1 Jahr:** Niederschlag liegt jährlich vor; Ernte und Abwanderung folgen dem Rhythmus der Regenzeit.
+
+## **6 Anfangszustand und Parameter**
+
+```{python}
+parameter_tabelle()[["wert", "einheit", "beschreibung", "quelle", "status"]]
+```
+
+## **7 Basislauf**
+
+Niederschlag bis 2023 aus den Daten, ab 2024 jedes Jahr ein Normaljahr.
+
+```{python}
+basis = simuliere(niederschlag_szenario(niederschlag, ref), ref)
+basis.loc[[2013, 2018, 2023, 2030, 2040, 2050],
+          ["bevoelkerung", "abwanderung", "abwanderungsrate", "abgewanderte", "haushaltseinkommen_index", "nahrung_pk_index"]]
+```
+
+```{python}
+fig, axes = plt.subplots(2, 2, figsize=(12, 7), sharex=True)
+basis["bevoelkerung"].plot(ax=axes[0, 0], title="Bevölkerung (Personen)")
+basis["abwanderung"].plot(ax=axes[0, 1], title="Abwanderung (Personen/Jahr)")
+basis["niederschlag_index"].plot(ax=axes[1, 0], title="Index (1 = Normaljahr bzw. 2013)", label="Niederschlag")
+basis["haushaltseinkommen_index"].plot(ax=axes[1, 0], label="Haushaltseinkommen pro Kopf")
+basis["nahrung_pk_index"].plot(ax=axes[1, 0], label="Nahrung pro Person")
+axes[1, 0].legend()
+basis["abgewanderte"].plot(ax=axes[1, 1], title="Abgewanderte Personen")
+for ax in axes.flat:
+    ax.axvline(2023, color="grey", ls="--", lw=1)
+fig.tight_layout()
+plt.show()
+```
+
+## **8 Backtest**
+
+Verglichen wird die Simulation 2013–2023 (mit echtem Niederschlag) mit den einzigen Vergleichswerten für Kaffrine. Fehlermass: relativer Fehler; bei zwei Vergleichswerten ist ein RMSE nicht aussagekräftiger.
+
+```{python}
+vergleich = pd.DataFrame({
+    "Simulation": [basis.loc[2023, "bevoelkerung"], basis.loc[2018:2022, "abwanderung"].sum()],
+    "Referenz": [bevoelkerung[2023], migration["wegzuege_5_jahre"]],
+}, index=["Bevölkerung 2023", "Wegzüge 2018-2022"])
+vergleich["Fehler"] = vergleich["Simulation"] / vergleich["Referenz"] - 1
+vergleich.style.format({"Simulation": "{:,.0f}", "Referenz": "{:,.0f}", "Fehler": "{:+.1%}"})
+```
+
+```{python}
+# Welche natürliche Wachstumsrate wäre nötig, um die Volkszählung 2023 zu treffen?
+for r in [0.029, 0.035, 0.040, 0.045, 0.050]:
+    df = simuliere(niederschlag_szenario(niederschlag, ref), ref, with_overrides(rate_natuerliches_wachstum=r), name=f"r{r}")
+    print(f"Wachstumsrate {r:.1%}: Bevölkerung 2023 = {df.loc[2023, 'bevoelkerung']:,.0f}")
+```
+
+- **Bevölkerung:** Das Modell unterschätzt die Bevölkerung 2023 um rund 15 %. Um die Volkszählung zu treffen, bräuchte es ein natürliches Wachstum von gut 4.5 % pro Jahr. Das ist für den Senegal unrealistisch hoch. Die Abweichung liegt also kaum an der Abwanderung, sondern an den Daten oder an fehlenden Zuflüssen: Untererfassung 2013, Zuzug nach Kaffrine (nicht im Modell) oder Unterschiede zwischen den Volkszählungen.
+- **Abwanderung:** Die simulierten Wegzüge liegen nahe an der Volkszählung (rund −4 %). Weil die Basisrate aus derselben Zahl abgeleitet ist, ist das nur eine Konsistenzprüfung, keine unabhängige Validierung.
+- **Grenzen:** Zwei Vergleichswerte reichen nicht, um die Wirkungsstärken (Ertrag, Arbeit, Netzwerk) zu prüfen. Diese bleiben Annahmen und werden in Abschnitt 10 variiert.
+
+## **9 Szenarien**
+
+Szenarien sind keine Prognosen. Sie zeigen, wie das Modell auf unterschiedliche Annahmen für den Niederschlag ab 2024 reagiert.
+
+| Szenario | Niederschlag ab 2024 | Begründung |
+|---|---|---|
+| basis | jedes Jahr Normaljahr (Mittel 1991–2020) | Referenz |
+| duerren | alle 5 Jahre ein Dürrejahr mit 30 % weniger Niederschlag | wiederkehrende Dürren |
+| trockener | dauerhaft 15 % weniger Niederschlag | trockeneres Klima |
+
+```{python}
+szenarien = {
+    "basis": niederschlag_szenario(niederschlag, ref),
+    "duerren": niederschlag_szenario(niederschlag, ref, duerre_alle=5, duerre_staerke=0.3),
+    "trockener": niederschlag_szenario(niederschlag, ref, aenderung=-0.15),
+}
+laeufe = {name: simuliere(ns, ref, name=name) for name, ns in szenarien.items()}
+
+tabelle = pd.DataFrame({name: {
+    "Bevölkerung 2050": df.loc[2050, "bevoelkerung"],
+    "Abwanderung 2024-2050 total": df.loc[2024:2050, "abwanderung"].sum(),
+} for name, df in laeufe.items()}).T
+tabelle["vs. basis"] = tabelle["Abwanderung 2024-2050 total"] / tabelle.loc["basis", "Abwanderung 2024-2050 total"] - 1
+tabelle.style.format({"Bevölkerung 2050": "{:,.0f}", "Abwanderung 2024-2050 total": "{:,.0f}", "vs. basis": "{:+.1%}"})
+```
+
+```{python}
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+for name, df in laeufe.items():
+    df["abwanderung"].plot(ax=axes[0], label=name)
+    df["bevoelkerung"].plot(ax=axes[1], label=name)
+axes[0].set(title="Abwanderung (Personen/Jahr)", xlabel="Jahr")
+axes[1].set(title="Bevölkerung (Personen)", xlabel="Jahr")
+for ax in axes:
+    ax.axvline(2023, color="grey", ls="--", lw=1)
+    ax.legend()
+fig.tight_layout()
+plt.show()
+```
+
+## **10 Sensitivitätsanalyse**
+
+Jeder Parameter, der eine Annahme ist, wird einzeln halbiert und verdoppelt. Gemessen wird die gesamte Abwanderung 2024–2050 im Szenario basis.
+
+```{python}
+annahmen = [k for k, p in PARAMS.items() if p.status == "Annahme" and p.einheit != "Jahr"]
+basis_total = laeufe["basis"].loc[2024:2050, "abwanderung"].sum()
+
+zeilen = []
+for k in annahmen:
+    for faktor in [0.5, 2.0]:
+        df = simuliere(szenarien["basis"], ref, with_overrides(**{k: PARAMS[k].wert * faktor}), name=f"{k}_{faktor}")
+        zeilen.append({"Parameter": k, "Faktor": faktor,
+                       "Änderung": df.loc[2024:2050, "abwanderung"].sum() / basis_total - 1})
+
+sens = pd.DataFrame(zeilen).pivot(index="Parameter", columns="Faktor", values="Änderung")
+sens = sens.reindex(sens.abs().max(axis=1).sort_values().index)
+ax = sens.plot.barh(figsize=(8, 4), color=["#6c8ebf", "#b85450"])
+ax.axvline(0, color="black", lw=1)
+ax.set(xlabel="Änderung der Abwanderung 2024-2050 gegenüber basis", ylabel="",
+       title="Parameter halbiert (0.5) und verdoppelt (2.0)")
+plt.show()
+sens.style.format("{:+.1%}")
+```
+
+### **R1 oder B1?**
+
+Weil Einkommen und Nahrung pro Kopf gerechnet werden, ist R1 nur dann verstärkend, wenn die Produktion stärker auf Arbeitskräfte reagiert als die Zahl der Esser (elast_arbeit > 1).
+
+```{python}
+fig, ax = plt.subplots(figsize=(8, 4))
+for e in [0.0, 0.3, 1.0, 1.5]:
+    df = simuliere(szenarien["duerren"], ref, with_overrides(elast_arbeit=e), name=f"arbeit_{e}")
+    df["abwanderungsrate"].plot(ax=ax, label=f"elast_arbeit = {e}")
+ax.set(title="Abwanderungsrate im Szenario duerren", xlabel="Jahr", ylabel="1/Jahr")
+ax.legend()
+plt.show()
+```
+
+## **11 Kausalschleifen des simulierten Systems**
+
+| Schleife aus LE1 | Im Modell | Umsetzung |
+|---|---|---|
+| R1 Arbeitskräfte–Einkommen | ja | elast_arbeit: Produktion hängt von der Bevölkerung ab |
+| R2 Netzwerk | ja | wirkung_netzwerk: mehr Abgewanderte erhöhen die Abwanderungsrate |
+| B1 Versorgung | ja | Nahrung pro Person = Produktion / Bevölkerung |
+| B2 Rücküberweisungen | ja | Rücküberweisungen pro Kopf wachsen mit den Abgewanderten |
+| R3 Natürliches Wachstum | ja | Stock Bevölkerung mit Wachstumsrate (in LE1 nicht eingezeichnet) |
+
+## **12 Erkenntnisse**
+
+- **Das Bevölkerungswachstum ist der stärkste Treiber der Abwanderung.** Die Produktion wächst langsamer als die Bevölkerung, Nahrung und Einkommen pro Kopf sinken, und die Abwanderungsrate steigt auch ohne Dürre von heute rund 1 % auf rund 2 % pro Jahr im Jahr 2050. Die Bevölkerung wächst trotzdem weiter, weil das natürliche Wachstum grösser bleibt.
+- **Dürren verstärken die Abwanderung, aber weniger stark.** Wiederkehrende Dürren erhöhen die Abwanderung bis 2050 um rund 6 %, ein dauerhaft trockeneres Klima um rund 14 %.
+- **Die Ergebnisse hängen stark von wenigen Annahmen ab.** Am empfindlichsten reagiert das Modell auf das natürliche Wachstum, gefolgt vom Netzwerk (R2), der Wirkung der Nahrung (B1) und der Abhängigkeit der Produktion von Arbeitskräften (R1). Genau für diese Grössen fehlen regionale Daten. Der Ertrag spielt im Szenario basis kaum eine Rolle, weil dort nach 2023 nur Normaljahre vorkommen.
+- **R1 ist schwach, B1 überwiegt.** Mit Einkommen pro Kopf entlastet jede Abwanderung die Zurückbleibenden. Je stärker die Produktion an den Arbeitskräften hängt, desto tiefer ist im Modell die Abwanderung, weil die wachsende Bevölkerung dann auch mehr produziert. Ein verstärkender Effekt der Abwanderung über fehlende Arbeitskräfte ist im Modell nicht sichtbar.
+- **R2 macht die Abwanderung träge.** Die Zahl der Abgewanderten baut sich über Jahre auf. Eine Dürre wirkt deshalb über das Netzwerk noch Jahre nach.
+- **Der Backtest zeigt eine Datenlücke.** Das Bevölkerungswachstum 2013–2023 ist mit natürlichem Wachstum und Abwanderung allein nicht erklärbar. Für belastbare Aussagen bräuchte es Daten zu Zuzug und zur Qualität der Volkszählung 2013.
