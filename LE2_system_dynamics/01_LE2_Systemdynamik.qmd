@@ -18,6 +18,10 @@ jupyter:
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import importlib
+import model as model_module
+
+model_module = importlib.reload(model_module)
 
 from model import (PARAMS, lade_niederschlag, lade_bevoelkerung, lade_migration,
                    niederschlag_szenario, simuliere, with_overrides, parameter_tabelle)
@@ -40,9 +44,10 @@ Grundlage ist das Kernmodell der Causal Loop Map aus LE1 (Teil 01).
 | Bereich | Umgang im Modell |
 |---|---|
 | Niederschlag | von aussen vorgegeben: Daten bis 2023, danach Szenario |
+| Wasserverfügbarkeit | nicht als eigene Wasserbilanz modelliert; normierter Niederschlag dient als Proxy |
 | Bevölkerung, Abwanderung, Abgewanderte Personen | im Modell berechnet (Stocks und Flows) |
 | Ertrag, Produktion, Einkommen, Nahrung, Rücküberweisungen | im Modell berechnet (Index, 1 = Normaljahr) |
-| Zielorte, Zuwanderung, Rückkehr | nicht modelliert; Rückkehr nur indirekt über die Verweildauer im Netzwerk |
+| Zielorte, Zuwanderung, Rückkehr | Zuzug ist als Datenreihe vorhanden, aber nicht als eigener Zufluss modelliert; Rückkehr nur indirekt über die Verweildauer im Netzwerk |
 | Preise, Bewässerung, Politik | nicht modelliert; Bewässerung ist Thema von LE4 |
 
 ## **3 Daten**
@@ -69,21 +74,35 @@ plt.show()
 
 ```{python}
 bevoelkerung = lade_bevoelkerung()
-migration = lade_migration()
+bevoelkerung_beobachtet = lade_bevoelkerung("Volkszaehlung").loc[[2013, 2023]]
+bevoelkerung_projektionen = lade_bevoelkerung("Projektion")
+migration_detail = lade_migration(vollstaendig=True)
+migration = migration_detail.set_index("groesse")["personen"]
 
-wachstum = np.log(bevoelkerung[2023] / bevoelkerung[2013]) / 10
-# Abwanderungsrate: Wegzüge der 5 Jahre vor 2023 pro Jahr / Bevölkerung in der Mitte des Fensters
-bev_mitte = bevoelkerung[2013] * np.exp(wachstum * 7.5)
+wachstum = np.log(bevoelkerung_beobachtet[2023] / bevoelkerung_beobachtet[2013]) / 10
+# Die Modellrate nutzt den Binnenwegzug Mai 2018 bis zur Volkszaehlung 2023.
+bev_mitte = bevoelkerung_beobachtet[2013] * np.exp(wachstum * 7.5)
 rate_basis = migration["wegzuege_5_jahre"] / 5 / bev_mitte
 
-print(f"Bevölkerung 2013: {bevoelkerung[2013]:,}   2023: {bevoelkerung[2023]:,}")
-print(f"Wachstum laut Volkszählung: {wachstum:.2%} pro Jahr")
+print(f"Bevölkerung 2013: {bevoelkerung_beobachtet[2013]:,}   2023: {bevoelkerung_beobachtet[2023]:,}")
+print(f"Beobachtetes Wachstum 2013-2023: {wachstum:.2%} pro Jahr")
 print(f"Abwanderungsrate Normaljahr: {rate_basis:.4f} pro Jahr")
+
+print("\nBeobachtete Bevoelkerung:")
+display(bevoelkerung_beobachtet.rename("personen").to_frame())
+
+print("\nBevoelkerungsprojektionen:")
+display(bevoelkerung_projektionen.loc[2024:2050].rename("personen").to_frame().head())
+
+print("\nMigrationsdaten nach Erhebungsjahr, Raum und Zeitfenster:")
+display(migration_detail[["bezeichnung", "erhebungsjahr", "raumbezug", "zeitfenster", "richtung", "personen", "datentyp"]])
 ```
 
-- Die Bevölkerung wuchs laut Volkszählung um rund 3.7 % pro Jahr, obwohl mehr Menschen weg- als zuziehen. Das ist mehr als ein typisches natürliches Wachstum im Senegal (Diskussion im Backtest).
-- Die Abwanderungsrate enthält nur Wegzüge innerhalb Senegals. Die Auswanderung ins Ausland ist für Kaffrine nicht ausgewiesen; die Rate ist eher zu tief.
-- Für Ertrag, Einkommen und Rücküberweisungen gibt es keine regionalen Daten. Diese Grössen sind deshalb Indizes, ihre Wirkungsstärken Annahmen (Sensitivität in Abschnitt 10).
+- Die Bevölkerungsdatei enthält historische Werte, Schätzungen, zwei Volkszählungswerte und Projektionen. Für den Backtest werden nur die beobachteten Volkszählungswerte 2013 und 2023 verwendet.
+- Die Projektionen 2024-2050 sind ein externer Vergleich und keine zusätzlichen Beobachtungen.
+- Die Basis-Abwanderungsrate nutzt weiterhin den Binnenwegzug von 27 588 Personen im Fünfjahresfenster Mai 2018 bis zur Volkszählung 2023. Zuzug und internationale Migration sind dokumentiert, aber noch keine eigenen Modellflüsse.
+- Für den natürlichen Zuwachs nutzt das Modell als regionale Näherung 3.36 % pro Jahr: Geburtenrate 38.6 Promille minus Sterberate 5.0 Promille aus RGPH-5 2023. Das bleibt eine Annahme für den gesamten Modellhorizont.
+- Für Ertrag, Einkommen und Rücküberweisungen liegen weiterhin keine direkt verwendeten Zeitreihen vor. Diese Grössen bleiben Indizes; ihre Wirkungsstärken werden in Abschnitt 10 variiert.
 
 ## **4 Modellstruktur**
 
@@ -95,16 +114,19 @@ print(f"Abwanderungsrate Normaljahr: {rate_basis:.4f} pro Jahr")
 | abwanderung | Flow | Personen/Jahr | bevoelkerung × abwanderungsrate | alle |
 | abgang_netzwerk | Flow | Personen/Jahr | abgewanderte / verweildauer | |
 | niederschlag_index | Converter | – | niederschlag / Mittel 1991–2020 | |
-| ertrag_index | Converter | – | 1 + elast_ertrag × (niederschlag_index − 1) | |
+| wasserverfuegbarkeit_index | Converter | – | Proxy: niederschlag_index | |
+| ertrag_index | Converter | – | 1 + elast_ertrag × (wasserverfuegbarkeit_index − 1) | |
 | produktion_index | Converter | – | ertrag_index × (1 + elast_arbeit × (bevoelkerung / bevoelkerung_2013 − 1)) | R1 |
 | nahrung_pk_index | Converter | – | produktion_index / (bevoelkerung / bevoelkerung_2013) | B1 |
+| rueck_pk_index | Converter | – | (Abgewanderte pro Bevölkerung) / (Anfangswert) | B2 |
 | haushaltseinkommen_index | Converter | – | (1 − anteil_rueck) × Produktion pro Kopf + anteil_rueck × Rücküberweisungen pro Kopf | R1, B2 |
 | abwanderungsrate | Converter | 1/Jahr | abwanderungsrate_basis × (1 + druck) × netzwerk_faktor | |
 | druck | Converter | – | wirkung_einkommen × (1 − haushaltseinkommen_index) + wirkung_nahrung × (1 − nahrung_pk_index) | R1, B1, B2 |
 | netzwerk_faktor | Converter | – | 1 + wirkung_netzwerk × (abgewanderte / abgewanderte_2013 − 1) | R2 |
 
-- Einkommen und Nahrung werden **pro Kopf** gerechnet. Nur so zeigt sich, dass weniger Menschen auch weniger Esser bedeuten (B1).
-- Startwert der Abgewanderten: Gleichgewicht von Zu- und Abgang im Normaljahr, abwanderungsrate_basis × bevoelkerung_2013 × verweildauer ≈ 84 000. Zum Vergleich: Die Volkszählung 2023 zählt 80 171 Wegzüge über die ganze Lebenszeit (innerhalb Senegals).
+- Wasserverfügbarkeit wird als normierter Niederschlagsproxy abgebildet; eine eigene Speicher- und Wasserbedarfsbilanz ist nicht Teil dieses LE2-Kernmodells.
+- Einkommen und Nahrung werden **pro Kopf** gerechnet. Bei gleichbleibender Produktion erhöht weniger Bevölkerung die Nahrung pro Person; dadurch wirkt B1 ausgleichend gegen weitere Abwanderung.
+- Startwert der Abgewanderten: Gleichgewicht von Zu- und Abgang im Normaljahr, abwanderungsrate_basis × bevoelkerung_2013 × verweildauer ≈ 84 000. Die 80 171 Lebenszeitwegzüge aus 2023 sind ein Vergleichswert, aber kein direkt gemessener Netzwerkbestand.
 
 ## **5 Zeithorizont und Zeitschritt**
 
@@ -146,13 +168,13 @@ plt.show()
 
 ## **8 Backtest**
 
-Verglichen wird die Simulation 2013–2023 (mit echtem Niederschlag) mit den einzigen Vergleichswerten für Kaffrine. Fehlermass: relativer Fehler; bei zwei Vergleichswerten ist ein RMSE nicht aussagekräftiger.
+Verglichen wird die Simulation 2013–2023 (mit echtem Niederschlag) mit den beobachteten Volkszählungswerten sowie einem Migrationsfenster aus den ANSD-Daten. Schätzungen und Projektionen werden nicht als unabhängige Backtestwerte verwendet. Fehlermass: relativer Fehler.
 
 ```{python}
 vergleich = pd.DataFrame({
     "Simulation": [basis.loc[2023, "bevoelkerung"], basis.loc[2018:2022, "abwanderung"].sum()],
     "Referenz": [bevoelkerung[2023], migration["wegzuege_5_jahre"]],
-}, index=["Bevölkerung 2023", "Wegzüge 2018-2022"])
+}, index=["Bevölkerung 2023", "Binnenwegzüge Mai 2018-2023"])
 vergleich["Fehler"] = vergleich["Simulation"] / vergleich["Referenz"] - 1
 vergleich.style.format({"Simulation": "{:,.0f}", "Referenz": "{:,.0f}", "Fehler": "{:+.1%}"})
 ```
@@ -164,13 +186,26 @@ for r in [0.029, 0.035, 0.040, 0.045, 0.050]:
     print(f"Wachstumsrate {r:.1%}: Bevölkerung 2023 = {df.loc[2023, 'bevoelkerung']:,.0f}")
 ```
 
-- **Bevölkerung:** Das Modell unterschätzt die Bevölkerung 2023 um rund 15 %. Um die Volkszählung zu treffen, bräuchte es ein natürliches Wachstum von gut 4.5 % pro Jahr. Das ist für den Senegal unrealistisch hoch. Die Abweichung liegt also kaum an der Abwanderung, sondern an den Daten oder an fehlenden Zuflüssen: Untererfassung 2013, Zuzug nach Kaffrine (nicht im Modell) oder Unterschiede zwischen den Volkszählungen.
-- **Abwanderung:** Die simulierten Wegzüge liegen nahe an der Volkszählung (rund −4 %). Weil die Basisrate aus derselben Zahl abgeleitet ist, ist das nur eine Konsistenzprüfung, keine unabhängige Validierung.
-- **Grenzen:** Zwei Vergleichswerte reichen nicht, um die Wirkungsstärken (Ertrag, Arbeit, Netzwerk) zu prüfen. Diese bleiben Annahmen und werden in Abschnitt 10 variiert.
+- **Bevölkerung:** Das Modell wird gegen die beiden beobachteten Volkszählungswerte geprüft. Die zusätzlichen ANSD-Projektionen dienen als Plausibilitäts- und Szenariovergleich, nicht als unabhängige Validierung.
+- **Abwanderung:** Die simulierten Wegzüge werden mit dem Fünfjahresfenster Mai 2018 bis zur Volkszählung 2023 verglichen. Weil die Basisrate aus diesem Wert abgeleitet ist, bleibt dies eine Konsistenzprüfung.
+- **Migration:** Die Daten zeigen zusätzlich einen Binnenzuzug von 13 645 Personen sowie internationale Migration. Diese Flüsse werden im aktuellen Modell noch nicht separat in die Bevölkerungsbilanz aufgenommen.
+- **Grenzen:** Die Zeitfenster messen unterschiedliche Sachverhalte und sind nicht addierbar. Die Wirkungsstärken von Ertrag, Arbeit, Netzwerk und Zuzug bleiben deshalb nur teilweise empirisch bestimmt.
 
 ## **9 Szenarien**
 
 Szenarien sind keine Prognosen. Sie zeigen, wie das Modell auf unterschiedliche Annahmen für den Niederschlag ab 2024 reagiert.
+
+Die ANSD-Bevölkerungsprojektion wird zusätzlich als externe Referenz dargestellt. Sie ersetzt nicht die Modellbevölkerung und wird nicht zur Kalibrierung der Dürreszenarien verwendet.
+
+```{python}
+fig, ax = plt.subplots(figsize=(10, 4))
+basis["bevoelkerung"].plot(ax=ax, label="Modell: Basislauf")
+bevoelkerung_projektionen.loc[2024:2050].plot(ax=ax, label="ANSD-Projektion", ls="--")
+ax.axvline(2023, color="grey", ls="--", lw=1)
+ax.set(title="Modellbevölkerung und externe ANSD-Projektion", xlabel="Jahr", ylabel="Personen")
+ax.legend()
+plt.show()
+```
 
 | Szenario | Niederschlag ab 2024 | Begründung |
 |---|---|---|
@@ -253,15 +288,16 @@ plt.show()
 |---|---|---|
 | R1 Arbeitskräfte–Einkommen | ja | elast_arbeit: Produktion hängt von der Bevölkerung ab |
 | R2 Netzwerk | ja | wirkung_netzwerk: mehr Abgewanderte erhöhen die Abwanderungsrate |
-| B1 Versorgung | ja | Nahrung pro Person = Produktion / Bevölkerung |
+| B1 Versorgung | ja | Nahrung pro Person = Produktion / Bevölkerung; weniger Bevölkerung erhöht den Index pro Person |
 | B2 Rücküberweisungen | ja | Rücküberweisungen pro Kopf wachsen mit den Abgewanderten |
 | R3 Natürliches Wachstum | ja | Stock Bevölkerung mit Wachstumsrate (in LE1 nicht eingezeichnet) |
 
 ## **12 Erkenntnisse**
 
-- **Das Bevölkerungswachstum ist der stärkste Treiber der Abwanderung.** Die Produktion wächst langsamer als die Bevölkerung, Nahrung und Einkommen pro Kopf sinken, und die Abwanderungsrate steigt auch ohne Dürre von heute rund 1 % auf rund 2 % pro Jahr im Jahr 2050. Die Bevölkerung wächst trotzdem weiter, weil das natürliche Wachstum grösser bleibt.
-- **Dürren verstärken die Abwanderung, aber weniger stark.** Wiederkehrende Dürren erhöhen die Abwanderung bis 2050 um rund 6 %, ein dauerhaft trockeneres Klima um rund 14 %.
+- **Das Bevölkerungswachstum ist ein zentraler Treiber der Abwanderung.** Im Modell wächst die Bevölkerung trotz Abwanderung weiter, weil der natürliche Zuwachs grösser ist als der modellierte Abfluss. Die Produktion wächst langsamer als die Bevölkerung; dadurch sinken Nahrung und Einkommen pro Kopf und der Abwanderungsdruck steigt.
+- **Dürren verstärken die Abwanderung, aber weniger stark.** Im Vergleich zum Basisszenario erhöhen wiederkehrende Dürren die kumulierte Abwanderung 2024-2050 um rund 5.3 %, ein dauerhaft trockeneres Klima um rund 12.3 %.
 - **Die Ergebnisse hängen stark von wenigen Annahmen ab.** Am empfindlichsten reagiert das Modell auf das natürliche Wachstum, gefolgt vom Netzwerk (R2), der Wirkung der Nahrung (B1) und der Abhängigkeit der Produktion von Arbeitskräften (R1). Genau für diese Grössen fehlen regionale Daten. Der Ertrag spielt im Szenario basis kaum eine Rolle, weil dort nach 2023 nur Normaljahre vorkommen.
 - **R1 ist schwach, B1 überwiegt.** Mit Einkommen pro Kopf entlastet jede Abwanderung die Zurückbleibenden. Je stärker die Produktion an den Arbeitskräften hängt, desto tiefer ist im Modell die Abwanderung, weil die wachsende Bevölkerung dann auch mehr produziert. Ein verstärkender Effekt der Abwanderung über fehlende Arbeitskräfte ist im Modell nicht sichtbar.
 - **R2 macht die Abwanderung träge.** Die Zahl der Abgewanderten baut sich über Jahre auf. Eine Dürre wirkt deshalb über das Netzwerk noch Jahre nach.
-- **Der Backtest zeigt eine Datenlücke.** Das Bevölkerungswachstum 2013–2023 ist mit natürlichem Wachstum und Abwanderung allein nicht erklärbar. Für belastbare Aussagen bräuchte es Daten zu Zuzug und zur Qualität der Volkszählung 2013.
+- **Die Modellbevölkerung bleibt deutlich unter der ANSD-Projektion.** Der Basislauf erreicht 2050 rund 1.15 Millionen Personen, während die externe Projektion rund 2.05 Millionen ausweist. Das zeigt die Grenze des Kernmodells: Zuzug, Altersstruktur und eine zeitvariable natürliche Wachstumsrate fehlen.
+- **Der Backtest zeigt eine Datenlücke.** Das Bevölkerungswachstum 2013–2023 ist mit konstantem natürlichem Wachstum und Abwanderung allein nicht erklärbar. Die vorhandenen Zuzugsdaten stützen diese Einschränkung, bilden aber noch keine jährliche Zeitreihe.

@@ -2,7 +2,7 @@
 SD-Modell Kaffrine in BPTK-Py (LE2): Daten laden, Parameter, Modell, Simulation.
 
 Umsetzung des Kernmodells aus LE1:
-Niederschlag -> Wasser -> Ertrag -> Produktion -> Einkommen -> Abwanderung
+Niederschlag -> Wasserverfuegbarkeit (Proxy) -> Ertrag -> Produktion -> Einkommen -> Abwanderung
 mit den Schleifen R1 (Arbeitskräfte), R2 (Netzwerk), B1 (Versorgung), B2 (Rücküberweisungen)
 und dem natürlichen Bevölkerungswachstum (R3).
 
@@ -32,12 +32,21 @@ def lade_niederschlag():
     return reihe, ref
 
 
-def lade_bevoelkerung():
-    return pd.read_csv(DATA_RAW / "ansd_bevoelkerung_kaffrine.csv").set_index("jahr")["bevoelkerung"]
+def lade_bevoelkerung(datentyp=None):
+    """Bevoelkerungsreihe laden; optional auf einen Datentyp filtern."""
+    raw = pd.read_csv(DATA_RAW / "ansd_bevoelkerung_kaffrine.csv")
+    if datentyp is not None:
+        datentypen = [datentyp] if isinstance(datentyp, str) else list(datentyp)
+        raw = raw[raw["datentyp"].isin(datentypen)]
+    return raw.set_index("jahr")["bevoelkerung"]
 
 
-def lade_migration():
-    return pd.read_csv(DATA_RAW / "ansd_migration_kaffrine_2023.csv").set_index("groesse")["personen"]
+def lade_migration(vollstaendig=False):
+    """Migration laden; standardmaessig als Series fuer die Modellkompatibilitaet."""
+    raw = pd.read_csv(DATA_RAW / "ansd_migration_kaffrine_2023.csv")
+    if vollstaendig:
+        return raw
+    return raw.set_index("groesse")["personen"]
 
 
 def niederschlag_szenario(reihe, ref, aenderung=0.0, duerre_alle=None, duerre_staerke=0.3, ab=2024, bis=2050):
@@ -75,8 +84,8 @@ PARAMS = {
     "bevoelkerung_0": Param(566_992, "Personen", "Bevölkerung Kaffrine 2013", "ANSD, RGPH-4", "Daten"),
     "abwanderungsrate_basis": Param(0.0074, "1/Jahr", "Abwanderungsrate im Normaljahr",
                                     "ANSD, RGPH-5: 27 588 Wegzüge in 5 Jahren (innerhalb Senegals)", "Daten"),
-    "rate_natuerliches_wachstum": Param(0.029, "1/Jahr", "Geburten minus Todesfälle pro Person",
-                                        "Grössenordnung nationales Wachstum (ANSD), zu prüfen", "Annahme"),
+    "rate_natuerliches_wachstum": Param(0.0336, "1/Jahr", "Geburten minus Todesfälle pro Person; regionale Näherung 2023",
+                                        "ANSD, RGPH-5 2023: 38.6‰ Geburten minus 5.0‰ Sterbefälle", "Annahme"),
     "verweildauer": Param(20, "Jahre", "Zeit, die eine abgewanderte Person zum Netzwerk zählt", "Annahme", "Annahme"),
     "elast_ertrag": Param(1.0, "-", "10 % weniger Regen = 10 % weniger Ertrag", "Annahme (Regenfeldbau)", "Annahme"),
     "elast_arbeit": Param(0.3, "-", "10 % weniger Arbeitskräfte = 3 % weniger Produktion (R1)", "Annahme", "Annahme"),
@@ -104,6 +113,7 @@ def parameter_tabelle(params=None):
 # ---------------------------------------------------------------------------
 
 GROESSEN = ["bevoelkerung", "abgewanderte", "abwanderung", "abwanderungsrate", "niederschlag_index",
+            "wasserverfuegbarkeit_index",
             "produktion_index", "nahrung_pk_index", "haushaltseinkommen_index"]
 
 
@@ -134,9 +144,12 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
     ns_idx = m.converter("niederschlag_index")
     ns_idx.equation = ns / ref
 
-    # Klima -> Landwirtschaft
+    # Klima -> Wasserverfuegbarkeit -> Landwirtschaft. Die Wasserverfuegbarkeit
+    # ist mangels eigener Wasserbilanz ein normierter Niederschlagsproxy.
+    wasser = m.converter("wasserverfuegbarkeit_index")
+    wasser.equation = ns_idx
     ertrag = m.converter("ertrag_index")
-    ertrag.equation = sd.max(0, 1 + c["elast_ertrag"] * (ns_idx - 1))
+    ertrag.equation = sd.max(0, 1 + c["elast_ertrag"] * (wasser - 1))
     bev_idx = m.converter("bevoelkerung_index")
     bev_idx.equation = bev / bev_0
     prod = m.converter("produktion_index")                                   # R1
