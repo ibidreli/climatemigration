@@ -14,7 +14,7 @@ Region Kaffrine im Senegal (Sahel-Zone) und die Menschen, die von dort wegziehen
 
 | Zeitraum | Zweck |
 |---|---|
-| 2002–2023 | Modell mit echten Daten vergleichen (Backtest) |
+| 2013–2023 | Modell mit echten Daten vergleichen (Backtest) |
 | 2024–2050 | Szenarien für die Zukunft |
 
 Der Zeitraum richtet sich nach den Daten, die wir gefunden haben:
@@ -22,11 +22,11 @@ Der Zeitraum richtet sich nach den Daten, die wir gefunden haben:
 | Grösse | Quelle | Was es gibt |
 |---|---|---|
 | Niederschlag | CHIRPS v2.0 (Satelliten- und Stationsdaten) | jährlich ab 1981 |
-| Bevölkerung | ANSD (Statistikamt Senegal), Volkszählungen; Werte z.B. bei citypopulation.de | 2002, 2013, 2023 (Kaffrine 2013: 566 992, 2023: 820 405) |
+| Bevölkerung | ANSD (Statistikamt Senegal), Volkszählungen; Werte z.B. bei citypopulation.de | 2013, 2023 (Kaffrine 2013: 566 992, 2023: 820 405) |
 | Abwanderung | ANSD, Volkszählung 2023, Kapitel Migration | nur Momentaufnahmen, z.B. 27 588 Wegzüge aus Kaffrine in den letzten 5 Jahren (innerhalb Senegals) |
 | Landwirtschaft | ANSD, Regionalbericht Kaffrine 2022–2023; FAOSTAT für ganz Senegal | regional: Zeitreihe noch zu prüfen; national ab 1961 |
 
-Ab 2002 gibt es drei Volkszählungen und lückenlose Niederschlagsdaten. Für die Abwanderung gibt es keine Zeitreihe; der Vergleich mit echten Daten läuft deshalb vor allem über die Bevölkerung.
+Die Region Kaffrine gibt es seit 2008; Volkszählungswerte liegen für 2013 und 2023 vor, Niederschlagsdaten lückenlos. Für die Abwanderung gibt es keine Zeitreihe; der Vergleich mit echten Daten läuft deshalb vor allem über die Bevölkerung.
 
 ## **3. Cluster System Map**
 

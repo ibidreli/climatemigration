@@ -2,20 +2,13 @@
 
 Regeln:
 
-- Rohdaten in `data/raw/` werden nie verändert; jede Bereinigung erfolgt im Code und landet in `data/processed/`.
-- Jeder Datensatz erhält einen Eintrag in dieser Tabelle, bevor er im Modell verwendet wird.
-- Status: `Kandidat` (noch nicht geprüft), `geprüft`, `verwendet`, `verworfen` (mit Grund).
+- Rohdaten in `data/raw/` werden nie verändert; Aufbereitung im Code (`LE2_system_dynamics/model.py`).
+- Status: `verwendet`, `nicht verfügbar` (mit Umgang im Modell).
 
-| Grösse | Datensatz | Anbieter | Räuml. Auflösung | Zeitraum | Einheit | Abrufdatum | Lizenz | Datei | Status |
-|---|---|---|---|---|---|---|---|---|---|
-| Niederschlag | CHIRPS | UCSB Climate Hazards Center | | | mm | | | | Kandidat |
-| Ernteertrag | FAOSTAT Crops and livestock | FAO | Land | | t/ha | | | | Kandidat |
-| Ernteertrag regional | Agrarstatistik Senegal (DAPSA) | Senegal | Region | | | | | | Kandidat |
-| Bevölkerung | Volkszählungen / Projektionen | ANSD Senegal | Region | | Personen | | | | Kandidat |
-| Migration | Volkszählungen (Wohnort vs. Geburtsort) | ANSD Senegal | Region | | Personen | | | | Kandidat |
-
-Hinweis: Die Kandidaten sind noch nicht auf Verfügbarkeit für Kaffrine geprüft.
-
-## **Offene Datenlücken**
-
-- Regionale Migrationszeitreihe für Kaffrine: vorhanden? Falls nicht, Backtest gegen postulierte Werte (begründen).
+| Grösse | Datensatz | Anbieter | Räuml. Auflösung | Zeitraum | Einheit | Datei | Status |
+|---|---|---|---|---|---|---|---|
+| Niederschlag | CHIRPS v2.0, jährlich (ERDDAP `chirps20GlobalAnnualP05`) | UCSB Climate Hazards Center / NOAA | 0.05°, Mittel über Rechteck um Kaffrine | 1991–2023 | mm/Jahr | `raw/chirps_kaffrine_1991_2023.csv` | verwendet |
+| Bevölkerung | Volkszählungen RGPH-4 (2013) und RGPH-5 (2023) | ANSD Senegal | Region | 2013, 2023 | Personen | `raw/ansd_bevoelkerung_kaffrine.csv` | verwendet |
+| Abwanderung | RGPH-5 2023, Kapitel 6 Migrationen | ANSD Senegal | Region | Momentaufnahme 2023 | Personen | `raw/ansd_migration_kaffrine_2023.csv` | verwendet |
+| Ertrag, Produktion, Einkommen | Agrarstatistik / FAOSTAT | DAPSA / FAO | Region / Land | – | – | – | nicht verfügbar für Kaffrine; als Index mit Annahmen |
+| Rücküberweisungen | – | – | – | – | – | – | nicht verfügbar; Annahme |
