@@ -1,0 +1,7 @@
+numpy
+pandas
+matplotlib
+BPTK-Py
+jupyter
+ipykernel
+jupytext
