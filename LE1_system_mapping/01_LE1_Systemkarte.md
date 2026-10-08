@@ -84,7 +84,7 @@ Teil 02 ist unverändert. Im Kernmodell haben wir gegenüber der ersten Version 
 |---|---|---|---|
 | R1 Arbeitskräfte–Einkommen | verstärkend (Vermutung) | Abwanderung → Bevölkerung (−) → Arbeitskräfte (+) → Produktion (+) → landw. Einkommen (+) → Haushaltseinkommen (+) → Abwanderung (−) | Wer wegzieht, fehlt als Arbeitskraft. Die Ernte sinkt, das Einkommen auch, und noch mehr Menschen ziehen weg. |
 | R2 Netzwerk | verstärkend, verzögert | Abwanderung → Abgewanderte Personen (+) → Abwanderung (+) | Wer schon weg ist, erleichtert anderen das Wegziehen. |
-| B1 Versorgung | ausgleichend | Abwanderung → Bevölkerung (−) → Nahrung pro Person (−) → Abwanderung (−) | Weniger Menschen heisst mehr Nahrung pro Person. Der Druck wegzuziehen sinkt. |
+| B1 Versorgung | ausgleichend | Abwanderung → Bevölkerung (−) → Nahrung pro Person (+) → Abwanderung (−) | Weniger Menschen heisst mehr Nahrung pro Person. Der Druck wegzuziehen sinkt. |
 | B2 Rücküberweisungen | ausgleichend, verzögert | Abwanderung → Abgewanderte Personen (+) → Rücküberweisungen (+) → Haushaltseinkommen (+) → Abwanderung (−) | Geld von Abgewanderten hilft den Familien. Weniger Menschen müssen wegziehen. |
 
 R1 und B1 beginnen beide bei der sinkenden Bevölkerung, wirken aber gegeneinander. Welche Schleife stärker ist, untersuchen wir in LE2.
