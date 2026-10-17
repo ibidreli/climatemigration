@@ -128,8 +128,9 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
         c[k] = m.constant(k)
         c[k].equation = v(k)
 
-    bev_0 = v("bevoelkerung_0")
-    abg_0 = v("abwanderungsrate_basis") * bev_0 * v("verweildauer")  # Gleichgewicht im Normaljahr
+    # BPTK-Py verlangt Gleitkommazahlen als Anfangswerte
+    bev_0 = float(v("bevoelkerung_0"))
+    abg_0 = float(v("abwanderungsrate_basis") * bev_0 * v("verweildauer"))  # Gleichgewicht im Normaljahr
 
     # Stocks
     bev = m.stock("bevoelkerung")
