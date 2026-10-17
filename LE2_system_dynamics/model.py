@@ -4,7 +4,9 @@ SD-Modell Kaffrine in BPTK-Py (LE2): Daten laden, Parameter, Modell, Simulation.
 Umsetzung des Kernmodells aus LE1:
 Niederschlag -> Wasserverfuegbarkeit (Proxy) -> Ertrag -> Produktion -> Einkommen -> Abwanderung
 mit den Schleifen R1 (Arbeitskräfte), R2 (Netzwerk), B1 (Versorgung), B2 (Rücküberweisungen)
-und dem natürlichen Bevölkerungswachstum (R3).
+und dem natürlichen Bevölkerungswachstum (R3). Abgebildet wird dauerhafte Abwanderung
+(Wohnortwechsel über die Regionsgrenze, Fünfjahresfenster der Volkszählung); der Zuzug
+ist ein einfacher Zufluss mit konstanter Rate.
 
 Bevölkerung und Abwanderung in Personen, Klima bis Einkommen als Index (1 = Normaljahr bzw. 2013).
 """
@@ -84,6 +86,8 @@ PARAMS = {
     "bevoelkerung_0": Param(566_992, "Personen", "Bevölkerung Kaffrine 2013", "ANSD, RGPH-4", "Daten"),
     "abwanderungsrate_basis": Param(0.0074, "1/Jahr", "Abwanderungsrate im Normaljahr",
                                     "ANSD, RGPH-5: 27 588 Wegzüge in 5 Jahren (innerhalb Senegals)", "Daten"),
+    "zuzugsrate": Param(0.0036, "1/Jahr", "Zuzugsrate, konstant",
+                        "ANSD, RGPH-5: 13 645 Zuzüge in 5 Jahren (innerhalb Senegals)", "Daten"),
     "rate_natuerliches_wachstum": Param(0.0336, "1/Jahr", "Geburten minus Todesfälle pro Person; regionale Näherung 2023",
                                         "ANSD, RGPH-5 2023: 38.6‰ Geburten minus 5.0‰ Sterbefälle", "Annahme"),
     "verweildauer": Param(20, "Jahre", "Zeit, die eine abgewanderte Person zum Netzwerk zählt", "Annahme", "Annahme"),
@@ -112,7 +116,7 @@ def parameter_tabelle(params=None):
 # Modell
 # ---------------------------------------------------------------------------
 
-GROESSEN = ["bevoelkerung", "abgewanderte", "abwanderung", "abwanderungsrate", "niederschlag_index",
+GROESSEN = ["bevoelkerung", "abgewanderte", "abwanderung", "zuzug", "abwanderungsrate", "niederschlag_index",
             "wasserverfuegbarkeit_index",
             "produktion_index", "nahrung_pk_index", "haushaltseinkommen_index"]
 
@@ -123,7 +127,7 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
     m = Model(starttime=v("starttime"), stoptime=v("stoptime"), dt=v("dt"), name=name)
 
     c = {}
-    for k in ["rate_natuerliches_wachstum", "abwanderungsrate_basis", "verweildauer", "elast_ertrag",
+    for k in ["rate_natuerliches_wachstum", "abwanderungsrate_basis", "zuzugsrate", "verweildauer", "elast_ertrag",
               "elast_arbeit", "anteil_rueck", "wirkung_einkommen", "wirkung_nahrung", "wirkung_netzwerk"]:
         c[k] = m.constant(k)
         c[k].equation = v(k)
@@ -177,10 +181,12 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
     wachstum.equation = bev * c["rate_natuerliches_wachstum"]
     abw = m.flow("abwanderung")
     abw.equation = bev * rate
+    zuzug = m.flow("zuzug")
+    zuzug.equation = bev * c["zuzugsrate"]
     abgang = m.flow("abgang_netzwerk")
     abgang.equation = abg / c["verweildauer"]
 
-    bev.equation = wachstum - abw
+    bev.equation = wachstum + zuzug - abw
     abg.equation = abw - abgang
     return m
 
