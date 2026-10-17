@@ -2,13 +2,19 @@
 
 Regeln:
 
-- Rohdaten in `data/raw/` werden nie verändert; Aufbereitung im Code (`LE2_system_dynamics/model.py`).
-- Status: `verwendet`, `nicht verfügbar` (mit Umgang im Modell).
+- Rohdaten in `data/raw/` werden nicht aufbereitet; die Aufbereitung geschieht im Code (`LE2_system_dynamics/model.py`).
+- Die ANSD-Tabellen sind von Hand aus den PDF-Berichten übertragen. Fundstellen, Widersprüche und Varianten sind in `Quellenpruefung_Kaffrine.md` dokumentiert.
+- Status: `verwendet`, `Vergleich` (nur Plausibilisierung, keine Kalibrierung), `verfügbar` (noch nicht extrahiert), `nicht verfügbar` (mit Umgang im Modell).
 
 | Grösse | Datensatz | Anbieter | Räuml. Auflösung | Zeitraum | Einheit | Datei | Status |
 |---|---|---|---|---|---|---|---|
 | Niederschlag | CHIRPS v2.0, jährlich (ERDDAP `chirps20GlobalAnnualP05`) | UCSB Climate Hazards Center / NOAA | 0.05°, Mittel über Rechteck um Kaffrine | 1991–2023 | mm/Jahr | `raw/chirps_kaffrine_1991_2023.csv` | verwendet |
-| Bevölkerung | Volkszählungen RGPH-4 (2013) und RGPH-5 (2023) | ANSD Senegal | Region | 2013, 2023 | Personen | `raw/ansd_bevoelkerung_kaffrine.csv` | verwendet |
-| Abwanderung | RGPH-5 2023, Kapitel 6 Migrationen | ANSD Senegal | Region | Momentaufnahme 2023 | Personen | `raw/ansd_migration_kaffrine_2023.csv` | verwendet |
-| Ertrag, Produktion, Einkommen | Agrarstatistik / FAOSTAT | DAPSA / FAO | Region / Land | – | – | – | nicht verfügbar für Kaffrine; als Index mit Annahmen |
+| Bevölkerung, beobachtet | Volkszählungen RGPH-4 (2013) und RGPH-5 (2023) | ANSD Senegal | Region | 2013, 2023 | Personen | `raw/ansd_bevoelkerung_kaffrine.csv` (`datentyp = Volkszaehlung`) | verwendet (Anfangswert, Backtest) |
+| Bevölkerung, historisch und geschätzt | SES Kaffrine 2010–2023 | ANSD Senegal | Region bzw. Vorgängergebiet | 1976–2022 | Personen | `raw/ansd_bevoelkerung_kaffrine.csv` | Vergleich |
+| Bevölkerung, Projektion | Projections démographiques 2023–2073 | ANSD Senegal | Region | 2024–2050 | Personen | `raw/ansd_bevoelkerung_kaffrine.csv` (`datentyp = Projektion`) | Vergleich (externes Referenzszenario) |
+| Natürliches Wachstum | Geburten- und Sterberaten RGPH 2013 und 2023 | ANSD Senegal (SES 2013, SES 2022–2023) | Region | 2013, 2023 | ‰ | – (Parameter in `model.py`) | verwendet (Wert 2023) |
+| Binnenmigration | RGPH-5 2023, Kapitel 6; SES Kaffrine 2013 | ANSD Senegal | Region | Lebenszeit-, Fünf- und Einjahresfenster, Erhebungen 2013 und 2023 | Personen | `raw/ansd_migration_kaffrine_2023.csv` | verwendet (Wegzug Fünfjahresfenster 2023), übrige Fenster als Vergleich |
+| Internationale Migration | RGPH-5 2023, Kapitel 6; SES Kaffrine 2013 | ANSD Senegal | Region | Fünf- und Einjahresfenster | Personen | `raw/ansd_migration_kaffrine_2023.csv` | Vergleich |
+| Ertrag, Anbaufläche, Produktion | SES Kaffrine, Kapitel Landwirtschaft | ANSD Senegal | Region | Einzeljahre 2012–2023 | t, ha, kg/ha | – | verfügbar, noch nicht extrahiert; im Modell als Index mit Annahmen |
+| Einkommen | – | – | – | – | – | – | nicht verfügbar; Index mit Annahmen |
 | Rücküberweisungen | – | – | – | – | – | – | nicht verfügbar; Annahme |
