@@ -67,6 +67,7 @@ Die Abwanderungsdaten enthalten keine Auswanderung ins Ausland. Diese ist mit ru
 - **Arbeitskräfte und Produktion:** 10 % weniger Arbeitskräfte führen zu 3 % weniger Produktion. Die Bevölkerung dient als Näherung für die verfügbaren Arbeitskräfte.
 - **Rücküberweisungen:** Anteil von 15 % am Haushaltseinkommen im Ausgangszustand
 - **Netzwerk:** Abgewanderte Personen zählen im Mittel 20 Jahre zum Netzwerk.
+- **Verzögerung:** Der Abwanderungsdruck wirkt nach einem Jahr. Die Ernte fällt im Herbst an, abgewandert wird in der folgenden Trockenzeit.
 
 Für Ertrag, Einkommen und Rücküberweisungen fehlen regionale Daten. Diese Grössen werden als Indizes gerechnet. Ein Wert von 1 entspricht dem Referenzzustand. Die Wirkungsstärken sind Annahmen und werden in der Sensitivitätsanalyse variiert.
 
@@ -78,6 +79,7 @@ Das Stock-and-Flow-Modell beschreibt Bestände und ihre jährlichen Zu- und Abfl
 
 - **Bevölkerung:** Menschen, die in Kaffrine leben
 - **Abgewanderte Personen:** Menschen ausserhalb der Region, die im Modell zum Netzwerk gehören und Rücküberweisungen leisten können
+- **Verzögerter Abwanderungsdruck:** Der Druck, der tatsächlich auf die Abwanderung wirkt. Er folgt dem aktuellen Druck mit einem Jahr Verzögerung.
 
 Der Anfangsbestand der Abgewanderten wird aus Basisrate, Anfangsbevölkerung und Verweildauer abgeleitet. Er beträgt rund 84 000 Personen und ist kein direkt gemessener Bestand.
 
@@ -94,7 +96,7 @@ Der Anfangsbestand der Abgewanderten wird aus Basisrate, Anfangsbevölkerung und
 - Ertrag und verfügbare Arbeitskräfte bestimmen die Produktion.
 - Die Produktion wird auf die Bevölkerung verteilt, um Nahrung und landwirtschaftliches Einkommen pro Person zu berechnen.
 - Rücküberweisungen ergänzen das Haushaltseinkommen.
-- Weniger Einkommen und Nahrung pro Person erhöhen den Druck wegzuziehen.
+- Weniger Einkommen und Nahrung pro Person erhöhen den Druck wegzuziehen. Dieser Druck wirkt mit einem Jahr Verzögerung.
 - Ein grösseres Netzwerk abgewanderter Personen erhöht die Abwanderungsrate.
 
 ## 4. Rückkopplungen
@@ -146,7 +148,7 @@ Verglichen werden die Bevölkerung 2050 und die gesamte Abwanderung von 2024 bis
 
 ### Sensitivitätsanalyse
 
-Die angenommenen Wirkungsparameter, die natürliche Wachstumsrate, die Verweildauer im Netzwerk sowie die Abwanderungs- und die Zuzugsrate werden einzeln halbiert und verdoppelt. Gemessen wird die Veränderung der gesamten Abwanderung im Basisszenario.
+Die angenommenen Wirkungsparameter, die natürliche Wachstumsrate, die Verweildauer im Netzwerk sowie die Abwanderungs- und die Zuzugsrate werden einzeln halbiert und verdoppelt. Gemessen wird die Veränderung der gesamten Abwanderung im Szenario mit wiederkehrenden Dürren, damit auch die Parameter der Klimakette wirken. Die Verzögerung wird separat mit 1, 2 und 3 Jahren geprüft.
 
 Zusätzlich wird die Abhängigkeit der Produktion von Arbeitskräften im Dürreszenario variiert. Damit wird untersucht, unter welchen Annahmen die vermutete Schleife R1 verstärkend wirkt und wann die Versorgungsschleife B1 überwiegt.
 
@@ -155,10 +157,10 @@ Zusätzlich wird die Abhängigkeit der Produktion von Arbeitskräften im Dürres
 ### Zentrale Erkenntnisse
 
 - **Bevölkerungswachstum:** Im Modell wächst die Produktion langsamer als die Bevölkerung. Einkommen und Nahrung pro Person sinken, und die Abwanderung steigt auch ohne zusätzliche Dürren.
-- **Dürren:** Weniger Niederschlag verringert den Ertrag und erhöht die Abwanderung gegenüber dem Basislauf. Bis 2050 sind es bei wiederkehrenden Dürren rund 27 000 und bei dauerhaft trockenerem Klima rund 62 000 zusätzliche Abwandernde.
+- **Dürren:** Weniger Niederschlag verringert den Ertrag und erhöht die Abwanderung gegenüber dem Basislauf. Bis 2050 sind es bei wiederkehrenden Dürren rund 29 000 und bei dauerhaft trockenerem Klima rund 64 000 zusätzliche Abwandernde. Die Wirkung tritt jeweils im Folgejahr ein.
 - **Versorgung:** Abwanderung entlastet unter den gewählten Annahmen die Zurückbleibenden stärker, als der Verlust an Arbeitskräften die Produktion verringert.
 - **Netzwerke:** Der Bestand der Abgewanderten verändert sich über Jahre. Dadurch können die Folgen einer Dürre über das Netzwerk nachwirken.
-- **Annahmen:** Die Ergebnisse reagieren besonders auf natürliches Wachstum, Netzwerke, die beiden Migrationsraten, die Wirkung der Nahrung und die Abhängigkeit der Produktion von Arbeitskräften.
+- **Annahmen:** Die Ergebnisse reagieren besonders auf natürliches Wachstum, Netzwerke, die beiden Migrationsraten, die Wirkung der Nahrung und die Abhängigkeit der Produktion von Arbeitskräften. Der Zusammenhang zwischen Niederschlag und Ertrag wirkt selbst im Dürreszenario schwach.
 
 ### Aussagekraft des Modells
 

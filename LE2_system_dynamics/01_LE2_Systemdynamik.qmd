@@ -128,11 +128,14 @@ display(migration_detail[["bezeichnung", "erhebungsjahr", "raumbezug", "zeitfens
 | nahrung_pk_index | Converter | – | produktion_index / (bevoelkerung / bevoelkerung_2013) | B1 |
 | rueck_pk_index | Converter | – | (Abgewanderte pro Bevölkerung) / (Anfangswert) | B2 |
 | haushaltseinkommen_index | Converter | – | (1 − anteil_rueck) × Produktion pro Kopf + anteil_rueck × Rücküberweisungen pro Kopf | R1, B2 |
-| abwanderungsrate | Converter | 1/Jahr | abwanderungsrate_basis × (1 + druck) × netzwerk_faktor | |
+| abwanderungsrate | Converter | 1/Jahr | abwanderungsrate_basis × (1 + druck_verzoegert) × netzwerk_faktor | |
 | druck | Converter | – | wirkung_einkommen × (1 − haushaltseinkommen_index) + wirkung_nahrung × (1 − nahrung_pk_index) | R1, B1, B2 |
+| druck_verzoegert | Stock | – | Zu- bzw. Abfluss anpassung_druck; Anfangswert = Druck aus dem Erntejahr 2012 | |
+| anpassung_druck | Biflow | 1/Jahr | (druck − druck_verzoegert) / verzoegerung | |
 | netzwerk_faktor | Converter | – | 1 + wirkung_netzwerk × (abgewanderte / abgewanderte_2013 − 1) | R2 |
 
 - Wasserverfügbarkeit wird als normierter Niederschlagsproxy abgebildet; eine eigene Speicher- und Wasserbedarfsbilanz ist nicht Teil dieses LE2-Kernmodells.
+- Der Abwanderungsdruck wirkt mit einer Verzögerung erster Ordnung von einem Jahr. Die Ernte fällt im Herbst an, abgewandert wird in der folgenden Trockenzeit. Eine Dürre erhöht die Abwanderung deshalb erst im Folgejahr. Weil der Druck auch sinken kann, ist die Anpassung ein Biflow.
 - Einkommen und Nahrung werden **pro Kopf** gerechnet. Bei gleichbleibender Produktion erhöht weniger Bevölkerung die Nahrung pro Person; dadurch wirkt B1 ausgleichend gegen weitere Abwanderung.
 - Startwert der Abgewanderten: Gleichgewicht von Zu- und Abgang im Normaljahr, abwanderungsrate_basis × bevoelkerung_2013 × verweildauer ≈ 84 000. Die 80 171 Lebenszeitwegzüge aus 2023 sind ein Vergleichswert, aber kein direkt gemessener Netzwerkbestand.
 
@@ -254,17 +257,19 @@ plt.show()
 
 ## **10 Sensitivitätsanalyse**
 
-Jeder Parameter, der eine Annahme ist, wird einzeln halbiert und verdoppelt. Zusätzlich werden die beiden Migrationsraten variiert, weil sie aus nur einem Erhebungsfenster stammen. Gemessen wird die gesamte Abwanderung 2024–2050 im Szenario basis.
+Jeder Parameter, der eine Annahme ist, wird einzeln halbiert und verdoppelt. Zusätzlich werden die beiden Migrationsraten variiert, weil sie aus nur einem Erhebungsfenster stammen. Gemessen wird die gesamte Abwanderung 2024–2050 im Szenario duerren. Im Szenario basis gibt es nach 2023 nur Normaljahre, dort wären die Parameter der Klimakette wie elast_ertrag wirkungslos.
+
+Die Verzögerung wird separat mit 1, 2 und 3 Jahren geprüft. Eine Halbierung auf 0.5 Jahre wäre kürzer als der Zeitschritt und numerisch nicht sinnvoll.
 
 ```{python}
-annahmen = [k for k, p in PARAMS.items() if p.status == "Annahme" and p.einheit != "Jahr"]
+annahmen = [k for k, p in PARAMS.items() if p.status == "Annahme" and p.einheit != "Jahr" and k != "verzoegerung"]
 annahmen += ["abwanderungsrate_basis", "zuzugsrate"]
-basis_total = laeufe["basis"].loc[2024:2050, "abwanderung"].sum()
+basis_total = laeufe["duerren"].loc[2024:2050, "abwanderung"].sum()
 
 zeilen = []
 for k in annahmen:
     for faktor in [0.5, 2.0]:
-        df = simuliere(szenarien["basis"], ref, with_overrides(**{k: PARAMS[k].wert * faktor}), name=f"{k}_{faktor}")
+        df = simuliere(szenarien["duerren"], ref, with_overrides(**{k: PARAMS[k].wert * faktor}), name=f"{k}_{faktor}")
         zeilen.append({"Parameter": k, "Faktor": faktor,
                        "Änderung": df.loc[2024:2050, "abwanderung"].sum() / basis_total - 1})
 
@@ -272,12 +277,25 @@ sens = pd.DataFrame(zeilen).pivot(index="Parameter", columns="Faktor", values="�
 sens = sens.reindex(sens.abs().max(axis=1).sort_values().index)
 ax = sens.plot.barh(figsize=(8, 4), color=["#6c8ebf", "#b85450"])
 ax.axvline(0, color="black", lw=1)
-ax.set(xlabel="Änderung der Abwanderung 2024-2050 gegenüber basis", ylabel="",
+ax.set(xlabel="Änderung der Abwanderung 2024-2050 im Szenario duerren", ylabel="",
        title="Parameter halbiert (0.5) und verdoppelt (2.0)")
 plt.show()
 sens.style.format("{:+.1%}")
 ```
 
+```{python}
+# Verzögerung: 1, 2 und 3 Jahre im Szenario duerren
+fig, ax = plt.subplots(figsize=(8, 4))
+for tau in [1, 2, 3]:
+    df = simuliere(szenarien["duerren"], ref, with_overrides(verzoegerung=tau), name=f"tau_{tau}")
+    df["abwanderungsrate"].plot(ax=ax, label=f"verzoegerung = {tau} Jahre")
+    print(f"Verzögerung {tau} Jahre: Abwanderung 2024-2050 {df.loc[2024:2050, 'abwanderung'].sum() / basis_total - 1:+.1%} gegenüber 1 Jahr")
+ax.set(title="Abwanderungsrate im Szenario duerren", xlabel="Jahr", ylabel="1/Jahr")
+ax.legend()
+plt.show()
+```
+
+- Die Länge der Verzögerung verschiebt den Zeitpunkt der Reaktion und glättet die Spitzen, verändert die kumulierte Abwanderung aber kaum.
 - Eine Verdoppelung der Basis-Abwanderungsrate liegt noch weit unter der Rate aus dem Einjahresfenster. Würde man saisonale Migration einbeziehen, wäre das ein anderes Modell mit einem anderen Bestand der Abgewanderten und keine Parametervariante.
 
 ### **R1 oder B1?**
@@ -307,10 +325,11 @@ plt.show()
 ## **12 Erkenntnisse**
 
 - **Das Bevölkerungswachstum ist ein zentraler Treiber der Abwanderung.** Im Modell wächst die Bevölkerung trotz Abwanderung weiter, weil der natürliche Zuwachs grösser ist als der modellierte Abfluss. Die Produktion wächst langsamer als die Bevölkerung; dadurch sinken Nahrung und Einkommen pro Kopf und der Abwanderungsdruck steigt.
-- **Dürren verstärken die Abwanderung, aber weniger stark.** Im Vergleich zum Basisszenario erhöhen wiederkehrende Dürren die kumulierte Abwanderung 2024-2050 um rund 4.8 % (rund 27 000 Personen), ein dauerhaft trockeneres Klima um rund 11.1 % (rund 62 000 Personen).
-- **Die Ergebnisse hängen stark von wenigen Annahmen ab.** Am empfindlichsten reagiert das Modell auf das natürliche Wachstum, gefolgt vom Netzwerk (R2), der Basis-Abwanderungsrate, der Zuzugsrate, der Wirkung der Nahrung (B1) und der Abhängigkeit der Produktion von Arbeitskräften (R1). Für Netzwerk, Nahrung und Arbeitskräfte fehlen regionale Daten, die beiden Migrationsraten stammen aus nur einem Erhebungsfenster. Der Ertrag spielt im Szenario basis kaum eine Rolle, weil dort nach 2023 nur Normaljahre vorkommen.
+- **Dürren verstärken die Abwanderung, aber weniger stark.** Im Vergleich zum Basisszenario erhöhen wiederkehrende Dürren die kumulierte Abwanderung 2024-2050 um rund 5.3 % (rund 29 000 Personen), ein dauerhaft trockeneres Klima um rund 11.5 % (rund 64 000 Personen).
+- **Dürren wirken verzögert.** Eine Dürre erhöht die Abwanderung im Folgejahr, so steigt die Rate nach der Dürre 2014 erst 2015 an. Die Länge der Verzögerung verändert die kumulierte Abwanderung kaum.
+- **Die Ergebnisse hängen stark von wenigen Annahmen ab.** Am empfindlichsten reagiert das Modell auf das natürliche Wachstum, gefolgt vom Netzwerk (R2), der Basis-Abwanderungsrate, der Zuzugsrate, der Wirkung der Nahrung (B1) und der Abhängigkeit der Produktion von Arbeitskräften (R1). Für Netzwerk, Nahrung und Arbeitskräfte fehlen regionale Daten, die beiden Migrationsraten stammen aus nur einem Erhebungsfenster. Selbst im Szenario duerren verändert eine Halbierung oder Verdoppelung von elast_ertrag die Abwanderung nur um rund 3 bis 5 %. Die Klimakette wirkt im Modell schwächer als die demografische Dynamik.
 - **R1 ist schwach, B1 überwiegt.** Mit Einkommen pro Kopf entlastet jede Abwanderung die Zurückbleibenden. Je stärker die Produktion an den Arbeitskräften hängt, desto tiefer ist im Modell die Abwanderung, weil die wachsende Bevölkerung dann auch mehr produziert. Ein verstärkender Effekt der Abwanderung über fehlende Arbeitskräfte ist im Modell nicht sichtbar.
 - **R2 macht die Abwanderung träge.** Die Zahl der Abgewanderten baut sich über Jahre auf. Eine Dürre wirkt deshalb über das Netzwerk noch Jahre nach.
-- **Die Modellbevölkerung bleibt deutlich unter der ANSD-Projektion.** Der Basislauf erreicht 2050 rund 1.24 Millionen Personen, während die externe Projektion rund 2.05 Millionen ausweist. Das zeigt die Grenze des Kernmodells, denn Altersstruktur und eine zeitvariable natürliche Wachstumsrate fehlen, und die Abwanderung steigt im Modell mit sinkender Versorgung pro Kopf stark an.
+- **Die Modellbevölkerung bleibt deutlich unter der ANSD-Projektion.** Der Basislauf erreicht 2050 rund 1.25 Millionen Personen, während die externe Projektion rund 2.05 Millionen ausweist. Das zeigt die Grenze des Kernmodells, denn Altersstruktur und eine zeitvariable natürliche Wachstumsrate fehlen, und die Abwanderung steigt im Modell mit sinkender Versorgung pro Kopf stark an.
 - **Der Backtest zeigt eine Datenlücke.** Mit Zuzug unterschätzt das Modell die Bevölkerung 2023 um rund 8 % statt 11 %. Das Bevölkerungswachstum 2013–2023 ist mit konstantem natürlichem Wachstum und konstanter Nettomigration nicht vollständig erklärbar.
 - **Das Modell erfasst nur dauerhafte Abwanderung.** Das Einjahresfenster der Volkszählung zeigt eine rund viermal höhere Mobilität. Aussagen über saisonale und zirkuläre Migration sind mit diesem Modell nicht möglich.
