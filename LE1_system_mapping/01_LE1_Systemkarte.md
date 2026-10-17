@@ -89,6 +89,8 @@ Teil 02 ist unverändert. Im Kernmodell haben wir gegenüber der ersten Version 
 
 R1 und B1 beginnen beide bei der sinkenden Bevölkerung, wirken aber gegeneinander. Welche Schleife stärker ist, untersuchen wir in LE2.
 
+Die Wirkung von Haushaltseinkommen und Nahrung pro Person auf die Abwanderung ist verzögert (||). Die Ernte fällt im Herbst an, abgewandert wird in der folgenden Trockenzeit.
+
 ### **Exploration in Loopy**
 
 Das Kernmodell ist in Loopy nachgebaut. Darin sieht man, wie sich eine Veränderung durch die Schleifen ausbreitet.
