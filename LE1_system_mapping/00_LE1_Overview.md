@@ -11,7 +11,7 @@ Untersucht wird, wie sich Dürren über Wasserverfügbarkeit, Ernte und Einkomme
 - **Systemkontext:** Sahel-Zone
 - **Untersuchungsland:** Senegal
 - **Untersuchungsregion:** Kaffrine
-- Betrachtet wird die Abwanderung aus der Region Kaffrine.
+- Betrachtet wird die dauerhafte Abwanderung aus der Region Kaffrine.
 - Das Ziel der abwandernden Personen liegt ausserhalb des Systems.
 
 ### Zentraler Zusammenhang
@@ -33,8 +33,8 @@ Eine Dürre ist ein Jahr mit deutlich weniger Niederschlag als üblich. Zusätzl
 ### Ausserhalb des direkten Modellfokus
 
 - konkrete Zielorte der Abwanderung
-- Zuwanderung
-- Rückkehrmigration
+- Rückkehrmigration und saisonale Migration
+- Zuwanderung (in LE2 nur als einfacher Zufluss mit konstanter Rate)
 - Konflikte als eigenständige Dynamik
 - detaillierte politische Entwicklungen
 
