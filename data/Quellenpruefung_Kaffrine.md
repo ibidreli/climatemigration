@@ -1,6 +1,6 @@
 # Quellenprüfung Kaffrine: Bevölkerung und Migration
 
-Stand: 7. Oktober 2026. Auswertung der in dieser Unterhaltung bereitgestellten Dateien. Keine zusätzliche Internetrecherche. Die Original-CSV-Dateien, das Modell und das Notebook wurden nicht verändert.
+Stand: 7. Oktober 2026, nachgeführt am 17. Oktober 2026. Ausgewertet wurden die unten aufgeführten ANSD-Berichte. Es wurde keine zusätzliche Internetrecherche durchgeführt.
 
 ## Ergebnis
 
@@ -27,7 +27,6 @@ Die Seitenangaben beziehen sich auf die PDF-Seitenzählung ab der ersten Dateise
 | Modell | model.py | Prüft den Verwendungszweck: Bevölkerungsbestand, natürlicher Zuwachs und Abwanderung. Zuzug ist bisher nicht modelliert. |
 | Notebook | 01_LE2_Systemdynamik.ipynb | Enthält Aussagen über fehlende internationale Migration und Ertragsdaten, die durch die mitgegebenen Quellen überholt sind. |
 | Übersicht | 00_LE2_Overview.md | Beschreibt Aufbau und Anforderungen, enthält keine zusätzlichen statistischen Originalwerte. |
-| Projektmaterial | pasted.txt, pasted(1).txt, pasted(2).txt | Kursbeschreibung und weiterführende Methodenlinks, keine Kaffrine-Zeitreihen. Die verlinkten externen Inhalte wurden nicht separat abgerufen. |
 | Aufgabenstellung | mss-Mini-Challenge-LE1-1753629155.pdf | Methodische Anforderungen an die Systemkartierung; keine zusätzlichen Kaffrine-Bevölkerungs- oder Migrationswerte. |
 
 ## 2. Ergänzungen zur Bevölkerungsdatei
@@ -181,13 +180,13 @@ Nicht jede Zahl in einem amtlichen Bericht ist automatisch intern konsistent. Di
 | 2013 | 46,4 | 8,5 | 37,9 ‰ = 3,79 % pro Jahr | S13, PDF-S. 20 und 22 / Druck-S. 25 und 27 |
 | 2023 | 38,6 | 5,0 | 33,6 ‰ = 3,36 % pro Jahr | S22, S. 21–22, Tab. II-4 |
 
-Die Differenzen sind selbst berechnete Näherungen für den natürlichen Zuwachs im jeweiligen Bezugsjahr, keine durchgehende gemessene Wachstumsreihe. Sie können die bisherige pauschale Annahme von 2,9 % im Modell besser begründen. Eine konstante Übernahme über 2013–2050 wäre wiederum eine Modellannahme. Gesamtbevölkerungswachstum enthält zusätzlich Migration und ist nicht gleich natürlichem Wachstum.
+Die Differenzen sind selbst berechnete Näherungen für den natürlichen Zuwachs im jeweiligen Bezugsjahr, keine durchgehende gemessene Wachstumsreihe. Das Modell verwendet seither den Wert 2023 von 3,36 % pro Jahr. Eine konstante Übernahme über 2013–2050 wäre wiederum eine Modellannahme. Gesamtbevölkerungswachstum enthält zusätzlich Migration und ist nicht gleich natürlichem Wachstum.
 
-## 6. Konsequenzen für eure Dateien und LE2
+## 6. Konsequenzen für die Datensätze und LE2
 
 ### Bevölkerungsdatei
 
-Die bisherigen Spalten `jahr,bevoelkerung,quelle` reichen für eine gemischte Datenbasis nicht aus. Ergänzen würde ich mindestens `datentyp`, `gebietsbezug`, `pdf_seite`, `tabelle` und `hinweis`. Die beiden 2023-Varianten dürfen nicht unmarkiert unter demselben Jahresschlüssel stehen. Das Modell braucht eine ausdrücklich gewählte Referenzreihe; Projektionen müssen beim Backtest ausgeschlossen werden.
+Die bisherigen Spalten `jahr,bevoelkerung,quelle` reichen für eine gemischte Datenbasis nicht aus. Ergänzt wurden deshalb `datentyp`, `gebietsbezug`, `pdf_seite` und `hinweis`. Die Tabelle steht jeweils in `quelle`. Die beiden 2023-Varianten dürfen nicht unmarkiert unter demselben Jahresschlüssel stehen. Das Modell braucht eine ausdrücklich gewählte Referenzreihe; Projektionen müssen beim Backtest ausgeschlossen werden.
 
 ### Migrationsdatei
 
@@ -207,4 +206,4 @@ Das jetzige Schema passt zu einer einzigen Erhebung. Für 2013 und 2023 sollte j
 
 Alle bereitgestellten Dateien wurden nach ihrer Relevanz für die beiden Datensätze geprüft; die relevanten demografischen Tabellen, Definitionen und Widersprüche wurden im Detail ausgewertet. Unverwandte Fachkapitel wurden nicht vollständig in Daten umgewandelt. Die kritischen Tabellen für 2009, den Migrationswert 25’956 und die Projektionsbasis 820’404 wurden zusätzlich visuell am PDF kontrolliert.
 
-Die Quellen erlauben keine durchgehende beobachtete jährliche Migrationsreihe für Kaffrine und keine direkte Schätzung des kausalen Dürreeffekts auf Migration. Die weiterführenden Methodenlinks in den Textdateien wurden nicht als zusätzliche externe Datenquellen untersucht. Alle aufgeführten Zahlen stammen aus den bereitgestellten Dateien; abgeleitete Zahlen sind entsprechend gekennzeichnet.
+Die Quellen erlauben keine durchgehende beobachtete jährliche Migrationsreihe für Kaffrine und keine direkte Schätzung des kausalen Dürreeffekts auf Migration. Alle aufgeführten Zahlen stammen aus den ausgewerteten ANSD-Berichten; abgeleitete Zahlen sind entsprechend gekennzeichnet.

@@ -4,7 +4,10 @@ SD-Modell Kaffrine in BPTK-Py (LE2): Daten laden, Parameter, Modell, Simulation.
 Umsetzung des Kernmodells aus LE1:
 Niederschlag -> Wasserverfuegbarkeit (Proxy) -> Ertrag -> Produktion -> Einkommen -> Abwanderung
 mit den Schleifen R1 (Arbeitskräfte), R2 (Netzwerk), B1 (Versorgung), B2 (Rücküberweisungen)
-und dem natürlichen Bevölkerungswachstum (R3).
+und dem natürlichen Bevölkerungswachstum (R3). Der Abwanderungsdruck wirkt mit einer
+Verzögerung (Ernte im Herbst, Abwanderung in der folgenden Trockenzeit). Abgebildet wird dauerhafte Abwanderung
+(Wohnortwechsel über die Regionsgrenze, Fünfjahresfenster der Volkszählung); der Zuzug
+ist ein einfacher Zufluss mit konstanter Rate.
 
 Bevölkerung und Abwanderung in Personen, Klima bis Einkommen als Index (1 = Normaljahr bzw. 2013).
 """
@@ -84,9 +87,13 @@ PARAMS = {
     "bevoelkerung_0": Param(566_992, "Personen", "Bevölkerung Kaffrine 2013", "ANSD, RGPH-4", "Daten"),
     "abwanderungsrate_basis": Param(0.0074, "1/Jahr", "Abwanderungsrate im Normaljahr",
                                     "ANSD, RGPH-5: 27 588 Wegzüge in 5 Jahren (innerhalb Senegals)", "Daten"),
+    "zuzugsrate": Param(0.0036, "1/Jahr", "Zuzugsrate, konstant",
+                        "ANSD, RGPH-5: 13 645 Zuzüge in 5 Jahren (innerhalb Senegals)", "Daten"),
     "rate_natuerliches_wachstum": Param(0.0336, "1/Jahr", "Geburten minus Todesfälle pro Person; regionale Näherung 2023",
                                         "ANSD, RGPH-5 2023: 38.6‰ Geburten minus 5.0‰ Sterbefälle", "Annahme"),
     "verweildauer": Param(20, "Jahre", "Zeit, die eine abgewanderte Person zum Netzwerk zählt", "Annahme", "Annahme"),
+    "verzoegerung": Param(1, "Jahre", "Zeit, bis der Abwanderungsdruck auf die Abwanderung wirkt",
+                          "Annahme (Ernte im Herbst, Abwanderung in der folgenden Trockenzeit)", "Annahme"),
     "elast_ertrag": Param(1.0, "-", "10 % weniger Regen = 10 % weniger Ertrag", "Annahme (Regenfeldbau)", "Annahme"),
     "elast_arbeit": Param(0.3, "-", "10 % weniger Arbeitskräfte = 3 % weniger Produktion (R1)", "Annahme", "Annahme"),
     "anteil_rueck": Param(0.15, "-", "Anteil Rücküberweisungen am Haushaltseinkommen (B2)", "Annahme", "Annahme"),
@@ -112,7 +119,7 @@ def parameter_tabelle(params=None):
 # Modell
 # ---------------------------------------------------------------------------
 
-GROESSEN = ["bevoelkerung", "abgewanderte", "abwanderung", "abwanderungsrate", "niederschlag_index",
+GROESSEN = ["bevoelkerung", "abgewanderte", "abwanderung", "zuzug", "abwanderungsrate", "druck", "druck_verzoegert", "niederschlag_index",
             "wasserverfuegbarkeit_index",
             "produktion_index", "nahrung_pk_index", "haushaltseinkommen_index"]
 
@@ -123,13 +130,14 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
     m = Model(starttime=v("starttime"), stoptime=v("stoptime"), dt=v("dt"), name=name)
 
     c = {}
-    for k in ["rate_natuerliches_wachstum", "abwanderungsrate_basis", "verweildauer", "elast_ertrag",
+    for k in ["rate_natuerliches_wachstum", "abwanderungsrate_basis", "zuzugsrate", "verweildauer", "verzoegerung", "elast_ertrag",
               "elast_arbeit", "anteil_rueck", "wirkung_einkommen", "wirkung_nahrung", "wirkung_netzwerk"]:
         c[k] = m.constant(k)
         c[k].equation = v(k)
 
-    bev_0 = v("bevoelkerung_0")
-    abg_0 = v("abwanderungsrate_basis") * bev_0 * v("verweildauer")  # Gleichgewicht im Normaljahr
+    # BPTK-Py verlangt Gleitkommazahlen als Anfangswerte
+    bev_0 = float(v("bevoelkerung_0"))
+    abg_0 = float(v("abwanderungsrate_basis") * bev_0 * v("verweildauer"))  # Gleichgewicht im Normaljahr
 
     # Stocks
     bev = m.stock("bevoelkerung")
@@ -168,18 +176,32 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
     druck.equation = c["wirkung_einkommen"] * (1 - hh) + c["wirkung_nahrung"] * (1 - nahrung)
     netz = m.converter("netzwerk_faktor")                                    # R2
     netz.equation = sd.max(0, 1 + c["wirkung_netzwerk"] * (abg / abg_0 - 1))
+    # Verzögerung erster Ordnung: der wahrgenommene Druck passt sich mit der Zeit
+    # verzoegerung an den aktuellen Druck an. Anfangswert ist der Druck aus dem
+    # Erntejahr 2012 (gleiche Formeln bei Bevölkerung und Netzwerk im Anfangszustand).
+    ertrag_vj = max(0.0, 1 + v("elast_ertrag") * (niederschlag[v("starttime") - 1] / ref - 1))
+    hh_vj = (1 - v("anteil_rueck")) * ertrag_vj + v("anteil_rueck")
+    druck_0 = v("wirkung_einkommen") * (1 - hh_vj) + v("wirkung_nahrung") * (1 - ertrag_vj)
+    druck_v = m.stock("druck_verzoegert")
+    druck_v.initial_value = float(druck_0)
+    anpassung = m.biflow("anpassung_druck")  # biflow: Druck kann steigen und sinken
+    anpassung.equation = (druck - druck_v) / c["verzoegerung"]
+    druck_v.equation = anpassung
+
     rate = m.converter("abwanderungsrate")
-    rate.equation = c["abwanderungsrate_basis"] * sd.max(0, 1 + druck) * netz
+    rate.equation = c["abwanderungsrate_basis"] * sd.max(0, 1 + druck_v) * netz
 
     # Flows
     wachstum = m.flow("natuerliches_wachstum")
     wachstum.equation = bev * c["rate_natuerliches_wachstum"]
     abw = m.flow("abwanderung")
     abw.equation = bev * rate
+    zuzug = m.flow("zuzug")
+    zuzug.equation = bev * c["zuzugsrate"]
     abgang = m.flow("abgang_netzwerk")
     abgang.equation = abg / c["verweildauer"]
 
-    bev.equation = wachstum - abw
+    bev.equation = wachstum + zuzug - abw
     abg.equation = abw - abgang
     return m
 

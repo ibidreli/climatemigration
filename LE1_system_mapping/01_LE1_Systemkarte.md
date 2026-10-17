@@ -8,7 +8,7 @@
 
 ### **Ort**
 
-Region Kaffrine im Senegal (Sahel-Zone) und die Menschen, die von dort wegziehen. Nicht betrachtet werden Zielorte, Zuwanderung, Rückkehr, Konflikte, Politik und Wirtschaftskrisen.
+Region Kaffrine im Senegal (Sahel-Zone) und die Menschen, die von dort dauerhaft wegziehen. Zuwanderung wird im Simulationsmodell (LE2) als einfacher Zufluss berücksichtigt. Nicht betrachtet werden Zielorte, Rückkehr, saisonale Migration, Konflikte, Politik und Wirtschaftskrisen.
 
 ### **Zeitraum**
 
@@ -88,6 +88,8 @@ Teil 02 ist unverändert. Im Kernmodell haben wir gegenüber der ersten Version 
 | B2 Rücküberweisungen | ausgleichend, verzögert | Abwanderung → Abgewanderte Personen (+) → Rücküberweisungen (+) → Haushaltseinkommen (+) → Abwanderung (−) | Geld von Abgewanderten hilft den Familien. Weniger Menschen müssen wegziehen. |
 
 R1 und B1 beginnen beide bei der sinkenden Bevölkerung, wirken aber gegeneinander. Welche Schleife stärker ist, untersuchen wir in LE2.
+
+Die Wirkung von Haushaltseinkommen und Nahrung pro Person auf die Abwanderung ist verzögert (||). Die Ernte fällt im Herbst an, abgewandert wird in der folgenden Trockenzeit.
 
 ### **Exploration in Loopy**
 
