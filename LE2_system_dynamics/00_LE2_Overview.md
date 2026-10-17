@@ -166,6 +166,19 @@ Das Modell macht mögliche Zusammenhänge und Rückkopplungen sichtbar. Die Erge
 
 Für belastbarere Aussagen werden insbesondere Migrationsdaten über mehrere Zeitpunkte sowie regionale Daten zu landwirtschaftlicher Produktion, Einkommen und Rücküberweisungen benötigt.
 
+### Offene Punkte
+
+**Validierung der Beziehung zwischen Niederschlag und Ertrag**
+
+- Der Parameter `elast_ertrag = 1.0` (10 % weniger Niederschlag führen zu 10 % weniger Ertrag) ist eine Annahme und nicht mit Daten geprüft.
+- Die SES-Berichte Kaffrine der ANSD enthalten regionale Anbauflächen, Erträge und Produktion, unter anderem SES 2022–2023 S. 108 (Tab. XVIII-3/4), SES 2020–2021 S. 125, SES 2017–2018 S. 133–134, SES 2013 und SES 2012.
+- Vorgehen, sobald die PDFs vorliegen
+  1. Erträge je Kultur (Hirse, Erdnuss) nach `data/raw/ansd_ertrag_kaffrine.csv` übertragen, mit Fundstelle je Wert
+  2. Ertrag gegen den CHIRPS-Niederschlagsindex auftragen und `elast_ertrag` daraus schätzen
+  3. Ertrag 2013–2023 als zusätzlichen, von den Migrationsdaten unabhängigen Backtest aufnehmen
+  4. `data/SOURCES.md`, Parametertabelle und Erkenntnisse nachführen
+- Die PDFs fehlen im Repo. `data/raw/pdf/*.pdf` ist in `.gitignore` ausgeschlossen, die Dateien müssen deshalb ausserhalb von Git geteilt oder die Regel angepasst werden.
+
 ### Zugehörige Dateien
 
 - **`01_LE2_Systemdynamik.qmd`:** Ausführliche Analyse mit Modellstruktur, Parametern, Simulationen, Backtest, Szenarien und Sensitivität
