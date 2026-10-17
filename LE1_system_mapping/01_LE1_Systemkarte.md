@@ -8,7 +8,7 @@
 
 ### **Ort**
 
-Region Kaffrine im Senegal (Sahel-Zone) und die Menschen, die von dort wegziehen. Nicht betrachtet werden Zielorte, Zuwanderung, Rückkehr, Konflikte, Politik und Wirtschaftskrisen.
+Region Kaffrine im Senegal (Sahel-Zone) und die Menschen, die von dort dauerhaft wegziehen. Zuwanderung wird im Simulationsmodell (LE2) als einfacher Zufluss berücksichtigt. Nicht betrachtet werden Zielorte, Rückkehr, saisonale Migration, Konflikte, Politik und Wirtschaftskrisen.
 
 ### **Zeitraum**
 
