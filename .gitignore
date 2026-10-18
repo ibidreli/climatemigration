@@ -9,6 +9,9 @@ __pycache__/
 # Lokale Quelldokumente / PDFs
 data/raw/pdf/*.pdf
 
+# Lokale Entwürfe (z.B. Mails an Dozenten)
+Mail_Dozent_*.md
+
 # Distribution / packaging
 .Python
 build/

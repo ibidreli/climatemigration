@@ -14,8 +14,7 @@ jupyter:
 ---
 
 
-Ziel: prüfen, ob Climada bzw. climada_petals für Dürre oder Ernteertrag in Senegal nutzbar ist.
-Ergebnis dieser Prüfung (nutzbar / nicht nutzbar, Gründe) in `LE4_Overview.md` festhalten.
+Skizze, wie CLIMADA den Kanal Dürre → Ertrag im LE4-Modell ersetzen oder prüfen könnte. In der Lösungsskizze wird CLIMADA nicht verwendet; der Kanal ist mit einer Regression auf ANSD-Erträge abgebildet (`01_uebertragungskanaele_szenarien.qmd`, Abschnitt 6). Die Code-Zellen sind für die Umgebung `mss-climada` vorbereitet und wurden nicht ausgeführt.
 
 
 ```{python}
@@ -34,9 +33,17 @@ client = Client()
 
 ## **2 Hazard – Exposure – Vulnerability**
 
-Konzept und mögliche Abbildung auf die Fragestellung.
+| Baustein | Mögliche Abbildung für Kaffrine |
+|---|---|
+| Hazard | Dürre bzw. Niederschlagsdefizit je Jahr und Rasterzelle, z.B. aus CHIRPS oder Klimaszenarien |
+| Exposure | Anbaufläche von Hirse und Erdnuss je Département (ANSD, SES Kaffrine) |
+| Vulnerability | Impact-Funktion Ertragsverlust in Abhängigkeit des Niederschlagsdefizits, kalibriert mit der Elastizität aus LE4 |
+| Impact | Produktionsverlust je Jahr, als Eingang für den Ertragsindex des SD-Modells |
+
+Der Mehrwert gegenüber der Regression wäre die räumliche Auflösung nach Départements und die Verwendung von Klimaszenarien als Hazard-Sets. Für die Abwanderung bleibt das SD-Modell nötig, weil CLIMADA keine Migrationsreaktion abbildet.
 
 
 ## **3 Fazit**
 
-- 
+- In der Skizze nicht verwendet. Die Verfügbarkeit passender Hazard- und Exposure-Daten für Senegal über die CLIMADA Data API wurde nicht geprüft.
+- Möglicher Ausbau, falls die räumliche Verteilung der Ernteausfälle innerhalb der Region untersucht werden soll.
