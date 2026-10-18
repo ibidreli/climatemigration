@@ -23,8 +23,9 @@ import model as model_module
 
 model_module = importlib.reload(model_module)
 
-from model import (PARAMS, lade_niederschlag, lade_bevoelkerung, lade_migration,
-                   niederschlag_szenario, simuliere, with_overrides, parameter_tabelle)
+from model import (PARAMS, lade_niederschlag, lade_bevoelkerung, lade_migration, lade_ertrag,
+                   schaetze_ertrag_elastizitaet, niederschlag_szenario, simuliere, with_overrides,
+                   parameter_tabelle)
 
 pd.set_option("display.float_format", "{:,.3f}".format)
 ```
@@ -109,7 +110,38 @@ display(migration_detail[["bezeichnung", "erhebungsjahr", "raumbezug", "zeitfens
 - Die Basis-Abwanderungsrate nutzt den Binnenwegzug von 27 588 Personen im Fünfjahresfenster Mai 2018 bis zur Volkszählung 2023, die Zuzugsrate entsprechend den Binnenzuzug von 13 645 Personen. Internationale Migration ist dokumentiert, mit rund 2 400 Wegzügen in fünf Jahren aber klein und kein eigener Modellfluss.
 - Das Einjahresfenster 2022 bis 2023 weist 25 956 Wegzüge aus, das ergibt eine rund viermal höhere Rate. Der Unterschied deutet auf saisonale und zirkuläre Migration mit Rückkehr hin, die das Fünfjahresfenster nicht erfasst. Das Modell bildet nur die dauerhafte Abwanderung ab; die Unsicherheit der Rate wird in Abschnitt 10 geprüft.
 - Für den natürlichen Zuwachs nutzt das Modell als regionale Näherung 3.36 % pro Jahr: Geburtenrate 38.6 Promille minus Sterberate 5.0 Promille aus RGPH-5 2023. Das bleibt eine Annahme für den gesamten Modellhorizont.
-- Für Ertrag, Einkommen und Rücküberweisungen liegen weiterhin keine direkt verwendeten Zeitreihen vor. Diese Grössen bleiben Indizes; ihre Wirkungsstärken werden in Abschnitt 10 variiert.
+- Für Einkommen und Rücküberweisungen liegen keine Zeitreihen vor. Diese Grössen bleiben Indizes; ihre Wirkungsstärken werden in Abschnitt 10 variiert.
+
+### **Ertrag (ANSD, SES Kaffrine)**
+
+Erträge in kg/ha für Hirse (Grundnahrungsmittel) und Erdnuss (wichtigste Einkommenskultur) aus den Berichten SES 2013, 2017–2018, 2020–2021 und 2022–2023. Für 2014–2016 liegen keine Werte vor. Das Jahr bezeichnet die Regenzeit, die Kampagne 2018/2019 gehört also zum Niederschlag 2018.
+
+Geschätzt wird $\log(\text{Ertrag}) = a + b \log(\text{Niederschlagsindex}) + c \, t$. Dabei ist $b$ die Elastizität des Ertrags auf den Niederschlag und $c$ der Trend pro Jahr. Ohne Trendterm würde der Anstieg der Erträge seit 2009 fälschlich dem Niederschlag zugeschrieben, weil die Jahre ab 2019 überdurchschnittlich nass waren.
+
+```{python}
+ertrag = lade_ertrag()
+schaetzung = pd.DataFrame({k: schaetze_ertrag_elastizitaet(ertrag[k].dropna(), niederschlag, ref)
+                           for k in ertrag.columns}).T
+display(schaetzung.style.format({"n": "{:.0f}", "elastizitaet": "{:.2f}", "se_elastizitaet": "{:.2f}",
+                                 "trend": "{:+.1%}", "se_trend": "{:.1%}", "r2": "{:.2f}"}))
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 3.8))
+for k in ertrag.columns:
+    ertrag[k].dropna().plot(ax=axes[0], marker="o", label=k)
+axes[0].set(title="Ertrag (kg/ha)", xlabel="Jahr der Regenzeit")
+axes[0].legend()
+for k in ertrag.columns:
+    e = ertrag[k].dropna()
+    axes[1].scatter(niederschlag.reindex(e.index) / ref, e / e.mean(), label=k)
+axes[1].set(title="Ertrag relativ zum Mittel gegen Niederschlagsindex", xlabel="Niederschlagsindex", ylabel="Ertrag / Mittel")
+axes[1].legend()
+fig.tight_layout()
+plt.show()
+```
+
+- Die Elastizität beträgt für Hirse rund 0.46 und für Erdnuss rund 0.94. Das Modell rechnet mit einem einzigen Ertragsindex und verwendet das gerundete Mittel von 0.7. Die Spannweite der beiden Kulturen wird in Abschnitt 10 geprüft.
+- Die Erträge steigen zusätzlich um rund 5 % (Hirse) bzw. 2 % (Erdnuss) pro Jahr. In LE2 bleibt die Produktivität konstant; ein Produktivitätswachstum ist als Szenario in der LE4-Skizze vorgesehen.
+- Die Reihen sind kurz und lückenhaft (9 bzw. 12 Jahre). Die Schätzung ist deshalb unsicher, aber die einzige datenbasierte Grundlage für diese Beziehung.
 
 ## **4 Modellstruktur**
 
@@ -257,13 +289,13 @@ plt.show()
 
 ## **10 Sensitivitätsanalyse**
 
-Jeder Parameter, der eine Annahme ist, wird einzeln halbiert und verdoppelt. Zusätzlich werden die beiden Migrationsraten variiert, weil sie aus nur einem Erhebungsfenster stammen. Gemessen wird die gesamte Abwanderung 2024–2050 im Szenario duerren. Im Szenario basis gibt es nach 2023 nur Normaljahre, dort wären die Parameter der Klimakette wie elast_ertrag wirkungslos.
+Jeder Parameter, der eine Annahme ist, wird einzeln halbiert und verdoppelt. Zusätzlich werden die beiden Migrationsraten variiert, weil sie aus nur einem Erhebungsfenster stammen, sowie elast_ertrag, weil die Schätzung unsicher ist und sich zwischen den Kulturen unterscheidet. Gemessen wird die gesamte Abwanderung 2024–2050 im Szenario duerren. Im Szenario basis gibt es nach 2023 nur Normaljahre, dort wären die Parameter der Klimakette wie elast_ertrag wirkungslos.
 
 Die Verzögerung wird separat mit 1, 2 und 3 Jahren geprüft. Eine Halbierung auf 0.5 Jahre wäre kürzer als der Zeitschritt und numerisch nicht sinnvoll.
 
 ```{python}
 annahmen = [k for k, p in PARAMS.items() if p.status == "Annahme" and p.einheit != "Jahr" and k != "verzoegerung"]
-annahmen += ["abwanderungsrate_basis", "zuzugsrate"]
+annahmen += ["abwanderungsrate_basis", "zuzugsrate", "elast_ertrag"]
 basis_total = laeufe["duerren"].loc[2024:2050, "abwanderung"].sum()
 
 zeilen = []
@@ -324,10 +356,10 @@ plt.show()
 
 ## **12 Erkenntnisse**
 
-- **Das Bevölkerungswachstum ist ein zentraler Treiber der Abwanderung.** Im Modell wächst die Bevölkerung trotz Abwanderung weiter, weil der natürliche Zuwachs grösser ist als der modellierte Abfluss. Die Produktion wächst langsamer als die Bevölkerung; dadurch sinken Nahrung und Einkommen pro Kopf und der Abwanderungsdruck steigt.
-- **Dürren verstärken die Abwanderung, aber weniger stark.** Im Vergleich zum Basisszenario erhöhen wiederkehrende Dürren die kumulierte Abwanderung 2024-2050 um rund 5.3 % (rund 29 000 Personen), ein dauerhaft trockeneres Klima um rund 11.5 % (rund 64 000 Personen).
+- **Das Bevölkerungswachstum ist ein zentraler Treiber der Abwanderung.** Im Modell wächst die Bevölkerung trotz Abwanderung weiter, weil der natürliche Zuwachs grösser ist als der modellierte Abfluss. Die Produktion wächst langsamer als die Bevölkerung; dadurch sinken Nahrung und Einkommen pro Kopf und der Abwanderungsdruck steigt. Diese Aussage gilt nur unter der Annahme konstanter Produktivität. Die Ertragsdaten zeigen seit 2009 einen deutlichen Anstieg; seine Wirkung ist als Szenario in der LE4-Skizze vorgesehen.
+- **Dürren verstärken die Abwanderung, aber weniger stark.** Im Vergleich zum Basisszenario erhöhen wiederkehrende Dürren die kumulierte Abwanderung 2024-2050 um rund 3.7 % (rund 21 000 Personen), ein dauerhaft trockeneres Klima um rund 8.0 % (rund 45 000 Personen). Die Wirkung ist kleiner als mit der früheren Annahme elast_ertrag = 1.0, weil die Daten eine schwächere Reaktion des Ertrags auf den Niederschlag zeigen.
 - **Dürren wirken verzögert.** Eine Dürre erhöht die Abwanderung im Folgejahr, so steigt die Rate nach der Dürre 2014 erst 2015 an. Die Länge der Verzögerung verändert die kumulierte Abwanderung kaum.
-- **Die Ergebnisse hängen stark von wenigen Annahmen ab.** Am empfindlichsten reagiert das Modell auf das natürliche Wachstum, gefolgt vom Netzwerk (R2), der Basis-Abwanderungsrate, der Zuzugsrate, der Wirkung der Nahrung (B1) und der Abhängigkeit der Produktion von Arbeitskräften (R1). Für Netzwerk, Nahrung und Arbeitskräfte fehlen regionale Daten, die beiden Migrationsraten stammen aus nur einem Erhebungsfenster. Selbst im Szenario duerren verändert eine Halbierung oder Verdoppelung von elast_ertrag die Abwanderung nur um rund 3 bis 5 %. Die Klimakette wirkt im Modell schwächer als die demografische Dynamik.
+- **Die Ergebnisse hängen stark von wenigen Annahmen ab.** Am empfindlichsten reagiert das Modell auf das natürliche Wachstum, gefolgt vom Netzwerk (R2), der Basis-Abwanderungsrate, der Zuzugsrate, der Wirkung der Nahrung (B1) und der Abhängigkeit der Produktion von Arbeitskräften (R1). Für Netzwerk, Nahrung und Arbeitskräfte fehlen regionale Daten, die beiden Migrationsraten stammen aus nur einem Erhebungsfenster. Selbst im Szenario duerren verändert eine Halbierung oder Verdoppelung von elast_ertrag die Abwanderung nur um rund 2 bis 4 %. Die Klimakette wirkt im Modell schwächer als die demografische Dynamik.
 - **R1 ist schwach, B1 überwiegt.** Mit Einkommen pro Kopf entlastet jede Abwanderung die Zurückbleibenden. Je stärker die Produktion an den Arbeitskräften hängt, desto tiefer ist im Modell die Abwanderung, weil die wachsende Bevölkerung dann auch mehr produziert. Ein verstärkender Effekt der Abwanderung über fehlende Arbeitskräfte ist im Modell nicht sichtbar.
 - **R2 macht die Abwanderung träge.** Die Zahl der Abgewanderten baut sich über Jahre auf. Eine Dürre wirkt deshalb über das Netzwerk noch Jahre nach.
 - **Die Modellbevölkerung bleibt deutlich unter der ANSD-Projektion.** Der Basislauf erreicht 2050 rund 1.25 Millionen Personen, während die externe Projektion rund 2.05 Millionen ausweist. Das zeigt die Grenze des Kernmodells, denn Altersstruktur und eine zeitvariable natürliche Wachstumsrate fehlen, und die Abwanderung steigt im Modell mit sinkender Versorgung pro Kopf stark an.

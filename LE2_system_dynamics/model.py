@@ -14,6 +14,8 @@ Bevölkerung und Abwanderung in Personen, Klima bis Einkommen als Index (1 = Nor
 from dataclasses import dataclass, asdict, replace
 from pathlib import Path
 
+import numpy as np
+import matplotlib.pyplot as plt
 import pandas as pd
 from BPTK_Py import Model, bptk
 from BPTK_Py import sd_functions as sd
@@ -50,6 +52,29 @@ def lade_migration(vollstaendig=False):
     if vollstaendig:
         return raw
     return raw.set_index("groesse")["personen"]
+
+
+def lade_ertrag(kultur=None):
+    """Ertrag (kg/ha) je Jahr der Regenzeit und Kultur; optional eine Kultur als Series."""
+    raw = pd.read_csv(DATA_RAW / "ansd_ertrag_kaffrine.csv")
+    tab = raw.pivot(index="jahr", columns="kultur", values="ertrag_kg_ha")
+    return tab if kultur is None else tab[kultur].dropna()
+
+
+def schaetze_ertrag_elastizitaet(ertrag, niederschlag, ref):
+    """
+    Regression log(Ertrag) = a + b * log(Niederschlagsindex) + c * (Jahr - Mittel).
+    b ist die Elastizität des Ertrags auf den Niederschlag, c der Trend pro Jahr.
+    """
+    df = pd.DataFrame({"ertrag": ertrag, "index": niederschlag.reindex(ertrag.index) / ref}).dropna()
+    t = df.index.values - df.index.values.mean()
+    X = np.column_stack([np.ones(len(df)), np.log(df["index"]), t])
+    y = np.log(df["ertrag"].values)
+    b, *_ = np.linalg.lstsq(X, y, rcond=None)
+    e = y - X @ b
+    se = np.sqrt(np.diag(e @ e / (len(df) - 3) * np.linalg.inv(X.T @ X)))
+    return {"n": len(df), "elastizitaet": b[1], "se_elastizitaet": se[1], "trend": b[2], "se_trend": se[2],
+            "r2": 1 - e @ e / ((y - y.mean()) ** 2).sum()}
 
 
 def niederschlag_szenario(reihe, ref, aenderung=0.0, duerre_alle=None, duerre_staerke=0.3, ab=2024, bis=2050):
@@ -94,7 +119,8 @@ PARAMS = {
     "verweildauer": Param(20, "Jahre", "Zeit, die eine abgewanderte Person zum Netzwerk zählt", "Annahme", "Annahme"),
     "verzoegerung": Param(1, "Jahre", "Zeit, bis der Abwanderungsdruck auf die Abwanderung wirkt",
                           "Annahme (Ernte im Herbst, Abwanderung in der folgenden Trockenzeit)", "Annahme"),
-    "elast_ertrag": Param(1.0, "-", "10 % weniger Regen = 10 % weniger Ertrag", "Annahme (Regenfeldbau)", "Annahme"),
+    "elast_ertrag": Param(0.7, "-", "10 % weniger Regen = 7 % weniger Ertrag",
+                          "ANSD SES 2013-2023, Regression mit Trend: Hirse 0.46, Erdnuss 0.94; Mittel gerundet", "Daten"),
     "elast_arbeit": Param(0.3, "-", "10 % weniger Arbeitskräfte = 3 % weniger Produktion (R1)", "Annahme", "Annahme"),
     "anteil_rueck": Param(0.15, "-", "Anteil Rücküberweisungen am Haushaltseinkommen (B2)", "Annahme", "Annahme"),
     "wirkung_einkommen": Param(1.0, "-", "10 % weniger Einkommen pro Kopf = 10 % mehr Abwanderung", "Annahme", "Annahme"),
@@ -120,7 +146,7 @@ def parameter_tabelle(params=None):
 # ---------------------------------------------------------------------------
 
 GROESSEN = ["bevoelkerung", "abgewanderte", "abwanderung", "zuzug", "abwanderungsrate", "druck", "druck_verzoegert", "niederschlag_index",
-            "wasserverfuegbarkeit_index",
+            "wasserverfuegbarkeit_index", "ertrag_index",
             "produktion_index", "nahrung_pk_index", "haushaltseinkommen_index"]
 
 
@@ -209,11 +235,14 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
 def simuliere(niederschlag, ref, params=None, name="basis"):
     """Ein Lauf als DataFrame (Index: Jahr)."""
     m = build_model(niederschlag, ref, params, name)
-    b = bptk()
-    b.register_model(m)
-    b.register_scenario_manager({f"sm_{name}": {"model": m, "base_constants": {}}})
-    b.register_scenarios(scenario_manager=f"sm_{name}", scenarios={name: {}})
-    df = b.run_scenarios(scenario_managers=[f"sm_{name}"], scenarios=[name], equations=GROESSEN, return_format="df")
+    # BPTK-Py setzt beim Start eigene Schriftgrössen; rc_context stellt sie danach wieder her
+    with plt.rc_context():
+        b = bptk()
+        b.register_model(m)
+        b.register_scenario_manager({f"sm_{name}": {"model": m, "base_constants": {}}})
+        b.register_scenarios(scenario_manager=f"sm_{name}", scenarios={name: {}})
+        df = b.run_scenarios(scenario_managers=[f"sm_{name}"], scenarios=[name], equations=GROESSEN,
+                             return_format="df")
     df.index = df.index.astype(int)
     df.index.name = "jahr"
     return df
