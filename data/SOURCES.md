@@ -15,6 +15,6 @@ Regeln:
 | Natürliches Wachstum | Geburten- und Sterberaten RGPH 2013 und 2023 | ANSD Senegal (SES 2013, SES 2022–2023) | Region | 2013, 2023 | ‰ | – (Parameter in `model.py`) | verwendet (Wert 2023) |
 | Binnenmigration | RGPH-5 2023, Kapitel 6; SES Kaffrine 2013 | ANSD Senegal | Region | Lebenszeit-, Fünf- und Einjahresfenster, Erhebungen 2013 und 2023 | Personen | `raw/ansd_migration_kaffrine_2023.csv` | verwendet (Wegzug Fünfjahresfenster 2023), übrige Fenster als Vergleich |
 | Internationale Migration | RGPH-5 2023, Kapitel 6; SES Kaffrine 2013 | ANSD Senegal | Region | Fünf- und Einjahresfenster | Personen | `raw/ansd_migration_kaffrine_2023.csv` | Vergleich |
-| Ertrag, Anbaufläche, Produktion | SES Kaffrine, Kapitel Landwirtschaft | ANSD Senegal | Region | Einzeljahre 2012–2023 | t, ha, kg/ha | – | verfügbar, noch nicht extrahiert; im Modell als Index mit Annahmen |
+| Ertrag, Anbaufläche, Produktion (Hirse, Erdnuss) | SES Kaffrine 2013, 2017–2018, 2020–2021, 2022–2023, Kapitel Landwirtschaft | ANSD Senegal / DRDR Kaffrine | Region | 2009–2013, 2017–2023 | ha, kg/ha, t | `raw/ansd_ertrag_kaffrine.csv` | verwendet (Schätzung von `elast_ertrag`) |
 | Einkommen | – | – | – | – | – | – | nicht verfügbar; Index mit Annahmen |
 | Rücküberweisungen | – | – | – | – | – | – | nicht verfügbar; Annahme |

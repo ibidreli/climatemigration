@@ -1,0 +1,22 @@
+jahr,kampagne,kultur,flaeche_ha,ertrag_kg_ha,produktion_t,datentyp,quelle,pdf_seite,hinweis
+2009,2009/2010,Hirse (mil),152900,839,,Erhebung,"ANSD, SES Kaffrine 2013, Tab. X.6 (Flaeche) und X.8 (Ertrag)",105-106,Produktion nicht uebertragen
+2010,2010/2011,Hirse (mil),187165,910,,Erhebung,"ANSD, SES Kaffrine 2013, Tab. X.6 (Flaeche) und X.8 (Ertrag)",105-106,Produktion nicht uebertragen
+2011,2011/2012,Hirse (mil),119452,730,,Erhebung,"ANSD, SES Kaffrine 2013, Tab. X.6 (Flaeche) und X.8 (Ertrag)",105-106,Produktion nicht uebertragen
+2012,2012/2013,Hirse (mil),124477,878,,Erhebung,"ANSD, SES Kaffrine 2013, Tab. X.6 (Flaeche) und X.8 (Ertrag)",105-106,Produktion nicht uebertragen
+2013,2013/2014,Hirse (mil),107547,849,,Erhebung,"ANSD, SES Kaffrine 2013, Tab. X.6 (Flaeche) und X.8 (Ertrag)",105-106,Produktion nicht uebertragen
+2017,2017/2018,Hirse (mil),134112,1087.5,145843,Erhebung,"ANSD, SES Kaffrine 2017-2018, Tab. IX-3",133,Fliesstext nennt abweichend 4383 kg/ha fuer 2018; Tabellenwert verwendet
+2018,2018/2019,Hirse (mil),121899,1115.9,136028,Erhebung,"ANSD, SES Kaffrine 2017-2018, Tab. IX-3",133,"Gleiche Werte in SES 2020-2021, Tab. XVIII-3"
+2019,2019/2020,Hirse (mil),154147,1326,204340,Erhebung,"ANSD, SES Kaffrine 2020-2021, Tab. XVIII-3",125,
+2020,2020/2021,Hirse (mil),171685,1339,229912,Erhebung,"ANSD, SES Kaffrine 2020-2021, Tab. XVIII-4",125,
+2021,2021/2022,Hirse (mil),149984,1450,217546,Erhebung,"ANSD, SES Kaffrine 2020-2021, Tab. XVIII-4",125,
+2022,2022/2023,Hirse (mil),150011,1658,248648,Erhebung,"ANSD, SES Kaffrine 2022-2023, Tab. XVIII-3",108,
+2023,2023/2024,Hirse (mil),179227,1650,295758,Erhebung,"ANSD, SES Kaffrine 2022-2023, Tab. XVIII-3",108,
+2009,2009/2010,Erdnuss (arachide d'huilerie),194359,1044,,Erhebung,"ANSD, SES Kaffrine 2013, Tab. X.6 (Flaeche) und X.8 (Ertrag)",105-106,Produktion nicht uebertragen
+2010,2010/2011,Erdnuss (arachide d'huilerie),265446,1310,,Erhebung,"ANSD, SES Kaffrine 2013, Tab. X.6 (Flaeche) und X.8 (Ertrag)",105-106,Produktion nicht uebertragen
+2011,2011/2012,Erdnuss (arachide d'huilerie),156793,810,,Erhebung,"ANSD, SES Kaffrine 2013, Tab. X.6 (Flaeche) und X.8 (Ertrag)",105-106,Produktion nicht uebertragen
+2012,2012/2013,Erdnuss (arachide d'huilerie),126597,1022,,Erhebung,"ANSD, SES Kaffrine 2013, Tab. X.6 (Flaeche) und X.8 (Ertrag)",105-106,Produktion nicht uebertragen
+2013,2013/2014,Erdnuss (arachide d'huilerie),165347,862,,Erhebung,"ANSD, SES Kaffrine 2013, Tab. X.6 (Flaeche) und X.8 (Ertrag)",105-106,Produktion nicht uebertragen
+2017,2017/2018,Erdnuss (arachide d'huilerie),200465,1264,253483,Erhebung,"ANSD, SES Kaffrine 2017-2018, Tab. IX-4",134,
+2018,2018/2019,Erdnuss (arachide d'huilerie),209100,1303.5,272570,Erhebung,"ANSD, SES Kaffrine 2017-2018, Tab. IX-4",134,
+2022,2022/2023,Erdnuss (arachide d'huilerie),228368,1332,304185,Abgeleitet,"ANSD, SES Kaffrine 2022-2023, Tab. XVIII-4",108,Ertrag = Produktion / Flaeche; Tabelle ohne Ertragszeile
+2023,2023/2024,Erdnuss (arachide d'huilerie),235481,1529,360069,Abgeleitet,"ANSD, SES Kaffrine 2022-2023, Tab. XVIII-4",108,Ertrag = Produktion / Flaeche; Tabelle ohne Ertragszeile
