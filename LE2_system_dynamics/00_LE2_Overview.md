@@ -60,16 +60,24 @@ Diese Faktoren können das System beeinflussen, werden aber nicht selbst detaill
 
 Die Abwanderungsdaten enthalten keine Auswanderung ins Ausland. Diese ist mit rund 2 400 Wegzügen in fünf Jahren klein. Das Einjahresfenster 2022 bis 2023 weist mit 25 956 Wegzügen eine rund viermal höhere Rate aus. Das spricht für saisonale und zirkuläre Migration, die das Modell nicht abbildet.
 
+### Ertrag
+
+- **Quelle:** ANSD, Situation Economique et Sociale Kaffrine (SES 2013, 2017–2018, 2020–2021, 2022–2023)
+- **Daten:** Erträge in kg/ha für Hirse (12 Jahre) und Erdnuss (9 Jahre) zwischen 2009 und 2023, ohne 2014–2016
+- **Schätzung:** Regression des logarithmierten Ertrags auf den logarithmierten Niederschlagsindex mit linearem Trend. Elastizität Hirse 0.46, Erdnuss 0.94; das Modell verwendet das gerundete Mittel 0.7.
+- **Trend:** Die Erträge steigen um rund 5 % (Hirse) bzw. 2 % (Erdnuss) pro Jahr. LE2 rechnet mit konstanter Produktivität; ein Produktivitätswachstum ist als Szenario in der LE4-Skizze vorgesehen.
+- Die Berichte als PDF sind zu gross für das Repo und liegen ausserhalb von Git.
+
 ### Zentrale Annahmen
 
 - **Natürliches Bevölkerungswachstum:** 3.36 % pro Jahr (Geburten- minus Sterberate 2023)
-- **Niederschlag und Ertrag:** 10 % weniger Niederschlag führen zu 10 % weniger Ertrag.
+- **Niederschlag und Ertrag:** 10 % weniger Niederschlag führen zu 7 % weniger Ertrag. Der Wert ist aus Daten geschätzt (siehe Ertrag).
 - **Arbeitskräfte und Produktion:** 10 % weniger Arbeitskräfte führen zu 3 % weniger Produktion. Die Bevölkerung dient als Näherung für die verfügbaren Arbeitskräfte.
 - **Rücküberweisungen:** Anteil von 15 % am Haushaltseinkommen im Ausgangszustand
 - **Netzwerk:** Abgewanderte Personen zählen im Mittel 20 Jahre zum Netzwerk.
 - **Verzögerung:** Der Abwanderungsdruck wirkt nach einem Jahr. Die Ernte fällt im Herbst an, abgewandert wird in der folgenden Trockenzeit.
 
-Für Ertrag, Einkommen und Rücküberweisungen fehlen regionale Daten. Diese Grössen werden als Indizes gerechnet. Ein Wert von 1 entspricht dem Referenzzustand. Die Wirkungsstärken sind Annahmen und werden in der Sensitivitätsanalyse variiert.
+Für Einkommen und Rücküberweisungen fehlen regionale Daten. Diese Grössen und der Ertrag werden als Indizes gerechnet. Ein Wert von 1 entspricht dem Referenzzustand. Die Wirkungsstärken sind Annahmen und werden in der Sensitivitätsanalyse variiert.
 
 ## 3. Modellstruktur
 
@@ -156,8 +164,8 @@ Zusätzlich wird die Abhängigkeit der Produktion von Arbeitskräften im Dürres
 
 ### Zentrale Erkenntnisse
 
-- **Bevölkerungswachstum:** Im Modell wächst die Produktion langsamer als die Bevölkerung. Einkommen und Nahrung pro Person sinken, und die Abwanderung steigt auch ohne zusätzliche Dürren.
-- **Dürren:** Weniger Niederschlag verringert den Ertrag und erhöht die Abwanderung gegenüber dem Basislauf. Bis 2050 sind es bei wiederkehrenden Dürren rund 29 000 und bei dauerhaft trockenerem Klima rund 64 000 zusätzliche Abwandernde. Die Wirkung tritt jeweils im Folgejahr ein.
+- **Bevölkerungswachstum:** Im Modell wächst die Produktion langsamer als die Bevölkerung. Einkommen und Nahrung pro Person sinken, und die Abwanderung steigt auch ohne zusätzliche Dürren. Das gilt unter der Annahme konstanter Produktivität; die Ertragsdaten zeigen seit 2009 einen Anstieg, dessen Wirkung die LE4-Skizze als Szenario vorsieht.
+- **Dürren:** Weniger Niederschlag verringert den Ertrag und erhöht die Abwanderung gegenüber dem Basislauf. Bis 2050 sind es bei wiederkehrenden Dürren rund 21 000 und bei dauerhaft trockenerem Klima rund 45 000 zusätzliche Abwandernde. Die Wirkung tritt jeweils im Folgejahr ein.
 - **Versorgung:** Abwanderung entlastet unter den gewählten Annahmen die Zurückbleibenden stärker, als der Verlust an Arbeitskräften die Produktion verringert.
 - **Netzwerke:** Der Bestand der Abgewanderten verändert sich über Jahre. Dadurch können die Folgen einer Dürre über das Netzwerk nachwirken.
 - **Annahmen:** Die Ergebnisse reagieren besonders auf natürliches Wachstum, Netzwerke, die beiden Migrationsraten, die Wirkung der Nahrung und die Abhängigkeit der Produktion von Arbeitskräften. Der Zusammenhang zwischen Niederschlag und Ertrag wirkt selbst im Dürreszenario schwach.
@@ -170,16 +178,7 @@ Für belastbarere Aussagen werden insbesondere Migrationsdaten über mehrere Zei
 
 ### Offene Punkte
 
-**Validierung der Beziehung zwischen Niederschlag und Ertrag**
-
-- Der Parameter `elast_ertrag = 1.0` (10 % weniger Niederschlag führen zu 10 % weniger Ertrag) ist eine Annahme und nicht mit Daten geprüft.
-- Die SES-Berichte Kaffrine der ANSD enthalten regionale Anbauflächen, Erträge und Produktion, unter anderem SES 2022–2023 S. 108 (Tab. XVIII-3/4), SES 2020–2021 S. 125, SES 2017–2018 S. 133–134, SES 2013 und SES 2012.
-- Vorgehen, sobald die PDFs vorliegen
-  1. Erträge je Kultur (Hirse, Erdnuss) nach `data/raw/ansd_ertrag_kaffrine.csv` übertragen, mit Fundstelle je Wert
-  2. Ertrag gegen den CHIRPS-Niederschlagsindex auftragen und `elast_ertrag` daraus schätzen
-  3. Ertrag 2013–2023 als zusätzlichen, von den Migrationsdaten unabhängigen Backtest aufnehmen
-  4. `data/SOURCES.md`, Parametertabelle und Erkenntnisse nachführen
-- Die PDFs fehlen im Repo. `data/raw/pdf/*.pdf` ist in `.gitignore` ausgeschlossen, die Dateien müssen deshalb ausserhalb von Git geteilt oder die Regel angepasst werden.
+- Keine für LE2. Die Beziehung zwischen Niederschlag und Ertrag ist mit den Ertragsdaten der SES-Berichte geschätzt. Der Backtest dieses Übertragungskanals ist in der LE4-Skizze beschrieben.
 
 ### Zugehörige Dateien
 
