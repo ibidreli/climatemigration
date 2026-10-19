@@ -1,26 +1,33 @@
 # climatemigration
 
-MSS Mini-Challenge (FHNW): Klimabedingte Migration in der Sahel-Zone. Übersicht in `mss_project_overview.md`, Setup der Umgebungen in `environment/README.md`.
+MSS Mini Challenge (FHNW, HS26): klimabedingte Abwanderung aus der Region Kaffrine (Senegal) in der Sahel-Zone. Team Rodrigo Urech und Elias Pulver.
 
-Die Aufgabenstellungen der bearbeiteten Mini-Challenges (LE1, LE2, LE4) liegen in `docs/`.
+## Abgabe
 
-## Notebook-Workflow (Quarto + Jupytext)
+| LE | Umfang | Zu bewertende Dateien |
+|---|---|---|
+| LE1 Systemkarte | gelöst | `LE1_system_mapping/01_system_map.md` mit den Karten im selben Ordner |
+| LE2 Systemdynamik | gelöst | `LE2_system_dynamics/01_model.ipynb` (ausgeführt), Zusammenfassung in `00_overview.md` |
+| LE4 Szenario- und integrierte Analyse | Lösungsskizze | Dateien in `LE4_scenario_analysis/`, Übersicht in `00_overview.md` |
 
-Im Repo liegen die Notebooks ausschliesslich als `.qmd`. Das `.ipynb` ist nur eine lokale Arbeitskopie und über `.gitignore` von Git ausgeschlossen. Jupytext koppelt beide Dateien gemäss `jupytext.toml`: Beim Speichern in JupyterLab wird das `.qmd` automatisch aktualisiert, beim Öffnen gilt die jeweils neuere Datei.
+Nicht zu bewerten sind `LE1_system_mapping/previous_versions/` (frühere Versionen zur Nachvollziehbarkeit), `docs/` (Aufgabenstellungen) und `environment/`.
 
-Voraussetzung: Quarto und Jupytext sind installiert (siehe `environment/README.md`).
+Übersicht über das Projekt in `project_overview.md`, Datenquellen in `data/SOURCES.md`, Setup der Umgebungen in `environment/README.md`.
+
+## Notebook-Workflow (Jupytext)
+
+Quelle jedes Notebooks ist eine `.pct.py`-Datei im Percent-Format. Jupytext koppelt sie gemäss `jupytext.toml` mit dem `.ipynb`. Beim Speichern in JupyterLab werden beide Dateien geschrieben.
 
 Ablauf:
 
 1. `git pull`
-2. Das `.qmd` in JupyterLab öffnen (Rechtsklick > *Open With* > *Notebook*)
-3. Arbeiten und speichern, das `.qmd` wird dabei mitgeschrieben
-4. Vor dem Commit Kernel neu starten und alle Zellen ausführen
-5. `git diff` prüfen: Es dürfen nur die eigenen Änderungen im `.qmd` erscheinen
-6. Nur das `.qmd` committen und pushen
+2. Paar abgleichen: `jupytext --sync LE2_system_dynamics/*.pct.py`
+3. Das `.ipynb` in JupyterLab öffnen, arbeiten und speichern
+4. Vor dem Commit Kernel neu starten und alle Zellen ausführen, Zahlen im Text mit der Ausgabe abgleichen. Die Plausibilitätsprüfung muss bestehen
+5. `.pct.py` und, wo für die Abgabe vorgesehen, das ausgeführte `.ipynb` committen
 
 Regeln:
 
 - Immer zuerst pullen, bevor im Notebook gearbeitet wird
 - Möglichst nicht gleichzeitig im selben Notebook arbeiten
-- Neues Notebook: als `.ipynb` anlegen und speichern, Jupytext erzeugt das `.qmd` automatisch
+- Commits klein halten, ein Branch pro Thema, Merge per Pull Request
