@@ -27,4 +27,4 @@ LE3 (agentenbasierte Modellierung) wird gemäss Vorgabe für Zweierteams nicht a
 - Stärker wirkt, ob die Produktivität der Landwirtschaft mit dem Bevölkerungswachstum Schritt hält
 - Netzwerkeffekte sind die einflussreichste Annahme ohne Daten
 
-Details in `LE2_system_dynamics/00_overview.md` und `LE4_scenario_analysis/00_overview.md`.
+Details in `LE2_system_dynamics/00_overview.md` und `LE4_scenario_analysis/01_sketch.md`.
