@@ -19,22 +19,22 @@ conda activate mss-climada
 python -m ipykernel install --user --name mss-climada --display-name "Python (mss-climada)"
 ```
 
-## **Quarto installieren**
-
-Jupytext verwendet Quarto für das `.qmd`-Format: https://quarto.org/docs/get-started/
-
-Bestehende Umgebung aktualisieren (installiert Jupytext):
+## **Umgebung aktualisieren**
 
 ```
 mamba env update -f environment/environment-sd.yml
 ```
 
-Vor der Abgabe alle Notebooks mit «Restart Kernel and Run All» vollständig ausführen.
+Alternativ mit pip in einer Python-3.11-Umgebung: `pip install -r requirements.txt`. BPTK-Py 1.9.0 braucht `setuptools<81`, weil es `pkg_resources` importiert.
+
+Die LE4-Notebooks liegen noch als `.qmd` vor. Zum Öffnen braucht Jupytext dafür Quarto: https://quarto.org/docs/get-started/
+
+Vor der Abgabe alle Notebooks mit «Restart Kernel and Run All» vollständig ausführen. Die Plausibilitätsprüfung im LE2-Notebook bricht bei einem Fehler ab.
 
 ## **Welches Notebook mit welchem Kernel**
 
 | Notebook | Kernel |
 |---|---|
-| `LE2_system_dynamics/*.qmd` | mss-sd |
-| `LE4_scenario_analysis/01_uebertragungskanaele_szenarien.qmd` | mss-sd |
-| `LE4_scenario_analysis/02_climada_exploration.qmd` | mss-climada |
+| `LE2_system_dynamics/01_model.pct.py` | mss-sd |
+| `LE4_scenario_analysis/01_scenarios.qmd` | mss-sd |
+| `LE4_scenario_analysis/02_climada.qmd` | mss-climada |

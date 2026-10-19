@@ -25,8 +25,8 @@ Die Seitenangaben beziehen sich auf die PDF-Seitenzählung ab der ersten Dateise
 | Ausgangsdaten | ansd_bevoelkerung_kaffrine.csv | Zwei Ausgangswerte: 2013 = 566’992; 2023 = 820’405. |
 | Ausgangsdaten | ansd_migration_kaffrine_2023.csv | Zwei Ausgangswerte: Binnenwegzug 5 Jahre = 27’588; Lebenszeit = 80’171. Beide Zahlen sind in M23 belegt, die Beschreibungen brauchen Präzisierung. |
 | Modell | model.py | Prüft den Verwendungszweck: Bevölkerungsbestand, natürlicher Zuwachs und Abwanderung. Zuzug ist bisher nicht modelliert. |
-| Notebook | 01_LE2_Systemdynamik.ipynb | Enthält Aussagen über fehlende internationale Migration und Ertragsdaten, die durch die mitgegebenen Quellen überholt sind. |
-| Übersicht | 00_LE2_Overview.md | Beschreibt Aufbau und Anforderungen, enthält keine zusätzlichen statistischen Originalwerte. |
+| Notebook | 01_model.ipynb | Enthält Aussagen über fehlende internationale Migration und Ertragsdaten, die durch die mitgegebenen Quellen überholt sind. |
+| Übersicht | 00_overview.md | Beschreibt Aufbau und Anforderungen, enthält keine zusätzlichen statistischen Originalwerte. |
 | Aufgabenstellung | mss-Mini-Challenge-LE1-1753629155.pdf | Methodische Anforderungen an die Systemkartierung; keine zusätzlichen Kaffrine-Bevölkerungs- oder Migrationswerte. |
 
 ## 2. Ergänzungen zur Bevölkerungsdatei

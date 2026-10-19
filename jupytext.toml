@@ -1,1 +1,1 @@
-formats = "ipynb,qmd"
+formats = "ipynb,.pct.py:percent"
