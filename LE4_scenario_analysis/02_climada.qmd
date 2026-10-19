@@ -14,7 +14,7 @@ jupyter:
 ---
 
 
-Skizze, wie CLIMADA den Kanal Dürre → Ertrag im LE4-Modell ersetzen oder prüfen könnte. In der Lösungsskizze wird CLIMADA nicht verwendet; der Kanal ist mit einer Regression auf ANSD-Erträge abgebildet (`01_uebertragungskanaele_szenarien.qmd`, Abschnitt 6). Die Code-Zellen sind für die Umgebung `mss-climada` vorbereitet und wurden nicht ausgeführt.
+Skizze, wie CLIMADA den Kanal Dürre → Ertrag im LE4-Modell ersetzen oder prüfen könnte. In der Lösungsskizze wird CLIMADA nicht verwendet; der Kanal ist mit einer Regression auf ANSD-Erträge abgebildet (`01_scenarios.qmd`, Abschnitt 6). Die Code-Zellen sind für die Umgebung `mss-climada` vorbereitet und wurden nicht ausgeführt.
 
 
 ```{python}

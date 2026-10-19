@@ -10,8 +10,8 @@
 
 | Datei | Inhalt |
 |---|---|
-| `01_uebertragungskanaele_szenarien.qmd` | Skizze: Fragestellungen, Systemgrenzen, Übertragungskanäle, Parameter, geplante Szenarien, Hypothesen, Backtest-Beschreibung |
-| `02_climada_exploration.qmd` | Skizze, wie CLIMADA den Kanal Dürre → Ertrag ergänzen könnte (nicht ausgeführt) |
+| `01_scenarios.qmd` | Skizze: Fragestellungen, Systemgrenzen, Übertragungskanäle, Parameter, geplante Szenarien, Hypothesen, Backtest-Beschreibung |
+| `02_climada.qmd` | Skizze, wie CLIMADA den Kanal Dürre → Ertrag ergänzen könnte (nicht ausgeführt) |
 
 LE4 wird nur skizziert, nicht gerechnet. Gerechnet würde mit dem LE2-Modell (`../LE2_system_dynamics/model.py`), damit LE2 und LE4 dieselben Parameter verwenden. Die Ertragsbeziehung (`elast_ertrag` = 0.7) ist bereits in LE2 aus ANSD-Daten geschätzt.
 

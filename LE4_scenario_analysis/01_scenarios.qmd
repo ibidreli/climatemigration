@@ -104,7 +104,7 @@ plt.show()
 |---|---|---|
 | SD-Modell LE2 (`model.py`) | Kanal Ertrag → Einkommen und Nahrung → Abwanderung → Bevölkerung | keine; für die Option Produktivität käme ein Parameter für das Ertragswachstum ab 2024 hinzu |
 | Ertragsbeziehung (LE2, Abschnitt 3) | Kanal Niederschlag → Ertrag | bereits aus ANSD-Erträgen und CHIRPS geschätzt (`elast_ertrag` = 0.7) |
-| CLIMADA | möglicher Ausbau: Dürre als Hazard, Anbaufläche als Exposure, Ertragsverlust als Impact-Funktion | siehe `02_climada_exploration.qmd` |
+| CLIMADA | möglicher Ausbau: Dürre als Hazard, Anbaufläche als Exposure, Ertragsverlust als Impact-Funktion | siehe `02_climada.qmd` |
 
 ## **6 Kennzahlen und Funktionsparameter**
 

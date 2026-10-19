@@ -81,8 +81,10 @@ docs/_build/
 .pybuilder/
 target/
 
-# Jupyter Notebook: Quelle ist die .qmd-Datei, das .ipynb ist nur die lokale Arbeitskopie (Jupytext-Paar)
+# Jupyter Notebook: Quelle ist die .pct.py-Datei (Jupytext-Paar). Für die Abgabe werden
+# die ausgeführten Notebooks mit Ausgaben ausdrücklich mitversioniert.
 *.ipynb
+!LE2_system_dynamics/01_model.ipynb
 .ipynb_checkpoints
 
 # Quarto
