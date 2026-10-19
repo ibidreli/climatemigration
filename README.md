@@ -8,7 +8,7 @@ MSS Mini Challenge (FHNW, HS26): klimabedingte Abwanderung aus der Region Kaffri
 |---|---|---|
 | LE1 Systemkarte | gelöst | `LE1_system_mapping/01_system_map.md` mit den Karten im selben Ordner |
 | LE2 Systemdynamik | gelöst | `LE2_system_dynamics/01_model.ipynb` (ausgeführt), Zusammenfassung in `00_overview.md` |
-| LE4 Szenario- und integrierte Analyse | Lösungsskizze | Dateien in `LE4_scenario_analysis/`, Übersicht in `00_overview.md` |
+| LE4 Szenario- und integrierte Analyse | Lösungsskizze | `LE4_scenario_analysis/01_sketch.md` mit dem Graphen der Übertragungskanäle im selben Ordner |
 
 Nicht zu bewerten sind `LE1_system_mapping/previous_versions/` (frühere Versionen zur Nachvollziehbarkeit), `docs/` (Aufgabenstellungen) und `environment/`.
 
