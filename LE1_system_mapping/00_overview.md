@@ -25,9 +25,9 @@ Eine Dürre ist ein Jahr mit deutlich weniger Niederschlag als üblich. Zusätzl
 - Niederschlag (wirkt von aussen auf das System)
 - Wasserverfügbarkeit
 - landwirtschaftlicher Ertrag und Produktion
-- landwirtschaftliches Einkommen und Haushaltseinkommen
-- Bevölkerung und Arbeitskräfte
-- Nahrungsmittelverfügbarkeit pro Person
+- Haushaltseinkommen pro Kopf
+- Bevölkerung, natürliches Wachstum und Arbeitskräfte
+- Produktion pro Kopf (Nahrung und landwirtschaftliches Einkommen pro Person)
 - Abwanderung, abgewanderte Personen und Rücküberweisungen
 
 ### Ausserhalb des direkten Modellfokus
@@ -128,7 +128,8 @@ Die Causal Loop Map verbindet Klima, Landwirtschaft, Einkommen, Bevölkerung und
 
 - **R1 Arbeitskräfte–Einkommen (verstärkend, Vermutung):** Wer wegzieht, fehlt als Arbeitskraft. Ernte und Einkommen sinken, und noch mehr Menschen ziehen weg.
 - **R2 Netzwerk (verstärkend):** Wer schon weg ist, erleichtert anderen das Wegziehen.
-- **B1 Versorgung (ausgleichend):** Weniger Menschen heisst mehr Nahrung pro Person. Der Druck wegzuziehen sinkt.
+- **B1 Versorgung pro Kopf (ausgleichend):** Weniger Menschen teilen sich dieselbe Ernte. Nahrung und Einkommen pro Kopf steigen, der Druck wegzuziehen sinkt.
 - **B2 Rücküberweisungen (ausgleichend):** Geld von Abgewanderten hilft den Familien. Weniger Menschen müssen wegziehen.
+- **R3 Natürliches Wachstum (verstärkend):** Eine grössere Bevölkerung hat mehr Geburten.
 
-Welche Schleifen stärker sind, wird in LE2 untersucht.
+Welche Schleifen stärker sind, wird in LE2 untersucht. Die systemische Einordnung (Nichtlinearität, Emergenz, Rebound, Wahl des Modellansatzes) steht in `01_system_map.md`.
