@@ -52,9 +52,9 @@ Gemäss Aufgabenstellung werden die Werte zuerst abgeschätzt und dann mit den D
 |---|---|---|---|---|
 | Elastizität des Ertrags auf den Niederschlag | 1.0 (Regenfeldbau) | Hirse 0.46, Erdnuss 0.94 | geschätzt | Modell verwendet das gerundete Mittel 0.7 |
 | Trend des Ertrags bis **2023** | 0 | Hirse **+5.1 %**, Erdnuss **+2.2 %** pro Jahr | geschätzt | Modell verwendet **3.5 %** |
-| Basis-Abwanderungsrate | **0.74 %** pro Jahr | **0.88 %** pro Jahr | kalibriert | trifft die **27'588** Wegzüge **2018** bis **2023** |
+| Basis-Abwanderungsrate | **0.74 %** pro Jahr | **0.94 %** pro Jahr | kalibriert | trifft die **27'588** Wegzüge **2018** bis **2023** |
 | Zuzugsrate | **0.36 %** pro Jahr | **0.36 %** pro Jahr | geschätzt | konstant |
-| Natürliches Wachstum | **3.36 %** pro Jahr | **3.36 %** (**2023**) bis **3.79 %** (**2013**) | geschätzt | konstant |
+| Natürliches Wachstum | **3.36 %** pro Jahr | **3.36 %** (**2023**) bis **3.79 %** (**2013**) | geschätzt | bis **2023** linear zwischen beiden Werten, danach konstant |
 | Wirkung stabiler Erträge | Elastizität halbiert | keine | Annahme | Handlungsoption |
 | Produktivitätswachstum ab **2024** | **2 %** pro Jahr | untere Grenze der beobachteten Trends | Annahme | Handlungsoption |
 
@@ -105,14 +105,14 @@ Daraus ergeben sich 3 × 4 = **12** Läufe.
 - **Robustheit:** Eine Aussage gilt nur, wenn die Rangfolge der Handlungsoptionen über alle Bandbreiten gleich bleibt
 
 **Erwartete Ergebnisse (Hypothesen)**
-- **H1 zu F1:** Ohne Anpassung liegt die Zusatzabwanderung bei rund **14'400** (Dürren) bis **31'800** Personen (trockeneres Klima). Das sind die Werte aus LE2
-- **H2 zu F2:** Stabile Erträge verringern die Zusatzabwanderung etwa im Verhältnis der Elastizität, also etwa um die Hälfte. Produktivitätswachstum senkt die gesamte Abwanderung stark, verringert den Klimaeffekt aber nicht. LE2 zeigt bei **2 %** Produktivitätswachstum bereits **−28.0 %** gesamte Abwanderung im Szenario `basis`, aber einen leicht höheren Klimaeffekt der Dürren (**17'954** statt **14'417** Personen), weil ein höherer Ertrag bei gleicher prozentualer Einbusse absolut mehr verliert
+- **H1 zu F1:** Ohne Anpassung liegt die Zusatzabwanderung bei rund **9'300** (Dürren) bis **20'500** Personen (trockeneres Klima). Das sind die Werte aus LE2
+- **H2 zu F2:** Stabile Erträge verringern die Zusatzabwanderung etwa im Verhältnis der Elastizität, also etwa um die Hälfte. Produktivitätswachstum senkt die gesamte Abwanderung stark, verringert den Klimaeffekt aber nicht. LE2 zeigt bei **2 %** Produktivitätswachstum bereits **−23.4 %** gesamte Abwanderung im Szenario `basis`, aber einen leicht höheren Klimaeffekt der Dürren (**11'661** statt **9'315** Personen), weil ein höherer Ertrag bei gleicher prozentualer Einbusse absolut mehr verliert
 - **H3 zu F3:** Das Verhältnis von Produktivität und Bevölkerung prägt die Abwanderung stärker als der Niederschlag
 
 ## **4.9) Backtest**
 
 - **Kanal Niederschlag → Ertrag:** in LE2 durchgeführt. Mit einer Schätzung bis **2018** und Vorhersage **2019** bis **2023** verbessert der Niederschlag die Vorhersage für Hirse, nicht aber für Erdnuss. Für LE4 würde dieser Test mit einer längeren Ertragsreihe wiederholt
-- **Bevölkerung:** in LE2 durchgeführt. Die Bevölkerung **2023** wird um **8.3 %** unterschätzt
+- **Bevölkerung:** in LE2 durchgeführt. Die Bevölkerung **2023** wird um **6.2 %** unterschätzt
 - **Dürre 2014:** Prüfen, ob die Abwanderung **2015** messbar anstieg. Dafür fehlt eine jährliche Migrationsreihe. Möglich wären Erhebungen zur Ernährungssicherheit oder Daten der IOM
 - **Handlungsoptionen:** Regionen oder Jahre mit Bewässerungsprojekten mit vergleichbaren Regionen ohne solche Projekte vergleichen, um die angenommene Halbierung der Elastizität zu prüfen
 

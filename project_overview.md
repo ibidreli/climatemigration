@@ -23,7 +23,7 @@ LE3 (agentenbasierte Modellierung) wird gemäss Vorgabe für Zweierteams nicht a
 
 ## **Zentrale Ergebnisse**
 
-- Wiederkehrende Dürren erhöhen die dauerhafte Abwanderung 2024–2050 im Modell um 3.7 %, ein trockeneres Klima um 8.3 %
+- Wiederkehrende Dürren erhöhen die dauerhafte Abwanderung 2024–2050 im Modell um 3.4 %, ein trockeneres Klima um 7.5 %
 - Stärker wirkt, ob die Produktivität der Landwirtschaft mit dem Bevölkerungswachstum Schritt hält
 - Netzwerkeffekte sind die einflussreichste Annahme ohne Daten
 

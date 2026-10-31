@@ -122,6 +122,7 @@ pd.set_option("display.float_format", lambda x: zahl(x, 3))
 # - **Von aussen vorgegeben:**
 #   - Niederschlag, bis **2023** aus Daten, danach als Szenario
 #   - Produktivitätstrend des Ertrags, bis **2023** aus Daten, danach als Annahme
+#   - Natürliches Wachstum, bis **2023** aus den Volkszählungen, danach konstant
 # - **Im Modell berechnet:**
 #   - Bevölkerung, Abwanderung, Zuzug und Abgewanderte als Stocks und Flows
 #   - Ertrag, Produktion, Einkommen pro Kopf, Nahrung pro Person und Rücküberweisungen als Index
@@ -372,7 +373,7 @@ plt.show()
 # | `anpassung_druck` | Biflow | Index/Jahr | (`druck` − `druck_verzoegert`) / `verzoegerung` | |
 #
 # - **Anfangswert Bevölkerung:** Volkszählung **2013**
-# - **Anfangswert Abgewanderte:** Gleichgewicht von Zu- und Abgang im Normaljahr, also `abwanderungsrate_basis` × `bevoelkerung_0` × `verweildauer`. Das ist kein gemessener Bestand. Die **80'171** Lebenszeitwegzüge der Volkszählung **2023** dienen nur als Grössenordnung
+# - **Anfangswert Abgewanderte:** Gleichgewicht von Zu- und Abgang im Normaljahr, also `abwanderungsrate_basis` × `bevoelkerung_0` × `verweildauer`. Das ist kein gemessener Bestand. Die **80'171** Lebenszeitwegzüge der Volkszählung **2023** dienen nur als Grössenordnung. Weil die Bevölkerung wächst, sinkt der Anteil der Abgewanderten an der Bevölkerung nach dem Start. Abschnitt `2.6.1) Backtest Bevölkerung und Migration` vergleicht diesen Rückgang mit den Volkszählungen
 
 # %% [markdown]
 # ### **2.3.2) Wirkungskette und Abwanderungsdruck**
@@ -384,16 +385,21 @@ plt.show()
 # | `niederschlag_index` | Index | `niederschlag` / Mittel **1991** bis **2020** | |
 # | `wasserverfuegbarkeit_index` | Index | gleich `niederschlag_index` (Proxy) | |
 # | `produktivitaet_index` | Index | $e^{g (t - 2013)}$ bis **2023**, danach Szenarioannahme | |
+# | `rate_natuerliches_wachstum` | 1/Jahr | **3.79 %** (**2013**) linear auf **3.36 %** (**2023**), danach konstant | R3 |
 # | `ertrag_index` | Index | (1 + `elast_ertrag` × (`wasserverfuegbarkeit_index` − 1)) × `produktivitaet_index` | |
 # | `produktion_index` | Index | `ertrag_index` × (1 + `elast_arbeit` × (`bevoelkerung` / `bevoelkerung_0` − 1)) | R1 |
 # | `nahrung_pk_index` | Index | `produktion_index` / (`bevoelkerung` / `bevoelkerung_0`) | Kenngrösse |
 # | `rueck_pk_index` | Index | (`abgewanderte` / `bevoelkerung`) / Anfangswert | B2 |
 # | `haushaltseinkommen_index` | Index | (1 − `anteil_rueck`) × Produktion pro Kopf + `anteil_rueck` × `rueck_pk_index` | R1, B1, B2 |
 # | `druck` | Index | `wirkung_einkommen` × (1 − `haushaltseinkommen_index`) | R1, B1, B2 |
-# | `netzwerk_faktor` | Index | 1 + `wirkung_netzwerk` × (`abgewanderte` / Anfangswert − 1) | R2 |
+# | `netzwerk_faktor` | Index | 1 + `wirkung_netzwerk` × ((`abgewanderte` / `bevoelkerung`) / Anfangswert − 1) | R2 |
 # | `abwanderungsrate` | 1/Jahr | `abwanderungsrate_basis` × (1 + `druck_verzoegert`) × `netzwerk_faktor` | alle |
 #
 # Der Abwanderungsdruck hängt nur vom Haushaltseinkommen pro Kopf ab. Die Nahrung pro Person ist zu **85 %** dasselbe Signal wie das Einkommen pro Kopf, beide Grössen bestehen aus Produktion geteilt durch Bevölkerung. Würden beide auf den Druck wirken, wäre die Versorgung doppelt gezählt. Die Nahrung pro Person bleibt deshalb Kenngrösse für die Versorgung der Zurückbleibenden.
+#
+# Das Netzwerk wirkt wie die Rücküberweisungen über den Anteil der Abgewanderten an der Bevölkerung, nicht über ihre absolute Zahl. Sonst stiege die Abwanderungsrate allein, weil die Region wächst, auch wenn der Anteil der Haushalte mit Kontakten nach aussen gleich bleibt.
+#
+# Das natürliche Wachstum folgt bis **2023** den Geburten- und Sterberaten der beiden Volkszählungen und bleibt danach konstant. Eine Altersstruktur hat das Modell nicht.
 #
 # Der Produktivitätstrend ist Teil des Ertrags, weil die Daten aus Abschnitt `2.2.3) Ertrag` ihn für **2013** bis **2023** belegen. Ohne Trend würde das Modell im Backtest eine sinkende Versorgung rechnen, die in den Daten nicht vorkommt.
 
@@ -419,9 +425,9 @@ plt.show()
 # |---|---|---|---|
 # | R1 Arbeitskräfte und Einkommen | verstärkend | Abwanderung → Bevölkerung (−) → Arbeitskräfte (+) → Produktion (+) → Produktion pro Kopf (+) → Einkommen pro Kopf (+) → Abwanderung (−) | `elast_arbeit` |
 # | B1 Versorgung pro Kopf | ausgleichend | Abwanderung → Bevölkerung (−) → Produktion pro Kopf (−) → Einkommen pro Kopf (+) → Abwanderung (−) | `wirkung_einkommen` |
-# | R2 Netzwerk | verstärkend | Abwanderung → Abgewanderte (+) → Abwanderung (+) | `wirkung_netzwerk`, `verweildauer` |
+# | R2 Netzwerk | verstärkend | Abwanderung → Anteil Abgewanderte (+) → Abwanderung (+) | `wirkung_netzwerk`, `verweildauer` |
 # | B2 Rücküberweisungen | ausgleichend | Abwanderung → Abgewanderte (+) → Einkommen pro Kopf (+) → Abwanderung (−) | `anteil_rueck` |
-# | R3 Natürliches Wachstum | verstärkend | Bevölkerung → natürliches Wachstum (+) → Bevölkerung (+) | `rate_natuerliches_wachstum` |
+# | R3 Natürliches Wachstum | verstärkend | Bevölkerung → natürliches Wachstum (+) → Bevölkerung (+) | `rate_natuerliches_wachstum_2013`, `rate_natuerliches_wachstum` |
 #
 # R1 und B1 laufen beide über die Bevölkerung und das Einkommen pro Kopf. Weniger Menschen senken die Produktion (R1), verteilen sie aber auch auf weniger Köpfe (B1). Pro Kopf gerechnet ist R1 nur dann stärker als B1, wenn die Produktion stärker auf die Arbeitskräfte reagiert als die Zahl der Köpfe, also bei `elast_arbeit` > 1.
 
@@ -431,11 +437,11 @@ plt.show()
 # Die Gleichungen aus den Abschnitten `2.3.1) Stocks und Flows` bis `2.3.3) Verzögerung` werden in einer Funktion zusammengebaut. Eine zweite Funktion rechnet einen Lauf und gibt Jahreswerte zurück, damit Szenarien, Kalibrierung und Sensitivität dasselbe Modell verwenden.
 #
 # **Vorgehen:**
-# 1. Niederschlag und Produktivität als Jahreswerte in Lookups übergeben
+# 1. Niederschlag, Produktivität und natürliches Wachstum als Jahreswerte in Lookups übergeben
 # 2. Stocks, Flows und Converter mit den Gleichungen der Tabellen anlegen
 # 3. Lauf ausführen und bei `dt` < 1 die Flows zu Jahressummen zusammenfassen
 #
-# Niederschlag und Produktivität sind Treppenfunktionen. Ein Jahreswert gilt damit das ganze Jahr, auch wenn der Zeitschritt kleiner als ein Jahr ist.
+# Niederschlag, Produktivität und natürliches Wachstum sind Treppenfunktionen. Ein Jahreswert gilt damit das ganze Jahr, auch wenn der Zeitschritt kleiner als ein Jahr ist.
 
 # %%
 #------------------------------------------------------------------------------
@@ -464,6 +470,15 @@ def produktivitaet(jahr, params=None):
     return float(np.exp(g * (min(jahr, LETZTES_DATENJAHR) - t0) + g_z * max(jahr - LETZTES_DATENJAHR, 0)))
 
 
+def wachstumsrate(jahr, params=None):
+    """Natürliches Wachstum (1/Jahr): von 2013 bis 2023 linear zwischen den Volkszählungswerten, danach konstant."""
+    p = params or PARAMS
+    w_0, w_1 = p["rate_natuerliches_wachstum_2013"].wert, p["rate_natuerliches_wachstum"].wert
+    t0 = p["starttime"].wert
+    anteil = min(max((jahr - t0) / (LETZTES_DATENJAHR - t0), 0.0), 1.0)
+    return float(w_0 + (w_1 - w_0) * anteil)
+
+
 def _treppe(werte, dt):
     """Jahreswerte als Treppenfunktion für den Lookup, damit ein Jahreswert bei dt < 1 das ganze Jahr gilt."""
     punkte = []
@@ -484,7 +499,7 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
     m = Model(starttime=v("starttime"), stoptime=v("stoptime"), dt=dt, name=name)
 
     c = {}
-    for k in ["rate_natuerliches_wachstum", "abwanderungsrate_basis", "zuzugsrate", "verweildauer", "verzoegerung",
+    for k in ["abwanderungsrate_basis", "zuzugsrate", "verweildauer", "verzoegerung",
               "elast_ertrag", "elast_arbeit", "anteil_rueck", "wirkung_einkommen", "wirkung_netzwerk"]:
         c[k] = m.constant(k)
         c[k].equation = v(k)
@@ -499,16 +514,19 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
     abg = m.stock("abgewanderte")
     abg.initial_value = abg_0
 
-    # Exogene Reihen (Niederschlag, Produktivität) als Jahreswerte
+    # Exogene Reihen (Niederschlag, Produktivität, natürliches Wachstum) als Jahreswerte
     jahre = sorted(niederschlag)
     m.points["niederschlag"] = _treppe(niederschlag, dt)
     m.points["produktivitaet"] = _treppe({j: produktivitaet(j, p) for j in jahre}, dt)
+    m.points["wachstumsrate"] = _treppe({j: wachstumsrate(j, p) for j in jahre}, dt)
     ns = m.converter("niederschlag")
     ns.equation = sd.lookup(sd.time(), "niederschlag")
     ns_idx = m.converter("niederschlag_index")
     ns_idx.equation = ns / ref
     prod_idx = m.converter("produktivitaet_index")
     prod_idx.equation = sd.lookup(sd.time(), "produktivitaet")
+    w_rate = m.converter("rate_natuerliches_wachstum")
+    w_rate.equation = sd.lookup(sd.time(), "wachstumsrate")
 
     # Klima -> Wasserverfügbarkeit -> Landwirtschaft. Die Wasserverfügbarkeit
     # ist mangels eigener Wasserbilanz ein normierter Niederschlagsproxy.
@@ -533,7 +551,9 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
     druck = m.converter("druck")
     druck.equation = c["wirkung_einkommen"] * (1 - hh)
     netz = m.converter("netzwerk_faktor")                                    # R2
-    netz.equation = sd.max(0, 1 + c["wirkung_netzwerk"] * (abg / abg_0 - 1))
+    # Anteil der Abgewanderten an der Bevölkerung statt absolute Zahl, sonst stiege
+    # die Abwanderungsrate allein, weil die Region wächst
+    netz.equation = sd.max(0, 1 + c["wirkung_netzwerk"] * ((abg / bev) / (abg_0 / bev_0) - 1))
 
     # Verzögerung erster Ordnung: der wirksame Druck passt sich mit der Zeit
     # verzoegerung an den aktuellen Druck an. Anfangswert ist der Druck aus dem
@@ -553,7 +573,7 @@ def build_model(niederschlag, ref, params=None, name="kaffrine"):
 
     # Flows
     wachstum = m.flow("natuerliches_wachstum")
-    wachstum.equation = bev * c["rate_natuerliches_wachstum"]
+    wachstum.equation = bev * w_rate
     abw = m.flow("abwanderung")
     abw.equation = bev * rate
     zuzug = m.flow("zuzug")
@@ -636,7 +656,7 @@ def simuliere(niederschlag, ref, params=None, name="basis"):
 # 1. Parametertabelle ausgeben
 # 2. `abwanderungsrate_basis` so kalibrieren, dass die simulierten Wegzüge **2018** bis **2022** dem Zielwert entsprechen
 #
-# Die direkt aus den Daten abgeleitete Rate von **0.74 %** gilt für die Bedingungen im Fenster **2018** bis **2023**. Im Modell beschreibt `abwanderungsrate_basis` aber die Rate bei Druck 0, also bei Einkommen pro Kopf wie **2013**. Weil das Einkommen pro Kopf im Fenster über diesem Stand lag, muss die Basisrate höher sein. Sie wird deshalb kalibriert statt direkt übernommen.
+# Die direkt aus den Daten abgeleitete Rate von **0.74 %** gilt für die Bedingungen im Fenster **2018** bis **2023**. Im Modell beschreibt `abwanderungsrate_basis` aber die Rate bei Druck 0 und Netzwerkanteil wie **2013**. Weil im Fenster das Einkommen pro Kopf über diesem Stand und der Anteil der Abgewanderten darunter lag, muss die Basisrate höher sein. Sie wird deshalb kalibriert statt direkt übernommen.
 
 # %%
 #------------------------------------------------------------------------------
@@ -656,12 +676,16 @@ PARAMS = {
     "stoptime": Param(2050, "Jahr", "Ende des Szenariohorizonts", "Systemgrenze LE1", "Annahme"),
     "dt": Param(1, "Jahr", "Zeitschritt; eine Regenzeit und eine Ernte pro Jahr", "CHIRPS, Anbaukalender", "Annahme"),
     "bevoelkerung_0": Param(566_992, "Personen", "Bevölkerung Kaffrine 2013", "ANSD, RGPH-4", "Daten"),
-    "abwanderungsrate_basis": Param(0.0088, "1/Jahr", "Abwanderungsrate bei Druck 0 und Netzwerk 2013",
+    "abwanderungsrate_basis": Param(0.0094, "1/Jahr", "Abwanderungsrate bei Druck 0 und Netzwerkanteil 2013",
                                     "Kalibriert auf ANSD, RGPH-5: 27 588 Wegzüge Mai 2018 bis 2023 (innerhalb Senegals)",
                                     "Kalibriert"),
     "zuzugsrate": Param(0.0036, "1/Jahr", "Zuzugsrate, konstant",
                         "ANSD, RGPH-5: 13 645 Zuzüge in 5 Jahren (innerhalb Senegals)", "Daten"),
-    "rate_natuerliches_wachstum": Param(0.0336, "1/Jahr", "Geburten minus Todesfälle pro Person, konstant angenommen",
+    "rate_natuerliches_wachstum_2013": Param(0.0379, "1/Jahr",
+                                             "Geburten minus Todesfälle pro Person 2013, bis 2023 linear zum Wert 2023",
+                                             "ANSD, SES Kaffrine 2013 (RGPHAE 2013): 46.4 ‰ Geburten minus 8.5 ‰ Sterbefälle",
+                                             "Daten"),
+    "rate_natuerliches_wachstum": Param(0.0336, "1/Jahr", "Geburten minus Todesfälle pro Person 2023, danach konstant angenommen",
                                         "ANSD, RGPH-5 2023: 38.6 ‰ Geburten minus 5.0 ‰ Sterbefälle", "Daten"),
     "verweildauer": Param(20, "Jahre", "Zeit, die eine abgewanderte Person zum Netzwerk zählt", "Annahme", "Annahme"),
     "verzoegerung": Param(1, "Jahre", "Zeit, bis der Abwanderungsdruck auf die Abwanderung wirkt",
@@ -676,7 +700,8 @@ PARAMS = {
     "anteil_rueck": Param(0.15, "-", "Anteil Rücküberweisungen am Haushaltseinkommen (B2)", "Annahme", "Annahme"),
     "wirkung_einkommen": Param(1.0, "-", "10 % weniger Einkommen pro Kopf = 10 % mehr Abwanderung (R1, B1, B2)",
                                "Annahme", "Annahme"),
-    "wirkung_netzwerk": Param(0.5, "-", "10 % mehr Abgewanderte = 5 % mehr Abwanderung (R2)", "Annahme", "Annahme"),
+    "wirkung_netzwerk": Param(0.5, "-", "10 % höherer Anteil Abgewanderter an der Bevölkerung = 5 % mehr Abwanderung (R2)",
+                              "Annahme", "Annahme"),
 }
 
 
@@ -722,9 +747,9 @@ print(f"Wert in PARAMS:           {prozent(PARAMS['abwanderungsrate_basis'].wert
 # %% [markdown]
 # #### **Erkenntnisse**
 #
-# Von **16** Einträgen sind **6** aus Daten geschätzt, **1** kalibriert und **9** gesetzt. Unter den gesetzten Werten sind Zeithorizont, Zeitschritt, Verzögerung und Produktivität ab **2024** Festlegungen, die übrigen **5** sind Wirkungsannahmen.
+# Von **17** Einträgen sind **7** aus Daten geschätzt, **1** kalibriert und **9** gesetzt. Unter den gesetzten Werten sind Zeithorizont, Zeitschritt, Verzögerung und Produktivität ab **2024** Festlegungen, die übrigen **5** sind Wirkungsannahmen.
 #
-# - **Kalibrierung:** Die Basisrate liegt mit **0.88 %** über der direkt abgeleiteten Rate von **0.74 %**, weil im Fenster **2018** bis **2023** das Einkommen pro Kopf über dem Stand von **2013** lag
+# - **Kalibrierung:** Die Basisrate liegt mit **0.94 %** über der direkt abgeleiteten Rate von **0.74 %**, weil im Fenster **2018** bis **2023** das Einkommen pro Kopf über dem Stand von **2013** und der Netzwerkfaktor darunter lag
 # - **Annahmen:** Für Netzwerk, Rücküberweisungen, Arbeitskräfte und die Wirkung des Einkommens fehlen regionale Daten. Diese Parameter werden in der Sensitivitätsanalyse halbiert und verdoppelt
 #
 # Mit vollständiger Parametrisierung lässt sich das Modell rechnen.
@@ -770,13 +795,14 @@ plt.show()
 # Bis **2023** hält die Produktivität mit der Bevölkerung Schritt, danach sinkt das Einkommen pro Kopf und die Abwanderung steigt.
 #
 # **Bis 2023**
-# - Die Abwanderungsrate sinkt von **0.88 %** auf **0.69 %**, weil der Produktivitätstrend das Einkommen pro Kopf erhöht
-# - Die Dürre **2014** erhöht die Rate erst **2015** auf **1.01 %**
+# - Die Abwanderungsrate sinkt von **0.94 %** auf **0.65 %**, weil der Produktivitätstrend das Einkommen pro Kopf erhöht und der Anteil der Abgewanderten an der wachsenden Bevölkerung sinkt
+# - Die Dürre **2014** erhöht die Rate erst **2015** auf **1.05 %**
 #
 # **Ab 2024**
-# - Die Bevölkerung wächst auf **1.48** Mio. Personen (**2050**)
-# - Die Abwanderung steigt von rund **5'200** auf **27'600** Personen pro Jahr
+# - Die Bevölkerung wächst auf **1.66** Mio. Personen (**2050**)
+# - Die Abwanderung steigt von rund **5'000** auf **15'700** Personen pro Jahr, die Rate von **0.65 %** auf **0.95 %**
 # - Ursache ist die Annahme stagnierender Produktivität bei weiter wachsender Bevölkerung, nicht der Niederschlag
+# - Der Netzwerkfaktor sinkt bis **2050** auf **0.80** und dämpft den Anstieg, weil die Bevölkerung schneller wächst als die Zahl der Abgewanderten
 #
 # Ob die Entwicklung bis **2023** mit den Beobachtungen übereinstimmt, zeigt der Vergleich mit den Volkszählungen.
 
@@ -788,17 +814,19 @@ plt.show()
 # %% [markdown]
 # ### **2.6.1) Backtest Bevölkerung und Migration**
 #
-# Die Bevölkerung **2023** ist der einzige Vergleichswert, der weder für Parameter noch für die Kalibrierung verwendet wurde. Die Migrationsfenster sind nur teilweise unabhängig.
+# Die Bevölkerung **2023** und die Lebenszeitwegzüge der beiden Volkszählungen wurden weder für Parameter noch für die Kalibrierung verwendet. Die Migrationsfenster sind nur teilweise unabhängig.
 #
 # **Daten (Backtest):**
 # - `bev_beobachtet` aus Abschnitt `2.2.2) Bevölkerung und Migration`: Volkszählung **2023**
 # - `migration`: Wegzüge und Zuzüge Mai **2018** bis **2023**
 # - `raten`: Wegzugsraten der Fenster **2008** bis **2013** und **2018** bis **2023**
+# - `migration`: Lebenszeitwegzüge der Volkszählungen **2013** und **2023**
 #
 # **Vorgehen:**
 # 1. Bevölkerung **2023**, Wegzüge und Zuzüge **2018** bis **2022** mit den Daten vergleichen, Fehlermass ist der relative Fehler
 # 2. Prüfen, welches natürliche Wachstum die Volkszählung **2023** treffen würde
 # 3. Richtung der Abwanderungsrate mit beiden Volkszählungsfenstern vergleichen
+# 4. Rückgang des Anteils der Abgewanderten an der Bevölkerung mit den Lebenszeitwegzügen vergleichen
 
 # %%
 #------------------------------------------------------------------------------
@@ -817,11 +845,22 @@ display(vergleich.style.format({"Simulation": zahl, "Referenz": zahl, "Fehler": 
 # Natürliches Wachstum, das die Volkszählung 2023 treffen würde
 #------------------------------------------------------------------------------
 for r in [0.0336, 0.0379, 0.040, 0.042]:
-    df = simuliere(ns_basis, ref, with_overrides(rate_natuerliches_wachstum=r), name=f"r{int(r * 1e4)}")
-    print(f"Natürliches Wachstum {prozent(r, 2)}: Bevölkerung 2023 = {zahl(df.loc[2023, 'bevoelkerung'])}")
+    df = simuliere(ns_basis, ref, with_overrides(rate_natuerliches_wachstum_2013=r, rate_natuerliches_wachstum=r),
+                   name=f"r{int(r * 1e4)}")
+    print(f"Natürliches Wachstum konstant {prozent(r, 2)}: Bevölkerung 2023 = {zahl(df.loc[2023, 'bevoelkerung'])}")
 
 print(f"\nAbwanderungsrate im Modell 2013: {prozent(basis.loc[2013, 'abwanderungsrate'], 2)}, "
       f"Mittel 2018-2022: {prozent(basis.loc[2018:2022, 'abwanderungsrate'].mean(), 2)}")
+
+#------------------------------------------------------------------------------
+# Anteil der Abgewanderten an der Bevölkerung: Modell und Lebenszeitwegzüge
+#------------------------------------------------------------------------------
+anteil_modell = basis["abgewanderte"] / basis["bevoelkerung"]
+anteil_daten = pd.Series({2013: migration["wegzuege_lebenszeit_2013"] / bev_beobachtet[2013],
+                          2023: migration["wegzuege_lebenszeit"] / bev_beobachtet[2023]})
+for name, a in [("Modell", anteil_modell), ("Lebenszeitwegzüge", anteil_daten)]:
+    print(f"Anteil Abgewanderte {name}: 2013 {prozent(a[2013])}, 2023 {prozent(a[2023])}, "
+          f"Faktor 2023/2013 {a[2023] / a[2013]:.2f}")
 
 # %% [markdown]
 # #### **Erkenntnisse**
@@ -829,16 +868,17 @@ print(f"\nAbwanderungsrate im Modell 2013: {prozent(basis.loc[2013, 'abwanderung
 # Das Modell trifft die Grössenordnung, unterschätzt aber das Bevölkerungswachstum.
 #
 # **Bevölkerung**
-# - Die Bevölkerung **2023** wird um **8.3 %** unterschätzt
-# - Erst ein natürliches Wachstum von rund **4.2 %** würde die Volkszählung treffen. Beobachtet sind **3.79 %** (**2013**) und **3.36 %** (**2023**)
-# - Die Lücke ist mit konstantem Wachstum und konstanter Nettomigration nicht erklärbar. Mögliche Gründe sind eine Untererfassung **2013** oder Unterschiede zwischen den Volkszählungen
+# - Die Bevölkerung **2023** wird um **6.2 %** unterschätzt
+# - Das Modell rechnet mit den Volkszählungswerten des natürlichen Wachstums, linear von **3.79 %** (**2013**) auf **3.36 %** (**2023**). Erst ein konstantes Wachstum von gut **4.2 %** würde die Volkszählung treffen
+# - Die Lücke ist mit den beobachteten Geburten-, Sterbe- und Migrationsraten nicht erklärbar. Mögliche Gründe sind eine Untererfassung **2013** oder Unterschiede zwischen den Volkszählungen
 #
 # **Migration**
-# - **Wegzüge:** Die Abweichung von **+0.4 %** ist Folge der Kalibrierung und keine Validierung
-# - **Zuzüge:** Die Abweichung von **−8.9 %** folgt aus der zu tiefen Modellbevölkerung
-# - **Richtung:** Im Modell sinkt die Abwanderungsrate von **0.88 %** (**2013**) auf im Mittel **0.80 %** (**2018** bis **2022**). Die Daten zeigen dieselbe Richtung, aber stärker, von **1.27 %** (**2008** bis **2013**) auf **0.74 %** (**2018** bis **2023**). Das ist eine qualitative, unabhängige Bestätigung der Wirkung von Einkommen pro Kopf auf die Abwanderung
+# - **Wegzüge:** Die Abweichung von **−0.4 %** ist Folge der Kalibrierung und keine Validierung
+# - **Zuzüge:** Die Abweichung von **−7.2 %** folgt aus der zu tiefen Modellbevölkerung
+# - **Netzwerkanteil:** Im Modell sinkt der Anteil der Abgewanderten an der Bevölkerung von **18.8 %** auf **14.1 %**, bei den Lebenszeitwegzügen der Volkszählungen von **13.2 %** auf **9.8 %**. Der Rückgang ist mit dem Faktor **0.75** und **0.74** fast gleich. Das Niveau ist nicht vergleichbar, weil Lebenszeitwegzüge alle in Kaffrine Geborenen zählen, die anderswo in Senegal leben, und das Modell eine Verweildauer von **20** Jahren annimmt
+# - **Richtung:** Im Modell sinkt die Abwanderungsrate von **0.94 %** (**2013**) auf im Mittel **0.78 %** (**2018** bis **2022**). Die Daten zeigen dieselbe Richtung, aber stärker, von **1.27 %** (**2008** bis **2013**) auf **0.74 %** (**2018** bis **2023**). Das ist eine qualitative, unabhängige Bestätigung der Wirkung von Einkommen pro Kopf auf die Abwanderung
 #
-# Ein Backtest mit einem einzigen unabhängigen Wert prüft die Wirkungsstärken kaum. Deshalb wird der wichtigste Übertragungskanal zusätzlich einzeln getestet.
+# Ein Backtest mit so wenigen unabhängigen Werten prüft die Wirkungsstärken kaum. Deshalb wird der wichtigste Übertragungskanal zusätzlich einzeln getestet.
 
 # %% [markdown]
 # ### **2.6.2) Test ausserhalb der Stichprobe für den Ertrag**
@@ -938,8 +978,8 @@ zeitschritt.style.format({"Bevölkerung 2023": zahl, "Bevölkerung 2050": zahl, 
 #
 # Der Jahresschritt verzerrt die Bestände kaum, die kumulierte Abwanderung aber leicht.
 #
-# - **Bevölkerung:** Die Unterschiede liegen unter **0.3 %**
-# - **Abwanderung:** Mit `dt` = 0.25 liegt die kumulierte Abwanderung um **3.9 %** höher, weil die Rückkopplungen innerhalb des Jahres reagieren
+# - **Bevölkerung:** Die Unterschiede liegen unter **1 %**
+# - **Abwanderung:** Mit `dt` = 0.25 liegt die kumulierte Abwanderung um **2.6 %** höher, weil die Rückkopplungen innerhalb des Jahres reagieren
 # - **Entscheid:** `dt` = 1 bleibt, weil der Unterschied klein gegenüber der Unsicherheit der Parameter ist und der Jahrestakt der Ernte entspricht
 #
 # Neben Daten und Numerik wird die innere Konsistenz des Modells geprüft.
@@ -1058,13 +1098,13 @@ plt.show()
 # Dürren erhöhen die Abwanderung spürbar, verändern das Gesamtbild aber wenig.
 #
 # **Klimawirkung**
-# - **Wiederkehrende Dürren:** **+3.7 %** kumulierte Abwanderung bis **2050**, rund **14'400** Personen
-# - **Trockeneres Klima:** **+8.3 %**, rund **31'800** Personen
+# - **Wiederkehrende Dürren:** **+3.4 %** kumulierte Abwanderung bis **2050**, rund **9'300** Personen
+# - **Trockeneres Klima:** **+7.5 %**, rund **20'500** Personen
 # - Jede Dürre zeigt sich ein Jahr später als Spitze der Abwanderung
 #
 # **Vergleich mit der ANSD-Projektion**
-# - Das Modell erreicht **2050** rund **1.48** Mio. Personen, die ANSD-Projektion **2.05** Mio.
-# - Gründe sind die Lücke aus dem Backtest, die konstante Wachstumsrate ohne Altersstruktur und die steigende Abwanderung bei stagnierender Produktivität
+# - Das Modell erreicht **2050** rund **1.66** Mio. Personen, die ANSD-Projektion **2.05** Mio.
+# - Gründe sind die Lücke aus dem Backtest, die konstante Wachstumsrate ab **2024** ohne Altersstruktur und die steigende Abwanderung bei stagnierender Produktivität
 #
 # Wie belastbar diese Zahlen sind, hängt von den Annahmen ab, die nun einzeln variiert werden.
 
@@ -1141,19 +1181,19 @@ tabelle_sens.loc[sens.index[::-1]].style.format({"Wert tief": "{:.4g}", "Wert ho
 # %% [markdown]
 # #### **Erkenntnisse**
 #
-# Die Ergebnisse hängen stärker von Netzwerk, Migrationsraten und Bevölkerungsdynamik ab als von der Klimakette.
+# Die Ergebnisse hängen stärker von Migrationsraten, Netzwerk und Bevölkerungsdynamik ab als von der Klimakette.
 #
 # **Stärkste Einflüsse**
-# - **Netzwerk:** `wirkung_netzwerk` verändert die Abwanderung um **−13.3 %** bis **+37.1 %**. Es ist die wichtigste Annahme ohne Daten
-# - **Migrationsraten:** Mit den Raten aus dem Fenster **2008** bis **2013** steigt die Abwanderung um **+25.3 %** (Wegzug) und **+16.0 %** (Zuzug)
-# - **Natürliches Wachstum:** Mit dem Wert von **2013** steigt die Abwanderung um **+23.8 %**
+# - **Migrationsraten:** Mit den Raten aus dem Fenster **2008** bis **2013** steigt die Abwanderung um **+43.8 %** (Wegzug) und **+9.2 %** (Zuzug)
+# - **Netzwerk:** `wirkung_netzwerk` verändert die Abwanderung um **−37.4 %** bis **+9.9 %**. Weil der Anteil der Abgewanderten an der wachsenden Bevölkerung sinkt, senkt ein stärkerer Netzwerkeffekt die Abwanderung. Es ist die wichtigste Annahme ohne Daten
+# - **Natürliches Wachstum:** Bleibt das Wachstum auf dem Wert von **2013**, steigt die Abwanderung um **+10.3 %**
 #
 # **Mittlere Einflüsse**
-# - `elast_arbeit`, `verweildauer`, `wirkung_einkommen` und `ertrag_trend` verändern die Abwanderung um **6 %** bis **17 %**
+# - `elast_arbeit`, `ertrag_trend` und `wirkung_einkommen` verändern die Abwanderung um **7 %** bis **16 %**
 #
 # **Kleine Einflüsse**
-# - **Klimakette:** `elast_ertrag` verändert die Abwanderung über die ganze Spannweite der Kulturen nur um **±1.3 %**
-# - **Rücküberweisungen:** `anteil_rueck` wirkt mit unter **0.5 %** kaum. B2 ist im Modell praktisch bedeutungslos
+# - **Klimakette:** `elast_ertrag` verändert die Abwanderung über die ganze Spannweite der Kulturen nur um **±1.1 %**
+# - **Rücküberweisungen und Verweildauer:** `anteil_rueck` und `verweildauer` wirken mit unter **5 %**. B2 ist im Modell schwach
 #
 # Für belastbarere Aussagen wären vor allem Daten zu Netzwerkeffekten und eine Migrationszeitreihe nötig, nicht genauere Klimadaten.
 
@@ -1184,8 +1224,8 @@ plt.show()
 #
 # Die Länge der Verzögerung verschiebt den Zeitpunkt der Reaktion und glättet die Spitzen, die kumulierte Abwanderung ändert sich kaum.
 #
-# - **2 Jahre:** **−1.4 %**
-# - **3 Jahre:** **−2.5 %**
+# - **2 Jahre:** **−1.6 %**
+# - **3 Jahre:** **−2.8 %**
 #
 # Wichtiger als die Verzögerung ist die Annahme zur Produktivität nach **2023**.
 
@@ -1228,9 +1268,9 @@ trend_tab.style.format({"Abwanderung 2024-2050 basis": zahl, "Mehr durch Dürren
 #
 # Die Annahme zur Produktivität prägt die Abwanderung weit stärker als jedes Niederschlagsszenario.
 #
-# - **Gesamtwirkung:** Wächst die Produktivität ab **2024** um **2 %** pro Jahr, sinkt die kumulierte Abwanderung um **28.0 %**. Das ist mehr als dreimal so viel wie die Wirkung des trockeneren Klimas
-# - **Klimaeffekt:** Die zusätzliche Abwanderung durch Dürren steigt dabei leicht von **14'417** auf **17'954** Personen, weil ein höherer Ertrag bei gleicher prozentualer Einbusse absolut mehr verliert
-# - **Folgerung:** Der starke Anstieg der Abwanderung im Basislauf ist eine Folge der Stagnationsannahme und keine Klimawirkung
+# - **Gesamtwirkung:** Wächst die Produktivität ab **2024** um **2 %** pro Jahr, sinkt die kumulierte Abwanderung um **23.4 %**. Das ist rund dreimal so viel wie die Wirkung des trockeneren Klimas
+# - **Klimaeffekt:** Die zusätzliche Abwanderung durch Dürren steigt dabei leicht von **9'315** auf **11'661** Personen, weil ein höherer Ertrag bei gleicher prozentualer Einbusse absolut mehr verliert
+# - **Folgerung:** Der Anstieg der Abwanderungsrate im Basislauf ist eine Folge der Stagnationsannahme und keine Klimawirkung
 #
 # Offen ist noch, ob die in LE1 vermutete Schleife R1 im Modell verstärkend wirkt.
 
@@ -1264,7 +1304,7 @@ plt.show()
 #
 # R1 ist im Modell schwach, B1 überwiegt.
 #
-# - **Richtung:** Je stärker die Produktion an den Arbeitskräften hängt, desto tiefer ist die Abwanderung. Mit `elast_arbeit` = 1.5 sinkt sie auf **137'074** Personen, ohne Abhängigkeit (`elast_arbeit` = 0) steigt sie auf **463'941**
+# - **Richtung:** Je stärker die Produktion an den Arbeitskräften hängt, desto tiefer ist die Abwanderung. Mit `elast_arbeit` = 1.5 sinkt sie auf **107'654** Personen, ohne Abhängigkeit (`elast_arbeit` = 0) steigt sie auf **326'129**
 # - **Grund:** Die Bevölkerung wächst trotz Abwanderung. Eine stärkere Abhängigkeit von Arbeitskräften heisst dann, dass die wachsende Bevölkerung auch mehr produziert
 # - **Folgerung:** Eine Abwanderungsspirale über fehlende Arbeitskräfte entsteht nur bei schrumpfender Bevölkerung. Das kommt unter den beobachteten Wachstumsraten nicht vor
 #
@@ -1277,11 +1317,11 @@ plt.show()
 #
 # | Frage | Ergebnis im Modell |
 # |---|---|
-# | Wie stark erhöhen Dürren die Abwanderung? | **+3.7 %** (wiederkehrende Dürren) bis **+8.3 %** (trockeneres Klima) bis **2050**, rund **14'400** bis **31'800** Personen |
-# | Was treibt die Abwanderung am stärksten? | Verhältnis von Produktivität und Bevölkerung. **2 %** Produktivitätswachstum senkt die Abwanderung um **28.0 %** |
-# | Wie wirken die Rückkopplungen? | R2 (Netzwerk) ist am einflussreichsten, B1 überwiegt R1, B2 ist kaum wirksam |
-# | Wann wirkt eine Dürre? | im Folgejahr, längere Verzögerungen ändern die Summe nur um bis **−2.5 %** |
-# | Wie gut ist das Modell validiert? | Bevölkerung **2023** um **8.3 %** unterschätzt, Richtung der Abwanderungsrate bestätigt, Ertragskanal nur für Hirse besser als ein reiner Trend |
+# | Wie stark erhöhen Dürren die Abwanderung? | **+3.4 %** (wiederkehrende Dürren) bis **+7.5 %** (trockeneres Klima) bis **2050**, rund **9'300** bis **20'500** Personen |
+# | Was treibt die Abwanderung am stärksten? | Verhältnis von Produktivität und Bevölkerung. **2 %** Produktivitätswachstum senkt die Abwanderung um **23.4 %** |
+# | Wie wirken die Rückkopplungen? | R2 (Netzwerk) ist die einflussreichste Annahme und dämpft im Basislauf, weil der Anteil der Abgewanderten sinkt. B1 überwiegt R1, B2 ist schwach |
+# | Wann wirkt eine Dürre? | im Folgejahr, längere Verzögerungen ändern die Summe nur um bis **−2.8 %** |
+# | Wie gut ist das Modell validiert? | Bevölkerung **2023** um **6.2 %** unterschätzt, Rückgang des Netzwerkanteils wie bei den Lebenszeitwegzügen, Richtung der Abwanderungsrate bestätigt, Ertragskanal nur für Hirse besser als ein reiner Trend |
 #
 # #### **Erkenntnisse**
 #
@@ -1294,9 +1334,9 @@ plt.show()
 #
 # **Limitationen der Struktur**
 # - Nur dauerhafte Abwanderung, saisonale Migration ist rund viermal häufiger und wäre ein anderes Modell
-# - Keine Altersstruktur, konstantes natürliches Wachstum, keine eigene Wasserbilanz
+# - Keine Altersstruktur, konstantes natürliches Wachstum ab **2024**, keine eigene Wasserbilanz
 # - Ein Ertragsindex für Hirse und Erdnuss, obwohl beide unterschiedlich auf Regen reagieren
-# - Der Jahresschritt unterschätzt die kumulierte Abwanderung um rund **4 %**
+# - Der Jahresschritt unterschätzt die kumulierte Abwanderung um rund **3 %**
 #
 # **Interpretation**
 # - Die Zahlen gelten unter den dokumentierten Annahmen und sind keine Prognose
