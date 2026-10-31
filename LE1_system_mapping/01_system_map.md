@@ -2,7 +2,7 @@
 
 ## **1. Leitfrage**
 
->Wie wirken sich Dürren über Wasserverfügbarkeit, Ernte und Einkommen auf die Abwanderung aus der Region Kaffrine (Senegal) aus, und wie wirkt die Abwanderung auf Bevölkerung, Landwirtschaft >und Versorgung in der Region zurück?
+> Wie wirken sich Dürren über Wasserverfügbarkeit, Ernte und Einkommen auf die Abwanderung aus der Region Kaffrine (Senegal) aus, und wie wirkt die Abwanderung auf Bevölkerung, Landwirtschaft und Versorgung in der Region zurück?
 
 ## **2. Systemgrenzen**
 
