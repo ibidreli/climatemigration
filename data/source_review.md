@@ -2,6 +2,8 @@
 
 Stand: 7. Oktober 2026, nachgeführt am 17. Oktober 2026. Ausgewertet wurden die unten aufgeführten ANSD-Berichte. Es wurde keine zusätzliche Internetrecherche durchgeführt.
 
+> **Nachtrag 31. Oktober 2026:** Das Dokument hält den Stand der Quellenprüfung fest und wird nicht mehr nachgeführt. Die Datei `model.py` gibt es nicht mehr, Modell und Aufbereitung stehen in `LE2_system_dynamics/01_model.ipynb`. Von den Konsequenzen in Abschnitt 6 sind umgesetzt: Korrektur zur internationalen Migration, Zuzug als eigener Flow, Kalibrierung an den 27’588 Wegzügen ausdrücklich ohne Validierungsanspruch, natürliches Wachstum aus Geburten- und Sterberaten, ANSD-Projektion nur als Vergleich und Verwendung der Ertragsdaten. Offen ist Punkt 4: Als Grössenordnung für die Abgewanderten dient weiterhin der Lebenszeitwert 2023 (80’171) statt 2013 (74’671).
+
 ## Ergebnis
 
 Beide Datensätze lassen sich deutlich erweitern. Für die Bevölkerung sind zehn weitere historische Jahreswerte direkt in Bevölkerungsdarstellungen belegt, zusätzlich zwei vorsichtig zu behandelnde Werte aus Gesundheitskapiteln. Für 2024–2050 liegen 27 jährliche regionale Projektionen vor. Für die Migration gibt es zusätzliche Angaben zu Zuzug, Wegzug und Salden, internationale Migration sowie Vergleichswerte aus der Volkszählung 2013.

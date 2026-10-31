@@ -369,7 +369,7 @@ plt.show()
 # | `zuzug` | Flow | Personen/Jahr | `bevoelkerung` × `zuzugsrate` | |
 # | `abwanderung` | Flow | Personen/Jahr | `bevoelkerung` × `abwanderungsrate` | alle |
 # | `abgang_netzwerk` | Flow | Personen/Jahr | `abgewanderte` / `verweildauer` | R2, B2 |
-# | `anpassung_druck` | Biflow | 1/Jahr | (`druck` − `druck_verzoegert`) / `verzoegerung` | |
+# | `anpassung_druck` | Biflow | Index/Jahr | (`druck` − `druck_verzoegert`) / `verzoegerung` | |
 #
 # - **Anfangswert Bevölkerung:** Volkszählung **2013**
 # - **Anfangswert Abgewanderte:** Gleichgewicht von Zu- und Abgang im Normaljahr, also `abwanderungsrate_basis` × `bevoelkerung_0` × `verweildauer`. Das ist kein gemessener Bestand. Die **80'171** Lebenszeitwegzüge der Volkszählung **2023** dienen nur als Grössenordnung
