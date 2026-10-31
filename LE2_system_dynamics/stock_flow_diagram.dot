@@ -1,0 +1,84 @@
+// Stock-and-Flow-Diagramm des LE2-Modells (Kaffrine)
+// Rendern: dot -Tpng -Gdpi=150 stock_flow_diagram.dot -o stock_flow_diagram.png
+digraph SFD {
+  graph [rankdir=LR, ordering=out, fontname="DejaVu Sans", fontsize=11, nodesep=0.35, ranksep=0.55, newrank=true,
+         label="Rechteck = Bestand (Stock), dicker Pfeil = Fluss (Flow), Ellipse = Hilfsgrösse (Converter), grau = von aussen vorgegeben,\ngestrichelt = Informationsverbindung, gestrichelte Ellipse = Kenngrösse ohne Rückwirkung,\n<Name> = Verweis auf einen Bestand. Konstante Parameter sind nicht dargestellt.",
+         labelloc=b, labeljust=l];
+  node  [fontname="DejaVu Sans", fontsize=10];
+  edge  [fontname="DejaVu Sans", fontsize=9];
+
+  // Umgebung (Quellen und Senken)
+  node [shape=plaintext, fontcolor="#888888", label="Umgebung"];
+  q_wachstum; q_zuzug; s_netz; q_druck;
+
+  // Von aussen vorgegeben
+  node [shape=ellipse, style=filled, fillcolor="#f5f5f5", color="#666666", fontcolor="black"];
+  ns     [label="Niederschlag\n(Index)"];
+  prodv  [label="Produktivität\n(Index)"];
+  wrate  [label="Rate natürliches\nWachstum"];
+
+  // Converter
+  node [shape=ellipse, style=filled, color="#666666"];
+  wasser [label="Wasser-\nverfügbarkeit", fillcolor="#d5e8d4"];
+  ertrag [label="Ertrag", fillcolor="#dae8fc"];
+  prod   [label="Produktion", fillcolor="#dae8fc"];
+  nahr   [label="Nahrung\npro Kopf", fillcolor="#dae8fc", style="filled,dashed"];
+  rueck  [label="Rücküberweisungen\npro Kopf", fillcolor="#e1d5e7"];
+  hh     [label="Haushaltseinkommen\npro Kopf", fillcolor="#f8cecc"];
+  druck  [label="Abwanderungs-\ndruck", fillcolor="#f8cecc"];
+  netz   [label="Netzwerkfaktor\n(Anteil Abgewanderte)", fillcolor="#e1d5e7"];
+  rate   [label="Abwanderungs-\nrate", fillcolor="#fff2cc"];
+
+  // Stocks
+  node [shape=box, style="filled,bold", penwidth=2, color="black", fontsize=11];
+  bev   [label="Bevölkerung\n[Personen]", fillcolor="#fff2cc"];
+  abg   [label="Abgewanderte\n[Personen]", fillcolor="#e1d5e7"];
+  druckv[label="Wirksamer Druck\n(1 Jahr verzögert)\n[Index]", fillcolor="#f8cecc"];
+
+  // Flows (Ventile)
+  node [shape=box, style="rounded,filled", penwidth=1, fillcolor="white", color="#333333", fontsize=9];
+  f_wachstum [label="natürliches Wachstum\n[Personen/Jahr]"];
+  f_zuzug    [label="Zuzug\n[Personen/Jahr]"];
+  f_abw      [label="Abwanderung\n[Personen/Jahr]"];
+  f_abgang   [label="Abgang Netzwerk\n[Personen/Jahr]"];
+  f_anp      [label="Anpassung Druck\n(Biflow) [Index/Jahr]"];
+
+  // Materialflüsse
+  edge [penwidth=3, color="#333333", style=solid, arrowsize=0.9];
+  q_wachstum -> f_wachstum -> bev;
+  q_zuzug    -> f_zuzug    -> bev;
+  bev -> f_abw -> abg [constraint=false];
+  abg -> f_abgang [constraint=false]; f_abgang -> s_netz;
+  q_druck -> f_anp -> druckv [dir=both, arrowtail=normal];
+
+  // Schattenvariablen: Verweise auf Bestände, damit lange Verbindungen entfallen
+  node [shape=plaintext, style="", fontcolor="#444444", fontsize=9, penwidth=1];
+  sb_prod [label="<Bevölkerung>"]; sb_hh [label="<Bevölkerung>"]; sb_nahr [label="<Bevölkerung>"];
+  sb_rueck [label="<Bevölkerung>"]; sb_netz [label="<Bevölkerung>"];
+  sa_rueck [label="<Abgewanderte>"]; sa_netz [label="<Abgewanderte>"];
+
+  // Informationsverbindungen
+  edge [penwidth=1, color="#666666", style=dashed, arrowsize=0.6];
+  ns -> wasser -> ertrag;
+  prodv -> ertrag;
+  ertrag -> prod;
+  sb_prod -> prod [label="Arbeitskräfte (R1)"];
+  prod -> hh; sb_hh -> hh [label="pro Kopf (B1)"];
+  prod -> nahr; sb_nahr -> nahr;
+  sa_rueck -> rueck; sb_rueck -> rueck;
+  rueck -> hh [label="B2"];
+  hh -> druck -> f_anp;
+  druckv -> f_anp [constraint=false];
+  druckv -> rate;
+  sa_netz -> netz [label="R2"]; sb_netz -> netz;
+  netz -> rate;
+  rate -> f_abw;
+  bev -> f_abw [constraint=false];
+  wrate -> f_wachstum; bev -> f_wachstum [label="R3", constraint=false];
+  bev -> f_zuzug [constraint=false];
+  abg -> f_abgang [constraint=false];
+
+  { rank=same; ns; prodv; }
+  { rank=same; bev; f_abw; abg; }
+  { rank=same; f_wachstum; f_zuzug; f_abgang; rate; }
+}

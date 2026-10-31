@@ -354,7 +354,11 @@ plt.show()
 # %% [markdown]
 # ## **2.3) Modellstruktur**
 #
-# Die Knoten der Causal Loop Map werden in Stocks, Flows und Converter übersetzt. Jede Grösse erhält eine Einheit und eine Gleichung.
+# Die Knoten der Causal Loop Map werden in Stocks, Flows und Converter übersetzt. Jede Grösse erhält eine Einheit und eine Gleichung. Das Stock-and-Flow-Diagramm zeigt die Struktur des simulierten Modells, die Tabellen der folgenden Abschnitte die Gleichungen.
+#
+# ![Stock-and-Flow-Diagramm](stock_flow_diagram.png)
+#
+# Quelle des Diagramms ist `stock_flow_diagram.dot` (Graphviz).
 
 # %% [markdown]
 # ### **2.3.1) Stocks und Flows**
@@ -400,6 +404,8 @@ plt.show()
 # Das Netzwerk wirkt wie die Rücküberweisungen über den Anteil der Abgewanderten an der Bevölkerung, nicht über ihre absolute Zahl. Sonst stiege die Abwanderungsrate allein, weil die Region wächst, auch wenn der Anteil der Haushalte mit Kontakten nach aussen gleich bleibt.
 #
 # Das natürliche Wachstum folgt bis **2023** den Geburten- und Sterberaten der beiden Volkszählungen und bleibt danach konstant. Eine Altersstruktur hat das Modell nicht.
+#
+# Der Ertrag reagiert im Modell linear auf den Niederschlagsindex $W$, also mit dem Faktor $1 + b\,(W - 1)$, während die Regression in Abschnitt `2.2.3) Ertrag` log-linear ist, also $W^b$. Bei **30 %** weniger Regen und $b = 0.7$ ergibt das einen Ertragsrückgang von **21 %** statt **22 %**. Der Unterschied ist klein gegenüber der Unsicherheit der Elastizität.
 #
 # Der Produktivitätstrend ist Teil des Ertrags, weil die Daten aus Abschnitt `2.2.3) Ertrag` ihn für **2013** bis **2023** belegen. Ohne Trend würde das Modell im Backtest eine sinkende Versorgung rechnen, die in den Daten nicht vorkommt.
 
@@ -821,12 +827,14 @@ plt.show()
 # - `migration`: Wegzüge und Zuzüge Mai **2018** bis **2023**
 # - `raten`: Wegzugsraten der Fenster **2008** bis **2013** und **2018** bis **2023**
 # - `migration`: Lebenszeitwegzüge der Volkszählungen **2013** und **2023**
+# - `ansd_bevoelkerung_kaffrine.csv`: ANSD-Schätzungen und -Projektionen **2009** bis **2021**, nur zur Einordnung, keine Messungen
 #
 # **Vorgehen:**
 # 1. Bevölkerung **2023**, Wegzüge und Zuzüge **2018** bis **2022** mit den Daten vergleichen, Fehlermass ist der relative Fehler
 # 2. Prüfen, welches natürliche Wachstum die Volkszählung **2023** treffen würde
 # 3. Richtung der Abwanderungsrate mit beiden Volkszählungsfenstern vergleichen
 # 4. Rückgang des Anteils der Abgewanderten an der Bevölkerung mit den Lebenszeitwegzügen vergleichen
+# 5. Bevölkerung und Abwanderungsrate grafisch mit den Daten vergleichen
 
 # %%
 #------------------------------------------------------------------------------
@@ -862,6 +870,33 @@ for name, a in [("Modell", anteil_modell), ("Lebenszeitwegzüge", anteil_daten)]
     print(f"Anteil Abgewanderte {name}: 2013 {prozent(a[2013])}, 2023 {prozent(a[2023])}, "
           f"Faktor 2023/2013 {a[2023] / a[2013]:.2f}")
 
+# %%
+#------------------------------------------------------------------------------
+# Grafik Backtest: Modell gegen Volkszählungen und ANSD-Schätzungen
+#------------------------------------------------------------------------------
+bev_alle = pd.read_csv(DATA_RAW / "ansd_bevoelkerung_kaffrine.csv").set_index("jahr")
+bev_schaetzung = bev_alle.loc[(bev_alle.index >= 2009) & (bev_alle.index <= LETZTES_DATENJAHR)
+                              & bev_alle["datentyp"].isin(["Schaetzung", "Projektion"]), "bevoelkerung"]
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+ax = axes[0]
+basis.loc[2013:2023, "bevoelkerung"].plot(ax=ax, label="Modell")
+ax.scatter(bev_beobachtet.index, bev_beobachtet.values, color="black", zorder=3, label="Volkszählung")
+ax.scatter(bev_schaetzung.index, bev_schaetzung.values, marker="x", color="grey", zorder=3,
+           label="ANSD-Schätzung bzw. -Projektion (keine Messung)")
+ax.set(title="Bevölkerung (Personen)", xlabel="Jahr")
+ax.legend(fontsize=8)
+
+ax = axes[1]
+basis.loc[2013:2023, "abwanderungsrate"].plot(ax=ax, label="Modell")
+for (start, ende), fenster in [((2008, 2013), "Fenster 2008-2013"), ((2018, 2023), "Fenster 2018-2023")]:
+    ax.hlines(raten.loc[fenster, "wegzug"], start, ende, color="black", lw=2)
+ax.plot([], [], color="black", lw=2, label="Volkszählung, Mittel des Fünfjahresfensters")
+ax.set(title="Abwanderungsrate (1/Jahr)", xlabel="Jahr")
+ax.legend(fontsize=8)
+fig.tight_layout()
+plt.show()
+
 # %% [markdown]
 # #### **Erkenntnisse**
 #
@@ -876,7 +911,8 @@ for name, a in [("Modell", anteil_modell), ("Lebenszeitwegzüge", anteil_daten)]
 # - **Wegzüge:** Die Abweichung von **−0.4 %** ist Folge der Kalibrierung und keine Validierung
 # - **Zuzüge:** Die Abweichung von **−7.2 %** folgt aus der zu tiefen Modellbevölkerung
 # - **Netzwerkanteil:** Im Modell sinkt der Anteil der Abgewanderten an der Bevölkerung von **18.8 %** auf **14.1 %**, bei den Lebenszeitwegzügen der Volkszählungen von **13.2 %** auf **9.8 %**. Der Rückgang ist mit dem Faktor **0.75** und **0.74** fast gleich. Das Niveau ist nicht vergleichbar, weil Lebenszeitwegzüge alle in Kaffrine Geborenen zählen, die anderswo in Senegal leben, und das Modell eine Verweildauer von **20** Jahren annimmt
-# - **Richtung:** Im Modell sinkt die Abwanderungsrate von **0.94 %** (**2013**) auf im Mittel **0.78 %** (**2018** bis **2022**). Die Daten zeigen dieselbe Richtung, aber stärker, von **1.27 %** (**2008** bis **2013**) auf **0.74 %** (**2018** bis **2023**). Das ist eine qualitative, unabhängige Bestätigung der Wirkung von Einkommen pro Kopf auf die Abwanderung
+# - **Richtung:** Im Modell sinkt die Abwanderungsrate von **0.94 %** (**2013**) auf im Mittel **0.78 %** (**2018** bis **2022**). Die Daten zeigen dieselbe Richtung, aber stärker, von **1.27 %** (**2008** bis **2013**) auf **0.74 %** (**2018** bis **2023**). Das Modell ist damit konsistent mit den Daten, bestätigt den Mechanismus aber nicht. Die Richtung folgt im Modell aus den Annahmen zu Produktivität, Einkommen und Netzwerk, das Fenster **2008** bis **2013** liegt vor dem Modellstart, und der Rückgang zwischen den Volkszählungen kann auch andere Ursachen haben
+# - **ANSD-Schätzungen:** Die Schätzungen und Projektionen zwischen den Volkszählungen liegen über dem Modell, die Schätzung **2012** sogar über der Volkszählung **2013**. Sie sind deshalb nur zur Einordnung geeignet, nicht als Vergleichswerte
 #
 # Ein Backtest mit so wenigen unabhängigen Werten prüft die Wirkungsstärken kaum. Deshalb wird der wichtigste Übertragungskanal zusätzlich einzeln getestet.
 
@@ -1111,7 +1147,7 @@ plt.show()
 # %% [markdown]
 # ## **2.8) Sensitivität**
 #
-# Die Sensitivitätsanalyse zeigt, welche Parameter die Ergebnisse treiben. Gemessen wird immer die kumulierte Abwanderung **2024** bis **2050** im Szenario `duerren`, damit auch die Parameter der Klimakette wirken.
+# Die Sensitivitätsanalyse zeigt, welche Parameter die Ergebnisse treiben. Gemessen werden zwei Grössen im Szenario `duerren`. Die kumulierte Abwanderung **2024** bis **2050** zeigt, was die Abwanderung insgesamt treibt. Die Zusatzabwanderung durch Dürren, also die Differenz der Szenarien `duerren` und `basis`, beantwortet die Leitfrage.
 
 # %% [markdown]
 # ### **2.8.1) Parameterbandbreiten**
@@ -1119,13 +1155,14 @@ plt.show()
 # Daten-Parameter werden innerhalb ihrer belegten Spannweite variiert, Annahmen werden halbiert und verdoppelt.
 #
 # **Daten (Szenario):**
-# - `szenarien["duerren"]` aus Abschnitt `2.7) Szenarien`
+# - `szenarien["duerren"]` und `szenarien["basis"]` aus Abschnitt `2.7) Szenarien`
 # - `raten` und `schaetzung` aus Abschnitt `2.2) Daten` für die Bandbreiten
 #
 # **Vorgehen:**
 # 1. Bandbreite je Parameter festlegen
 # 2. Jeden Parameter einzeln auf den tiefen und den hohen Wert setzen
-# 3. Änderung der kumulierten Abwanderung gegenüber dem Szenario `duerren` darstellen
+# 3. Jeden Lauf auch im Szenario `basis` rechnen, um die Zusatzabwanderung durch Dürren zu erhalten
+# 4. Änderung beider Grössen gegenüber der Referenz darstellen
 
 # %%
 #------------------------------------------------------------------------------
@@ -1154,48 +1191,70 @@ def bandbreiten(raten, schaetzung):
 
 
 bb = bandbreiten(raten, schaetzung)
-duerren_total = laeufe["duerren"].loc[2024:2050, "abwanderung"].sum()
+kumuliert = lambda df: df.loc[2024:2050, "abwanderung"].sum()
+duerren_total = kumuliert(laeufe["duerren"])
+zusatz_ref = duerren_total - kumuliert(laeufe["basis"])  # Zusatzabwanderung durch Dürren
 
 zeilen = []
 for k, (tief, hoch, grundlage) in bb.iterrows():
     for stufe, wert in [("tief", tief), ("hoch", hoch)]:
-        df = simuliere(szenarien["duerren"], ref, with_overrides(**{k: wert}), name=f"{k}_{stufe}")
+        p_ = with_overrides(**{k: wert})
+        d_ = kumuliert(simuliere(szenarien["duerren"], ref, p_, name=f"{k}_{stufe}_d"))
+        b_ = kumuliert(simuliere(szenarien["basis"], ref, p_, name=f"{k}_{stufe}_b"))
         zeilen.append({"Parameter": k, "Stufe": stufe, "Wert": wert,
-                       "Änderung": df.loc[2024:2050, "abwanderung"].sum() / duerren_total - 1})
-sens = pd.DataFrame(zeilen).pivot(index="Parameter", columns="Stufe", values="Änderung")
+                       "Änderung": d_ / duerren_total - 1, "Zusatz": d_ - b_})
+erg = pd.DataFrame(zeilen)
+sens = erg.pivot(index="Parameter", columns="Stufe", values="Änderung")
 sens = sens.reindex(sens.abs().max(axis=1).sort_values().index)
+sens_zusatz = erg.pivot(index="Parameter", columns="Stufe", values="Zusatz") / zusatz_ref - 1
+sens_zusatz = sens_zusatz.reindex(sens_zusatz.abs().max(axis=1).sort_values().index)
 
-ax = sens[["tief", "hoch"]].plot.barh(figsize=(8, 4.5), color=["#6c8ebf", "#b85450"])
-ax.axvline(0, color="black", lw=1)
-ax.set(xlabel="Änderung der Abwanderung 2024-2050 im Szenario duerren", ylabel="",
-       title="Parameter auf tiefem und hohem Wert der Bandbreite")
+fig, axes = plt.subplots(1, 2, figsize=(13, 4.5))
+for ax, werte, titel in [(axes[0], sens, "Abwanderung 2024-2050 im Szenario duerren"),
+                         (axes[1], sens_zusatz, "Zusatzabwanderung durch Dürren 2024-2050")]:
+    werte[["tief", "hoch"]].plot.barh(ax=ax, color=["#6c8ebf", "#b85450"])
+    ax.axvline(0, color="black", lw=1)
+    ax.set(xlabel="Änderung gegenüber der Referenz", ylabel="", title=titel)
+fig.tight_layout()
 plt.show()
+
+print(f"Zusatzabwanderung durch Dürren: Referenz {zahl(zusatz_ref)} Personen, "
+      f"Einzelvariation {zahl(erg['Zusatz'].min())} bis {zahl(erg['Zusatz'].max())} Personen")
 
 tabelle_sens = bb.rename(columns={"tief": "Wert tief", "hoch": "Wert hoch", "grundlage": "Grundlage"})
 tabelle_sens = tabelle_sens.join(sens.rename(columns={"tief": "Änderung tief", "hoch": "Änderung hoch"}))
-tabelle_sens = tabelle_sens[["Wert tief", "Wert hoch", "Änderung tief", "Änderung hoch", "Grundlage"]]
-tabelle_sens.loc[sens.index[::-1]].style.format({"Wert tief": "{:.4g}", "Wert hoch": "{:.4g}",
-                                                  "Änderung tief": lambda x: prozent(x, 1, True),
-                                                  "Änderung hoch": lambda x: prozent(x, 1, True)})
+tabelle_sens = tabelle_sens.join(sens_zusatz.rename(columns={"tief": "Zusatz tief", "hoch": "Zusatz hoch"}))
+spalten = ["Änderung tief", "Änderung hoch", "Zusatz tief", "Zusatz hoch"]
+tabelle_sens = tabelle_sens[["Wert tief", "Wert hoch"] + spalten + ["Grundlage"]]
+tabelle_sens.loc[sens_zusatz.index[::-1]].style.format(
+    {"Wert tief": "{:.4g}", "Wert hoch": "{:.4g}", **{s: (lambda x: prozent(x, 1, True)) for s in spalten}})
 
 # %% [markdown]
 # #### **Erkenntnisse**
 #
-# Die Ergebnisse hängen stärker von Migrationsraten, Netzwerk und Bevölkerungsdynamik ab als von der Klimakette.
+# Die gesamte Abwanderung hängt vor allem von Migrationsraten, Netzwerk und Bevölkerungsdynamik ab. Die Zusatzabwanderung durch Dürren, also die Antwort auf die Leitfrage, hängt vor allem von der Wirkung des Einkommens und der Klimakette ab.
 #
-# **Stärkste Einflüsse**
+# **Gesamte Abwanderung, stärkste Einflüsse**
 # - **Migrationsraten:** Mit den Raten aus dem Fenster **2008** bis **2013** steigt die Abwanderung um **+43.8 %** (Wegzug) und **+9.2 %** (Zuzug)
 # - **Netzwerk:** `wirkung_netzwerk` verändert die Abwanderung um **−37.4 %** bis **+9.9 %**. Weil der Anteil der Abgewanderten an der wachsenden Bevölkerung sinkt, senkt ein stärkerer Netzwerkeffekt die Abwanderung. Es ist die wichtigste Annahme ohne Daten
 # - **Natürliches Wachstum:** Bleibt das Wachstum auf dem Wert von **2013**, steigt die Abwanderung um **+10.3 %**
 #
-# **Mittlere Einflüsse**
+# **Gesamte Abwanderung, mittlere Einflüsse**
 # - `elast_arbeit`, `ertrag_trend` und `wirkung_einkommen` verändern die Abwanderung um **7 %** bis **16 %**
 #
-# **Kleine Einflüsse**
+# **Gesamte Abwanderung, kleine Einflüsse**
 # - **Klimakette:** `elast_ertrag` verändert die Abwanderung über die ganze Spannweite der Kulturen nur um **±1.1 %**
 # - **Rücküberweisungen und Verweildauer:** `anteil_rueck` und `verweildauer` wirken mit unter **5 %**. B2 ist im Modell schwach
 #
-# Für belastbarere Aussagen wären vor allem Daten zu Netzwerkeffekten und eine Migrationszeitreihe nötig, nicht genauere Klimadaten.
+# **Zusatzabwanderung durch Dürren**
+# - **Bandbreite:** Referenz rund **9'300** Personen, je nach einzelner Annahme **4'845** bis **17'195** Personen
+# - **Wirkung des Einkommens:** `wirkung_einkommen` verändert die Zusatzabwanderung um **−48.0 %** bis **+84.6 %**. Diese Annahme ohne Daten bestimmt die Antwort auf die Leitfrage am stärksten
+# - **Klimakette:** `elast_ertrag` verändert sie um **−33.9 %** bis **+35.1 %**, die gesamte Abwanderung dagegen kaum
+# - **Basisrate:** Mit der Wegzugsrate des Fensters **2008** bis **2013** steigt sie um **+43.2 %**
+# - **Rücküberweisungen:** `anteil_rueck` verändert sie um **−21.1 %** bis **+11.0 %**. B2 dämpft den Dürreeffekt spürbar, obwohl es die gesamte Abwanderung kaum verändert
+# - **Netzwerk:** `wirkung_netzwerk` wirkt mit **−6.3 %** bis **−0.2 %** kaum auf die Zusatzabwanderung
+#
+# Für belastbarere Aussagen zur Leitfrage wären vor allem Daten zur Reaktion der Abwanderung auf das Einkommen nötig, für die gesamte Abwanderung Daten zu Netzwerkeffekten und eine Migrationszeitreihe. Genauere Klimadaten helfen weniger.
 
 # %% [markdown]
 # ### **2.8.2) Verzögerung**
@@ -1317,11 +1376,11 @@ plt.show()
 #
 # | Frage | Ergebnis im Modell |
 # |---|---|
-# | Wie stark erhöhen Dürren die Abwanderung? | **+3.4 %** (wiederkehrende Dürren) bis **+7.5 %** (trockeneres Klima) bis **2050**, rund **9'300** bis **20'500** Personen |
+# | Wie stark erhöhen Dürren die Abwanderung? | **+3.4 %** (wiederkehrende Dürren) bis **+7.5 %** (trockeneres Klima) bis **2050**, rund **9'300** bis **20'500** Personen. Bei den Dürren je nach Annahme **4'845** bis **17'195** Personen |
 # | Was treibt die Abwanderung am stärksten? | Verhältnis von Produktivität und Bevölkerung. **2 %** Produktivitätswachstum senkt die Abwanderung um **23.4 %** |
 # | Wie wirken die Rückkopplungen? | R2 (Netzwerk) ist die einflussreichste Annahme und dämpft im Basislauf, weil der Anteil der Abgewanderten sinkt. B1 überwiegt R1, B2 ist schwach |
 # | Wann wirkt eine Dürre? | im Folgejahr, längere Verzögerungen ändern die Summe nur um bis **−2.8 %** |
-# | Wie gut ist das Modell validiert? | Bevölkerung **2023** um **6.2 %** unterschätzt, Rückgang des Netzwerkanteils wie bei den Lebenszeitwegzügen, Richtung der Abwanderungsrate bestätigt, Ertragskanal nur für Hirse besser als ein reiner Trend |
+# | Wie gut ist das Modell validiert? | Bevölkerung **2023** um **6.2 %** unterschätzt, Rückgang des Netzwerkanteils wie bei den Lebenszeitwegzügen, Richtung der Abwanderungsrate konsistent, Ertragskanal nur für Hirse besser als ein reiner Trend |
 #
 # #### **Erkenntnisse**
 #
@@ -1337,6 +1396,7 @@ plt.show()
 # - Keine Altersstruktur, konstantes natürliches Wachstum ab **2024**, keine eigene Wasserbilanz
 # - Ein Ertragsindex für Hirse und Erdnuss, obwohl beide unterschiedlich auf Regen reagieren
 # - Der Jahresschritt unterschätzt die kumulierte Abwanderung um rund **3 %**
+# - Die Nichtlinearitäten aus LE1 sind vereinfacht. Der Ertrag sinkt linear mit dem Niederschlag, ein Ernteausfall unter einer Mindestmenge Regen fehlt. Ebenso fehlen sehr arme Haushalte, die sich das Wegziehen nicht leisten können. Beides wäre ein Fall für ein agentenbasiertes Modell (LE3)
 #
 # **Interpretation**
 # - Die Zahlen gelten unter den dokumentierten Annahmen und sind keine Prognose

@@ -31,13 +31,14 @@ Untersucht wird, wie stark Dürren über Ertrag und Einkommen die dauerhafte Abw
 - **Abwanderungsdruck:** nur über das Einkommen pro Kopf. Die Nahrung pro Person ist dasselbe Signal und bleibt Kenngrösse, um eine Doppelzählung zu vermeiden
 - **Verzögerung:** erster Ordnung mit 1 Jahr (Ernte im Herbst, Abwanderung in der folgenden Trockenzeit)
 - **Schleifen:** R1 Arbeitskräfte, B1 Versorgung pro Kopf, R2 Netzwerk, B2 Rücküberweisungen, R3 natürliches Wachstum
+- **Diagramm:** Stock-and-Flow-Diagramm in `stock_flow_diagram.png`, Quelle `stock_flow_diagram.dot`
 
 ## **4. Validierung**
 
 - **Bevölkerung 2023:** um 6.2 % unterschätzt. Erst ein konstantes natürliches Wachstum von gut 4.2 % würde die Volkszählung treffen
 - **Migration:** Wegzüge −0.4 % (Kalibrierung), Zuzüge −7.2 % (Folge der tieferen Modellbevölkerung)
 - **Netzwerkanteil:** Der Anteil der Abgewanderten an der Bevölkerung sinkt im Modell und bei den Lebenszeitwegzügen der Volkszählungen fast gleich stark (Faktor 0.75 und 0.74 von 2013 bis 2023)
-- **Richtung:** Modell und Daten zeigen eine sinkende Abwanderungsrate zwischen 2013 und 2018–2023
+- **Richtung:** Modell und Daten zeigen eine sinkende Abwanderungsrate zwischen 2013 und 2018–2023. Das ist Konsistenz, keine Bestätigung des Mechanismus, weil die Richtung im Modell aus den Annahmen folgt
 - **Ertrag ausserhalb der Stichprobe (Schätzung bis 2018, Vorhersage 2019–2023):** Der Niederschlag verbessert die Vorhersage für Hirse (12.1 % statt 17.8 % mittlerer Fehler), nicht aber für Erdnuss (17.9 % statt 5.4 %)
 - **Zeitschritt:** dt = 0.25 statt 1 ändert die Bevölkerung um weniger als 1 % und die kumulierte Abwanderung um +2.6 %
 - **Plausibilität:** Anfangswerte, Bestandsbilanz, Wertebereich, Wirkungsrichtung und Parameterdokumentation werden bei jedem Lauf geprüft
@@ -51,7 +52,8 @@ Untersucht wird, wie stark Dürren über Ertrag und Einkommen die dauerhafte Abw
 | trockener | dauerhaft −15 % | +7.5 % (rund 20 500 Personen) |
 
 - **Grösste Einflüsse:** Migrationsraten des Fensters 2008–2013 (+43.8 %), Netzwerkwirkung (−37.4 % bis +9.9 %), natürliches Wachstum 2013 (+10.3 %)
-- **Klimakette:** Die Elastizität des Ertrags verändert die Abwanderung über die ganze Spannweite nur um ±1.1 %
+- **Zusatzabwanderung durch Dürren:** Referenz rund 9 300 Personen, je nach einzelner Annahme 4 800 bis 17 200. Am stärksten wirken die Wirkung des Einkommens (−48 % bis +85 %) und die Elastizität des Ertrags (rund ±34 %)
+- **Klimakette:** Die Elastizität des Ertrags verändert die gesamte Abwanderung nur um ±1.1 %, die Zusatzabwanderung aber um rund ±34 %
 - **Produktivität ab 2024:** 2 % Wachstum pro Jahr senkt die Abwanderung um 23.4 %
 - **Verzögerung:** 2 bzw. 3 Jahre ändern die Abwanderung um −1.6 % bzw. −2.8 %
 - **R1 oder B1:** B1 überwiegt. Eine Abwanderungsspirale über fehlende Arbeitskräfte entsteht nur bei schrumpfender Bevölkerung
@@ -60,12 +62,13 @@ Untersucht wird, wie stark Dürren über Ertrag und Einkommen die dauerhafte Abw
 
 - Dürren erhöhen die dauerhafte Abwanderung messbar, sind aber nicht der dominierende Treiber
 - Entscheidend ist, ob die Landwirtschaft mit dem Bevölkerungswachstum Schritt hält. Der Anstieg der Abwanderungsrate im Basislauf folgt aus der Annahme stagnierender Produktivität
-- Die wichtigste Wissenslücke sind Netzwerkeffekte und eine Migrationszeitreihe, nicht genauere Klimadaten
-- Nur dauerhafte Abwanderung, keine Altersstruktur, ein Ertragsindex für zwei Kulturen, wenige unabhängige Vergleichswerte für den Backtest
+- Die wichtigsten Wissenslücken sind die Reaktion der Abwanderung auf das Einkommen (für den Dürreeffekt) sowie Netzwerkeffekte und eine Migrationszeitreihe (für die gesamte Abwanderung), nicht genauere Klimadaten
+- Nur dauerhafte Abwanderung, keine Altersstruktur, ein Ertragsindex für zwei Kulturen, Nichtlinearitäten aus LE1 linear vereinfacht, wenige unabhängige Vergleichswerte für den Backtest
 - Szenarien sind keine Prognosen
 
 ## **7. Dateien**
 
 - **`01_model.ipynb`:** ausgeführtes Notebook mit Daten, Modell, Auswertung und allen Grafiken (für die Abgabe)
 - **`01_model.pct.py`:** Quelle des Notebooks, mit Jupytext gekoppelt
+- **`stock_flow_diagram.png`, `stock_flow_diagram.dot`:** Stock-and-Flow-Diagramm und seine Quelle (Graphviz)
 - **`../data/raw/`, `../data/SOURCES.md`:** Rohdaten und Quellen
